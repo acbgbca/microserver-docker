@@ -2,7 +2,7 @@
 # To upgrade the database, see https://acbgbca.github.io/documentation/postgres/
 services:
   db16:
-    image: postgres:16.6
+    image: postgres:16.7
     restart: unless-stopped
     volumes:
       - ./pgdata16:/var/lib/postgresql/data
@@ -50,7 +50,7 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
 
   gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.16
+    image: docker.io/gotenberg/gotenberg:8.17
     restart: unless-stopped
 
     # The gotenberg chromium route is used to convert .eml files. We do not
