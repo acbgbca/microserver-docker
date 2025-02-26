@@ -8,8 +8,9 @@ services:
       - show.external=true
     volumes:
       - ./config:/config
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: unless-stopped
-    user: 9001:9001
 networks:
   default:
     external: true
