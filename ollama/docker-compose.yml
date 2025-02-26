@@ -1,0 +1,38 @@
+services:
+  ollama:
+    image: ollama/ollama:0.5.12
+    ports:
+      - 11434:11434
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.ollama.loadbalancer.server.port=11434
+      - show.external=true
+    volumes:
+      - ./code:/code
+      - /ctr_data/ollama/ollama:/root/.ollama
+    container_name: ollama
+    tty: true
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
+
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.openwebui.loadbalancer.server.port=8080
+      - show.external=true
+    volumes:
+      - /ctr_cfg/ollama/openwebui:/app/backend/data
+    depends_on:
+      - ollama
+    environment: # https://docs.openwebui.com/getting-started/env-configuration#default_models
+      - OLLAMA_BASE_URLS=http://ollama:11434 #comma separated ollama hosts
+      - ENV=prod
+      - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=REMOTE-EMAIL
+      - WEBUI_AUTH_TRUSTED_NAME_HEADER=REMOTE-NAME
+networks:
+  default:
+    external: true
+    name: ctr-network
