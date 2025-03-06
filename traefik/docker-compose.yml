@@ -3,7 +3,7 @@ version: "2.4"
 
 services:
   traefik:
-    image: traefik:v3.3.3
+    image: traefik:v3.3.4
     container_name: traefik
     labels:
       - traefik.enable=true

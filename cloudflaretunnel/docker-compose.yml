@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   cloudflared:
-    image: 'cloudflare/cloudflared:2025.2.0'
+    image: 'cloudflare/cloudflared:2025.2.1'
     container_name: cloudflared
     user: 9001:9001
     volumes:
@@ -18,7 +18,7 @@ services:
     restart: 'unless-stopped'
 
   traefikexternal:
-    image: traefik:v3.3.3
+    image: traefik:v3.3.4
     container_name: traefikexternal
     labels:
       - traefik.enable=true
