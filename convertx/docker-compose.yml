@@ -1,0 +1,19 @@
+services:
+  convertx: 
+    image: ghcr.io/c4illin/convertx
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.convertx.loadbalancer.server.port=3000
+      - show.external=true
+    container_name: convertx
+    user: 9001:9001
+    restart: unless-stopped
+    environment:
+      - HTTP_ALLOWED=true
+      - ALLOW_UNAUTHENTICATED=true
+    volumes:
+      - ./data:/app/data
+networks:
+  default:
+    external: true
+    name: ctr-network
