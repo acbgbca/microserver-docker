@@ -1,0 +1,21 @@
+services:
+  stirlingpdf:
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    container_name: stirlingpdf
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.stirlingpdf.loadbalancer.server.port=8080
+      - show.external=true
+    volumes:
+      - ./config:/configs
+      - ./customFiles:/customFiles/
+      - ./logs:/logs/
+      - ./pipeline:/pipeline/
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - LANGS=en_GB
+    restart: unless-stopped
+networks:
+  default:
+    external: true
+    name: ctr-network
