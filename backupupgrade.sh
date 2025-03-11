@@ -30,7 +30,9 @@ for d in */ ; do
 	d=${d%/}
 	cd $d
 	if [ -f ".no_upgrade" ]; then
-		echo "Skipping $d"
+		echo "Skipping $d. Pull only"
+		docker compose pull -q
+		echo "Skipping $d. Pull complete"
 		cd ..
 		continue
 	fi
