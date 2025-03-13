@@ -13,7 +13,7 @@ services:
       - ./config:/config
       - ./attach:/attach
   signal:
-    image: bbernhard/signal-cli-rest-api:0.91
+    image: bbernhard/signal-cli-rest-api:0.92
     container_name: signal
     restart: unless-stopped
     environment:
