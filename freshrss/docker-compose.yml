@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   freshrss:
-    image: freshrss/freshrss:1.26.0
+    image: freshrss/freshrss:1.26.1
     container_name: freshrss
     labels:
       - traefik.enable=true
@@ -26,7 +26,7 @@ services:
       - ./bridge:/config
     restart: unless-stopped
   playwrightproxy:
-    image: ghcr.io/acbgbca/pw-scraper:0.133
+    image: ghcr.io/acbgbca/pw-scraper:0.134
     container_name: playwrightproxy
     environment:
       - LOG_LEVEL="debug"
