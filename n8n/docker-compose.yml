@@ -1,7 +1,7 @@
 version: '2'
 services:
   n8n:
-    image: ghcr.io/n8n-io/n8n:1.84.1
+    image: ghcr.io/n8n-io/n8n:1.85.3
     container_name: n8n
     labels:
       - traefik.enable=true
