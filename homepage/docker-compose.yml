@@ -12,6 +12,7 @@ services:
     environment:
       - PUID=9001
       - PGID=9001
+      - HOMEPAGE_ALLOWED_HOSTS=homepage.gohbarrow.com,homepage.internal.gohbarrow.com
     volumes:
       - ./config:/app/config
       - ./images:/app/public/images
