@@ -1,6 +1,6 @@
 services:
   stirlingpdf:
-    image: stirlingtools/stirling-pdf:0.44.3
+    image: stirlingtools/stirling-pdf:0.45.0
     container_name: stirlingpdf
     labels:
       - traefik.enable=true

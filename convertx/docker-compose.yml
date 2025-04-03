@@ -1,6 +1,6 @@
 services:
   convertx: 
-    image: ghcr.io/c4illin/convertx:v0.12.0
+    image: ghcr.io/c4illin/convertx:v0.12.1
     labels:
       - traefik.enable=true
       - traefik.http.services.convertx.loadbalancer.server.port=3000
