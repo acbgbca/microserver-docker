@@ -1,0 +1,24 @@
+services:
+  microbin:
+    image: danielszabo99/microbin:2.0.4
+    restart: always
+    user: 9001:9001
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.microbin.loadbalancer.server.port=8080
+      - show.external=true
+    volumes:
+     - ./data:/app/microbin_data
+    environment:
+      MICROBIN_ADMIN_USERNAME: ${MICROBIN_ADMIN_USERNAME}
+      MICROBIN_ADMIN_PASSWORD: ${MICROBIN_ADMIN_PASSWORD}
+      MICROBIN_PUBLIC_PATH: ${MICROBIN_PUBLIC_PATH}
+      MICROBIN_GC_DAYS: 7
+      MICROBIN_WIDE: true
+      MICROBIN_QR: true
+      MICROBIN_DEFAULT_EXPIRY: 1week
+
+networks:
+  default:
+    external: true
+    name: ctr-network
