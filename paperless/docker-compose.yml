@@ -18,7 +18,7 @@ services:
       - ./redisdata:/data
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.14.7
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.15.1
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
@@ -50,7 +50,7 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
 
   gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.18
+    image: docker.io/gotenberg/gotenberg:8.19
     restart: unless-stopped
 
     # The gotenberg chromium route is used to convert .eml files. We do not
