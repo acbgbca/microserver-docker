@@ -8,6 +8,8 @@ services:
       - traefik.enable=true
       - traefik.http.services.calibre.loadbalancer.server.port=8083
       - show.external=true
+      - sablier.enable=true
+      - sablier.group=calibre
     environment:
       - PUID=9001
       - PGID=9001
@@ -17,10 +19,11 @@ services:
       - '/mnt/calibre/books:/books'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8083/login"]
-      interval: 30s
-      timeout: 10s
+      interval: 2m
+      timeout: 15s
       retries: 5
       start_period: 30s
+      start_interval: 5s
     restart: 'unless-stopped'
   calibreserver:
     image: 'ghcr.io/linuxserver/calibre:8.2.1@sha256:67deb24a6e55ad27bc672d00eeed6937310e63553952683d328c844a2bc84b21'
@@ -29,6 +32,8 @@ services:
       - traefik.enable=true
       - traefik.http.services.calibreserver.loadbalancer.server.port=8080
       - show.external=true
+      - sablier.enable=true
+      - sablier.group=calibre
     security_opt:
       - seccomp:unconfined
     environment:
