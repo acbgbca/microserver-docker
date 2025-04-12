@@ -7,6 +7,8 @@ services:
       - traefik.enable=true
       - traefik.http.services.audiobookshelf.loadbalancer.server.port=80
       - show.external=true
+      - sablier.enable=true
+      - sablier.group=audiobookshelf
     environment:
       - TZ=Australia/Melbourne
     volumes:
@@ -14,6 +16,13 @@ services:
       - ./podcasts:/podcasts
       - ./config:/config
       - ./metadata:/metadata
+    healthcheck:
+      test: "curl -f http://localhost/healthcheck"
+      interval: 2m
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+      start_interval: 5s
 
 networks:
   default:

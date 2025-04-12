@@ -29,10 +29,13 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.constraints=Label(`show.external`,`true`)"
       - '--providers.docker.defaultRule=Host(`{{ index .Labels "com.docker.compose.service" }}.$externaldomain`)'
+      - "--providers.file.directory=/config"
       - "--certificatesresolvers.cf.acme.dnschallenge=true"
       - "--certificatesresolvers.cf.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.cf.acme.email=$email"
       - "--certificatesresolvers.cf.acme.storage=/letsencrypt/acme.json"
+      - "--experimental.plugins.sablier.modulename=github.com/sablierapp/sablier"
+      - "--experimental.plugins.sablier.version=v1.8.5"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=secure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
@@ -57,8 +60,10 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./ext_letsencrypt:/letsencrypt
+      - ./traefik:/config
     depends_on:
       - autheliaexternal
+      - sablier
 
   autheliaexternal:
     image: authelia/authelia:4.39.1
@@ -96,6 +101,22 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass authelia
     volumes: 
       - ./redis:/data
+  sablier:
+    image: ghcr.io/sablierapp/sablier:1.9.0
+    container_name: sablier
+    command:
+      - start
+      - --provider.name=docker
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.sablier.loadbalancer.server.port=10000
+      - show.external=true
+    environment:
+      - SESSIONS_DEFAULT_DURATION=15m
+      - SESSIONS_EXPIRATION_INTERVAL=3m
+    volumes:
+        - '/var/run/docker.sock:/var/run/docker.sock'
+    restart: 'unless-stopped'
 networks:
   default:
   ctrnetwork:
