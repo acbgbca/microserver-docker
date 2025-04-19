@@ -13,8 +13,8 @@ services:
       - PGID=9001
     volumes:
       - './config:/config'
-      - '/mnt/videos:/tv'
-      - '/mnt/videos:/movies'
+      - '/mnt/data8tb/videos:/tv'
+      - '/mnt/data8tb/videos:/movies'
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:6767"]

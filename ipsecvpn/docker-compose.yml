@@ -6,7 +6,7 @@ services:
     container_name: ipsecvpn
     env_file: vpn.env
     volumes:
-      - '/ctr_cfg/ipsecvpn/config:/etc/ipsec.d'
+      - './config:/etc/ipsec.d'
       - '/lib/modules:/lib/modules:ro'
     ports:
       - 500:500/udp

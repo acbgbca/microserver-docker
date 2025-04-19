@@ -9,10 +9,10 @@ services:
       - traefik.http.services.plex.loadbalancer.server.port=32400
     env_file: plex.env
     volumes:
-      - '/ctr_cfg/plex/config:/config'
+      - './config:/config'
       - '/tmp/transcode:/transcode'
-      - '/mnt/videos:/data'
-      - '/mnt/music:/music'
+      - '/mnt/data8tb/videos:/data'
+      - '/mnt/data8tb/music:/music'
     ports:
       - 32400:32400/tcp
       - 1900:1900/udp

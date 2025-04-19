@@ -12,7 +12,7 @@ services:
       - PUID=1000
       - PGID=998
     volumes:
-      - '/ctr_cfg/uptimekuma/config:/app/data'
+      - './config:/app/data'
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: 'unless-stopped'
 networks:

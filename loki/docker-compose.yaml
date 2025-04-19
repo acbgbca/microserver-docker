@@ -5,7 +5,7 @@ services:
     container_name: loki
     volumes:
       - ./loki-config.yaml:/etc/loki/config.yaml
-      - /ctr_data/loki/data:/data/loki
+      - /mnt/ssd512/ctr_data/loki/data:/data/loki
     user: "9001:9001"
     ports:
       - 3100:3100
@@ -26,7 +26,7 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/log:/logs:ro
-      - /ctr_cfg/calibre/config/:/var/log/calibre:ro
+      - ./calibre/config/:/var/log/calibre:ro
     command: -config.file=/etc/promtail/docker-config.yaml
     restart: unless-stopped
     healthcheck:

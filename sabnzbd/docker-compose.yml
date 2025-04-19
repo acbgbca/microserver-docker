@@ -13,8 +13,8 @@ services:
       - PGID=9001
       - TZ="Australia/Melbourne"
     volumes:
-        - '/ctr_cfg/sabnzbd/config:/config'
-        - '/mnt/downloads:/media'
+        - './config:/config'
+        - '/mnt/data8tb/downloads:/media'
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/sabnzbd"]

@@ -11,8 +11,8 @@ services:
     user: 9001:9001
     volumes:
       - ./config:/config
-      - /ctr_data/jellyfin/cache:/cache
-      - '/mnt/videos:/data'
+      - /mnt/ssd512/ctr_data/jellyfin/cache:/cache
+      - '/mnt/data8tb/videos:/data'
       - /tmp/jellyfin:/transcode
     restart: 'unless-stopped'
 networks:

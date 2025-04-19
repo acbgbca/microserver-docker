@@ -13,9 +13,9 @@ services:
       - PGID=9001
       - TZ="Australia/Melbourne"
     volumes:
-      - '/ctr_cfg/radarr/config:/config'
-      - '/mnt/videos:/movies'
-      - '/mnt/downloads:/media'
+      - './config:/config'
+      - '/mnt/data8tb/videos:/movies'
+      - '/mnt/data8tb/downloads:/media'
     restart: 'unless-stopped'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7878/radarr"]

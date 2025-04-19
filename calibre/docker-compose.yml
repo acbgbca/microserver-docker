@@ -16,7 +16,7 @@ services:
 #      - DOCKER_MODS=linuxserver/mods:universal-calibre
     volumes:
       - './config:/config'
-      - '/mnt/calibre/books:/books'
+      - '/mnt/data8tb/onedrive/calibre/books:/books'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8083/login"]
       interval: 2m
@@ -41,8 +41,8 @@ services:
       - PGID=9001
     volumes:
       - './server:/config'
-      - '/mnt/calibre/books:/books'
-      - '/mnt/calibre/import:/import'
+      - '/mnt/data8tb/onedrive/calibre/books:/books'
+      - '/mnt/data8tb/onedrive/calibre/books/import:/import'
     restart: 'unless-stopped'
 
 networks:

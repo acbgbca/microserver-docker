@@ -9,7 +9,7 @@ services:
       - show.external=true
     volumes:
       - ./code:/code
-      - /ctr_data/ollama/ollama:/root/.ollama
+      - /mnt/ssd512/ctr_data/ollama/ollama:/root/.ollama
     container_name: ollama
     tty: true
     environment:
@@ -24,7 +24,7 @@ services:
       - traefik.http.services.openwebui.loadbalancer.server.port=8080
       - show.external=true
     volumes:
-      - /ctr_cfg/ollama/openwebui:/app/backend/data
+      - ./ollama/openwebui:/app/backend/data
     depends_on:
       - ollama
     environment: # https://docs.openwebui.com/getting-started/env-configuration#default_models

@@ -10,7 +10,7 @@ services:
       - traefik.http.services.prometheus.loadbalancer.server.port=9090
     volumes:
       - ./etc:/etc/prometheus
-      - /ctr_data/prometheus/data:/prometheus
+      - /mnt/ssd512/ctr_data/prometheus/data:/prometheus
     restart: unless-stopped
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"

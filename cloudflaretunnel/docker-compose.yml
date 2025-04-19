@@ -101,6 +101,9 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass authelia
     volumes: 
       - ./redis:/data
+
+# Manually start container
+# curl http://sablier.internal.domain/api/strategies/blocking?group=stirlingpdf
   sablier:
     image: ghcr.io/sablierapp/sablier:1.9.0
     container_name: sablier
@@ -114,9 +117,13 @@ services:
     environment:
       - SESSIONS_DEFAULT_DURATION=15m
       - SESSIONS_EXPIRATION_INTERVAL=3m
+      - STRATEGY_BLOCKING_DEFAULT_TIMEOUT=5m
+#      - LOGGING_LEVEL=debug
     volumes:
         - '/var/run/docker.sock:/var/run/docker.sock'
     restart: 'unless-stopped'
+    networks:
+      - ctrnetwork
 networks:
   default:
   ctrnetwork:
