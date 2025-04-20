@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-wd=${1:-/ctr_cfg}
+wd=${1:-/mnt/ssd512/ctr_cfg}
 date=`date "+%Y%m%d"`
 
 bd=${2:-/tmp/backup}
