@@ -13,7 +13,7 @@ services:
     container_name: ollama
     tty: true
     environment:
-      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_KEEP_ALIVE=5m
       - OLLAMA_HOST=0.0.0.0
     deploy:
       resources:
@@ -22,7 +22,6 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: openwebui
@@ -39,6 +38,31 @@ services:
       - ENV=prod
       - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=REMOTE-EMAIL
       - WEBUI_AUTH_TRUSTED_NAME_HEADER=REMOTE-NAME
+  sdwebui:
+    image: ghcr.io/neggles/sd-webui-docker:latest
+    restart: unless-stopped
+    container_name: sdwebui
+    ports:
+      - 7860:7860
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.sdwebui.loadbalancer.server.port=7860
+      - show.external=true
+    environment:
+      CLI_ARGS: "--skip-version-check --allow-code --api --xformers --medvram --no-half"
+      # make TQDM behave a little better
+      PYTHONUNBUFFERED: "1"
+      SD_WEBUI_VARIANT: auto
+    volumes:
+      - /mnt/ssd512/ctr_data/sdwebui/data:/data
+      - ./output:/output
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 networks:
   default:
     external: true
