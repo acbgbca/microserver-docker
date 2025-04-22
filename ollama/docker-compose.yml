@@ -38,31 +38,53 @@ services:
       - ENV=prod
       - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=REMOTE-EMAIL
       - WEBUI_AUTH_TRUSTED_NAME_HEADER=REMOTE-NAME
-  sdwebui:
-    image: ghcr.io/neggles/sd-webui-docker:latest
+  deepresearch:
+    image: ghcr.io/acbgbca/local-deep-research:latest
     restart: unless-stopped
-    container_name: sdwebui
-    ports:
-      - 7860:7860
+    container_name: deepresearch
     labels:
       - traefik.enable=true
-      - traefik.http.services.sdwebui.loadbalancer.server.port=7860
+      - traefik.http.services.deepresearch.loadbalancer.server.port=5000
       - show.external=true
     environment:
-      CLI_ARGS: "--skip-version-check --allow-code --api --xformers --medvram --no-half"
-      # make TQDM behave a little better
-      PYTHONUNBUFFERED: "1"
-      SD_WEBUI_VARIANT: auto
+      - OLLAMA_BASE_URL=http://ollama:11434
+      # LLM Configuration
+      - LDR_LLM__PROVIDER=ollama
+      - LDR_LLM__MODEL=gemma3
+      - LDR_LLM__TEMPERATURE=0.7
+      
+      # Search Configuration
+      - LDR_SEARCH__TOOL=auto
+      - LDR_SEARCH__ITERATIONS=2
+      - LDR_SEARCH__QUESTIONS_PER_ITERATION=2
+
+      # Searxng Configuration
+      - SEARXNG_INSTANCE=http://searxng:8080
+      - SEARXNG_DELAY=2.0
+      
+      # Web Interface Settings
+      - LDR_WEB__PORT=5000
+      - LDR_WEB__HOST=0.0.0.0
     volumes:
-      - /mnt/ssd512/ctr_data/sdwebui/data:/data
-      - ./output:/output
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+      - ./deepresearch:/root/.config/local_deep_research
+  searxng:
+    container_name: searxng
+    image: docker.io/searxng/searxng:latest
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.searxng.loadbalancer.server.port=8080
+      - show.external=true
+    volumes:
+      - ./searxng:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=https://${SEARXNG_HOSTNAME:-localhost}/
+    # cap_drop:
+    #   - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
 networks:
   default:
     external: true
