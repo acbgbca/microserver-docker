@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   prometheus:
-    image: prom/prometheus:v3.2.1
+    image: prom/prometheus:v3.3.0
     container_name: prometheus
     user: "9001:9001"
     labels:

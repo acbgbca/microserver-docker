@@ -24,7 +24,7 @@ services:
       - sablier.group=paperless
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.15.2
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.15.3
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
