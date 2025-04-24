@@ -31,12 +31,3 @@ scrape_configs:
           job: docker-backup-upgrade
           __path__: /logs/docker-backup-upgrade.log
           host: docker
-  - job_name: calibre
-    static_configs:
-      - targets:
-          - localhost
-        labels:
-          job: calibre
-          container_name: calibre-app
-          __path__: /var/log/calibre/calibre-web.log
-          host: docker

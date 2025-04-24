@@ -26,7 +26,6 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/log:/logs:ro
-      - ./calibre/config/:/var/log/calibre:ro
     command: -config.file=/etc/promtail/docker-config.yaml
     restart: unless-stopped
     healthcheck:
