@@ -16,9 +16,6 @@ scrape_configs:
       - targets: ['node_exporter:9100']
         labels:
           server: 'docker'
-      - targets: ['192.168.0.201:9100']
-        labels:
-          server: proxmox
 
   - job_name: 'cadvisor'
     static_configs:
