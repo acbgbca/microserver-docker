@@ -7,6 +7,8 @@ services:
       - traefik.enable=true
       - traefik.http.services.ollama.loadbalancer.server.port=11434
       - show.external=true
+      - sablier.enable=true
+      - sablier.group=ollama
     volumes:
       - ./code:/code
       - /mnt/ssd512/ctr_data/ollama/ollama:/root/.ollama
@@ -29,6 +31,8 @@ services:
       - traefik.enable=true
       - traefik.http.services.openwebui.loadbalancer.server.port=8080
       - show.external=true
+      - sablier.enable=true
+      - sablier.group=ollama
     volumes:
       - ./openwebui:/app/backend/data
     depends_on:
@@ -38,6 +42,13 @@ services:
       - ENV=prod
       - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=REMOTE-EMAIL
       - WEBUI_AUTH_TRUSTED_NAME_HEADER=REMOTE-NAME
+    healthcheck:
+      test: "curl -f http://localhost:8080/health"
+      interval: 5m
+      timeout: 15s
+      retries: 5
+      start_period: 30s
+      start_interval: 5s
   deepresearch:
     image: ghcr.io/acbgbca/local-deep-research:latest
     restart: unless-stopped
@@ -46,6 +57,8 @@ services:
       - traefik.enable=true
       - traefik.http.services.deepresearch.loadbalancer.server.port=5000
       - show.external=true
+      - sablier.enable=true
+      - sablier.group=ollama
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
       # LLM Configuration
@@ -75,10 +88,19 @@ services:
       - traefik.enable=true
       - traefik.http.services.searxng.loadbalancer.server.port=8080
       - show.external=true
+      - sablier.enable=true
+      - sablier.group=ollama
     volumes:
       - ./searxng:/etc/searxng:rw
     environment:
       - SEARXNG_BASE_URL=https://${SEARXNG_HOSTNAME:-localhost}/
+    healthcheck:
+      test: "wget --no-verbose --tries=1 --spider http://localhost:8080/ || exit 1"
+      interval: 5m
+      timeout: 15s
+      retries: 5
+      start_period: 30s
+      start_interval: 5s
     # cap_drop:
     #   - ALL
     cap_add:
