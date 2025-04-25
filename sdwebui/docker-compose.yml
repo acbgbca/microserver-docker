@@ -9,6 +9,8 @@ services:
       - traefik.enable=true
       - traefik.http.services.sdwebui.loadbalancer.server.port=7860
       - show.external=true
+      - sablier.enable=true
+      - sablier.group=sdwebui
     environment:
       CLI_ARGS: "--skip-version-check --allow-code --api --xformers --medvram --no-half"
       # make TQDM behave a little better
@@ -17,6 +19,13 @@ services:
     volumes:
       - /mnt/ssd512/ctr_data/sdwebui/data:/data
       - ./output:/output
+    healthcheck:
+      test: "curl -f http://localhost:7860/internal/ping"
+      interval: 5m
+      timeout: 15s
+      retries: 5
+      start_period: 30s
+      start_interval: 5s
     deploy:
       resources:
         reservations:
