@@ -9,7 +9,7 @@ bd=$bd/$date
 
 # Create a directory for today
 mkdir -p $bd
-su -c "mkdir -p /mnt/backup/$date/" ctrdata
+su -c "mkdir -p /mnt/data8tb/backup/docker/$date/" ctrdata
 
 echo "Working Directory: $wd"
 echo "Backup Directory: $bd"
@@ -47,7 +47,7 @@ for d in */ ; do
 		else
 			tar -czf $bd/$d.tgz ../$d
 		fi
-		su -c "cp $bd/$d.tgz /mnt/backup/$date/" ctrdata
+		su -c "cp $bd/$d.tgz /mnt/data8tb/backup/docker/$date/" ctrdata
 
 		echo "Upgrading $d"
 		docker compose pull -q
