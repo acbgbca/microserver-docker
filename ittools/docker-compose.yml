@@ -1,12 +1,11 @@
 ---
-version: "2.4"
 services:
   ittools:
-    image: 'corentinth/it-tools:latest@sha256:6f177c156b9466610e0f2093e24668b78da501c66f0054f98bccb582b74ab26b'
+    image: ghcr.io/sharevb/it-tools:latest
     container_name: ittools
     labels:
       - traefik.enable=true
-      - traefik.http.services.ittools.loadbalancer.server.port=80
+      - traefik.http.services.ittools.loadbalancer.server.port=8080
       - show.external=true
     restart: 'unless-stopped'
 networks:
