@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   freshrss:
-    image: freshrss/freshrss:1.26.1
+    image: freshrss/freshrss:1.26.1@sha256:bca4407f1f3ecb2e02bd57f704593c64f89bbf3fad53f03ebcf4baecb0122de6
     container_name: freshrss
     labels:
       - traefik.enable=true

@@ -2,7 +2,7 @@
 # To upgrade the database, see https://acbgbca.github.io/documentation/postgres/
 services:
   db16:
-    image: postgres:16.8
+    image: postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae
     restart: unless-stopped
     volumes:
       - ./pgdata16:/var/lib/postgresql/data
@@ -24,7 +24,7 @@ services:
       - sablier.group=paperless
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.15.3
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.15.3@sha256:39b337e73c978238f0b529baf42f1b59b65d17eed35cd61bc1ccbbf779b5d58b
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
@@ -58,7 +58,7 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
 
   gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.20
+    image: docker.io/gotenberg/gotenberg:8.20@sha256:cda4386c7ed38f18bc6897828be01ba7361c99929a5c84ec5e293d7916e29bac
     restart: unless-stopped
     labels:
       - sablier.enable=true
@@ -71,7 +71,7 @@ services:
       - "--chromium-allow-list=file:///tmp/.*"
 
   tika:
-    image: ghcr.io/paperless-ngx/tika:2.9.1-minimal
+    image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
     restart: unless-stopped
     labels:
       - sablier.enable=true

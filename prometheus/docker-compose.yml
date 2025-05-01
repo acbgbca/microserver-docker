@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   prometheus:
-    image: prom/prometheus:v3.3.0
+    image: prom/prometheus:v3.3.0@sha256:339ce86a59413be18d0e445472891d022725b4803fab609069110205e79fb2f1
     container_name: prometheus
     user: "9001:9001"
     labels:
@@ -20,7 +20,7 @@ services:
     depends_on:
       - cadvisor
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.52.1
+    image: gcr.io/cadvisor/cadvisor:v0.52.1@sha256:f40e65878e25c2e78ea037f73a449527a0fb994e303dc3e34cb6b187b4b91435
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
@@ -39,7 +39,7 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
   node_exporter:
-    image: quay.io/prometheus/node-exporter:v1.9.1
+    image: quay.io/prometheus/node-exporter:v1.9.1@sha256:d00a542e409ee618a4edc67da14dd48c5da66726bbd5537ab2af9c1dfc442c8a
     container_name: node_exporter
     command:
       - '--path.rootfs=/host'
