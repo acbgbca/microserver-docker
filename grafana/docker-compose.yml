@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   grafana:
-    image: grafana/grafana-oss:11.6.0
+    image: grafana/grafana-oss:11.6.1@sha256:52c3e20686b860c6dc1f623811565773cf51eefa378817a4896dfc863c3c82c8
     container_name: grafana
     user: "9001:9001"
     labels:

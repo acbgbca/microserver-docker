@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   cloudflareddns:
-    image: 'oznu/cloudflare-ddns:latest@sha256:f552b1053ca4bad934eb3ca16e2d22decefe4423e2bf3e0a354fa1ab03b46390'
+    image: 'oznu/cloudflare-ddns:latest@sha256:19bd73d8aea9641dc329ec18ae693b2b9c33ff7cdc007f368266ce584446f995'
     container_name: cloudflareddns
     env_file: ddns.env
     restart: 'unless-stopped'
