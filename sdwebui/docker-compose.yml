@@ -1,6 +1,6 @@
 services:
   sdwebui:
-    image: ghcr.io/neggles/sd-webui-docker:latest
+    image: ghcr.io/neggles/sd-webui-docker:latest@sha256:1795fe796e1dad0d8d3baa9ef7c38a255b69c0878b76869feecc617bfd015e53
     restart: unless-stopped
     container_name: sdwebui
     ports:
