@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   freshrss:
-    image: freshrss/freshrss:1.26.1@sha256:bca4407f1f3ecb2e02bd57f704593c64f89bbf3fad53f03ebcf4baecb0122de6
+    image: freshrss/freshrss:1.26.2@sha256:ac8ba074707a020b1a865ae6671f17b6110068142484cee9f36df02ed6c41130
     container_name: freshrss
     labels:
       - traefik.enable=true
@@ -26,7 +26,7 @@ services:
       - ./bridge:/config
     restart: unless-stopped
   playwrightproxy:
-    image: ghcr.io/acbgbca/pw-scraper:0.141@sha256:2859f9d92a78a6d83180a9405350b5927d9a1a862c1ebdb4e064d748c480fa3a
+    image: ghcr.io/acbgbca/pw-scraper:0.142@sha256:aac8193a52471227d5fb4336293e2781d55447223aa0d232101c68303cae914f
     container_name: playwrightproxy
     environment:
       - LOG_LEVEL="debug"
