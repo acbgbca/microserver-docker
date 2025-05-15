@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   minecraft:
-    image: ghcr.io/acbgbca/minecraft-bedrock:1.21.80.3@sha256:e0a334206e12f517847ddb1ce532b845a1312ade95db7390550e9f8572bb0491
+    image: ghcr.io/acbgbca/minecraft-bedrock:1.21.81.2@sha256:7c83aaa46a165a9b771c7b091fbf9029517b9246473cd433a72903e6a2f32de7
     container_name: minecraft
     environment:
       - UID=9001
