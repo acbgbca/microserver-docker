@@ -44,6 +44,7 @@ storage_config:
 limits_config:
   retention_period: 744h
   ingestion_rate_mb: 16
+  max_query_series: 5000
   ingestion_burst_size_mb: 32
 
 query_scheduler:
