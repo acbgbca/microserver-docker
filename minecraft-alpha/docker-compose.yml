@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   minecraft-alpha:
-    image: ghcr.io/acbgbca/minecraft-bedrock:alpha@sha256:843dc136c9f444513be257bd35c82006cbb17d56079d2f2276294060b3dd0047
+    image: ghcr.io/acbgbca/minecraft-bedrock:alpha@sha256:2a83a993f4fa2ac611e9963c105d3bf127487f4ed9a18321e8d32a0f8ef17241
     container_name: minecraft-alpha
     user: 9001:9001
     environment:
