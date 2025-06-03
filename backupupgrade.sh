@@ -65,6 +65,9 @@ for d in */ ; do
 done
 set -e
 
+# Restart sablier. It will only control containers started before it was.
+docker compose -f ./cloudflaretunnel/docker-compose.yml restart sablier
+
 # Remove old images
 docker image prune -fa
 
