@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   calibre:
-    image: 'ghcr.io/linuxserver/calibre-web:0.6.24@sha256:ad85f34ff3fa33705e21e54da4744406ff3f563563a68bb61004594d8066358b'
+    image: 'ghcr.io/linuxserver/calibre-web:0.6.24@sha256:efd9388420e9a3a306ee19f42ca8c547d099d2dd2e0aa4b40c39404e486e4c3d'
     container_name: calibre
     labels:
       - traefik.enable=true
@@ -26,7 +26,7 @@ services:
       start_interval: 5s
     restart: 'unless-stopped'
   calibreserver:
-    image: 'ghcr.io/linuxserver/calibre:8.4.0@sha256:f17b542ed5116513d6be65667f4e35826b99738d4f1ebccba6c85e81c011c2f7'
+    image: 'ghcr.io/linuxserver/calibre:8.4.0@sha256:dcfc52e135bac2c67c8aac5c6e6b479afc92adc4059c704fca344968b0032c3f'
     container_name: calibreserver
     labels:
       - traefik.enable=true
