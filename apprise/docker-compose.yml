@@ -18,6 +18,7 @@ services:
     restart: unless-stopped
     environment:
       - MODE=native
+      - AUTO_RECEIVE_SCHEDULE=0 21 * * *
     volumes:
       - ./signal:/home/.local/share/signal-cli
 
