@@ -13,6 +13,7 @@ services:
       - GF_AUTH_PROXY_ENABLED=true
       - GF_AUTH_PROXY_HEADER_NAME=REMOTE-USER
       - GF_AUTH_PROXY_HEADERS=Name:REMOTE-NAME Email:REMOTE-EMAIL Groups:REMOTE-GROUPS
+      - GF_LOG_LEVEL=warn # Grafana logs way too much at info level
     volumes:
       - ./data:/var/lib/grafana
     restart: unless-stopped
