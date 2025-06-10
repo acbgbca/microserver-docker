@@ -77,7 +77,7 @@ services:
   redis:
     image: redis:7.4.4-alpine@sha256:ee9e8748ace004102a267f7b8265dab2c618317df22507b89d16a8add7154273
     restart: unless-stopped
-    command: redis-server --save 20 1 --loglevel warning --requirepass authelia
+    command: redis-server --loglevel notice --requirepass authelia --databases 1 --hz 2
     volumes: 
       - ./redis:/data
     networks:
