@@ -1,5 +1,9 @@
 # https://grafana.com/docs/loki/latest/clients/promtail/configuration/
 # https://docs.docker.com/engine/api/v1.41/#operation/ContainerList
+global:
+  file_watch_config:
+    min_poll_frequency: 1s
+    max_poll_frequency: 30s
 server:
   http_listen_port: 9080
   grpc_listen_port: 0
@@ -14,7 +18,7 @@ scrape_configs:
   - job_name: docker
     docker_sd_configs:
       - host: unix:///var/run/docker.sock
-        refresh_interval: 5s
+        refresh_interval: 15s
     relabel_configs:
       - source_labels: ['__meta_docker_container_name']
         regex: '/(.*)'
@@ -31,3 +35,19 @@ scrape_configs:
           job: docker-backup-upgrade
           __path__: /logs/docker-backup-upgrade.log
           host: docker
+  - job_name: journal
+    journal:
+      json: false
+      max_age: 1h
+      path: /logs/journal
+      labels:
+        job: systemd-journal
+    relabel_configs:
+      - source_labels: ["__journal__systemd_unit"]
+        target_label: "unit"
+      - source_labels: ["__journal__hostname"]
+        target_label: host
+      - source_labels: ["__journal_priority_keyword"]
+        target_label: level
+      - source_labels: ["__journal_syslog_identifier"]
+        target_label: syslog_identifier
