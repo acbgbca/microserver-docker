@@ -1,0 +1,98 @@
+logging {
+  level  = "info"
+  format = "logfmt"
+}
+
+discovery.docker "docker" {
+	host             = "unix:///var/run/docker.sock"
+	refresh_interval = "15s"
+}
+
+discovery.relabel "docker" {
+	targets = []
+
+	rule {
+		source_labels = ["__meta_docker_container_name"]
+		regex         = "/(.*)"
+		target_label  = "container_name"
+	}
+
+	rule {
+		source_labels = ["__meta_docker_container_log_stream"]
+		target_label  = "logstream"
+	}
+
+	rule {
+		source_labels = ["__meta_docker_container_label_logging_jobname"]
+		target_label  = "job"
+	}
+}
+
+loki.source.docker "docker" {
+	host             = "unix:///var/run/docker.sock"
+	targets          = discovery.docker.docker.targets
+	forward_to       = [loki.write.default.receiver]
+	relabel_rules    = discovery.relabel.docker.rules
+	refresh_interval = "15s"
+}
+
+local.file_match "logfiles" {
+	path_targets = [{
+		__address__ = "localhost",
+		__path__    = "/logs/docker-backup-upgrade.log",
+		host        = "docker",
+		job         = "docker-backup-upgrade",
+	}]
+}
+
+loki.source.file "logfiles" {
+	targets    = local.file_match.logfiles.targets
+	forward_to = [loki.write.default.receiver]
+
+	file_watch {
+		min_poll_frequency = "1s"
+		max_poll_frequency = "30s"
+	}
+	legacy_positions_file = "/config/positions.yaml"
+}
+
+discovery.relabel "journal" {
+	targets = []
+
+	rule {
+		source_labels = ["__journal__systemd_unit"]
+		target_label  = "unit"
+	}
+
+	rule {
+		source_labels = ["__journal__hostname"]
+		target_label  = "host"
+	}
+
+	rule {
+		source_labels = ["__journal_priority_keyword"]
+		target_label  = "level"
+	}
+
+	rule {
+		source_labels = ["__journal_syslog_identifier"]
+		target_label  = "syslog_identifier"
+	}
+}
+
+loki.source.journal "journal" {
+	max_age       = "1h0m0s"
+	path          = "/logs/journal"
+	relabel_rules = discovery.relabel.journal.rules
+	forward_to    = [loki.write.default.receiver]
+	labels        = {
+		job = "systemd-journal",
+	}
+}
+
+loki.write "default" {
+	endpoint {
+		url = "http://loki:3100/loki/api/v1/push"
+	}
+	external_labels = {}
+}

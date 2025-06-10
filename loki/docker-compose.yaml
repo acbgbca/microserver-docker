@@ -17,25 +17,6 @@ services:
       retries: 2
       start_period: 60s
     restart: unless-stopped
-  promtail:
-    image:  grafana/promtail:3.5.1@sha256:65bfae480b572854180c78f7dc567a4ad2ba548b0c410e696baa1e0fa6381299
-    container_name: promtail
-    volumes:
-      - ./promtail.yaml:/etc/promtail/docker-config.yaml
-      - ./config:/config
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /var/log:/logs:ro
-    command: -config.file=/etc/promtail/docker-config.yaml
-    restart: unless-stopped
-    healthcheck:
-      test: wget --no-verbose --tries=1 --spider http://localhost:9080 || exit 1
-      interval: 1m
-      timeout: 10s
-      retries: 2
-      start_period: 20s
-    depends_on:
-      - loki
   
 networks:
   default:
