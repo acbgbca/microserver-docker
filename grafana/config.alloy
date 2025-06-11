@@ -3,39 +3,6 @@ logging {
   format = "logfmt"
 }
 
-discovery.docker "docker" {
-	host             = "unix:///var/run/docker.sock"
-	refresh_interval = "15s"
-}
-
-discovery.relabel "docker" {
-	targets = []
-
-	rule {
-		source_labels = ["__meta_docker_container_name"]
-		regex         = "/(.*)"
-		target_label  = "container_name"
-	}
-
-	rule {
-		source_labels = ["__meta_docker_container_log_stream"]
-		target_label  = "logstream"
-	}
-
-	rule {
-		source_labels = ["__meta_docker_container_label_logging_jobname"]
-		target_label  = "job"
-	}
-}
-
-loki.source.docker "docker" {
-	host             = "unix:///var/run/docker.sock"
-	targets          = discovery.docker.docker.targets
-	forward_to       = [loki.write.default.receiver]
-	relabel_rules    = discovery.relabel.docker.rules
-	refresh_interval = "15s"
-}
-
 local.file_match "logfiles" {
 	path_targets = [{
 		__address__ = "localhost",
@@ -77,6 +44,11 @@ discovery.relabel "journal" {
 	rule {
 		source_labels = ["__journal_syslog_identifier"]
 		target_label  = "syslog_identifier"
+	}
+
+    rule {
+		source_labels = ["__journal_container_name"]
+		target_label  = "container_name"
 	}
 }
 
