@@ -62,45 +62,7 @@ services:
       - ./ext_letsencrypt:/letsencrypt
       - ./traefik:/config
     depends_on:
-      - autheliaexternal
       - sablier
-
-  autheliaexternal:
-    image: authelia/authelia:4.39.4@sha256:64b356c30fd817817a4baafb4dbc0f9f8702e46b49e1edb92ff42e19e487b517
-    container_name: autheliaexternal
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.autheliaexternal.loadbalancer.server.port=9091
-      - traefik.http.middlewares.autheliaexternal.forwardauth.address=http://autheliaexternal:9091/api/verify?rd=https://autheliaexternal.$externaldomain/
-      - traefik.http.middlewares.autheliaexternal.forwardauth.trustForwardHeader=true
-      - traefik.http.middlewares.autheliaexternal.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email
-      - show.external=true
-    environment:
-      - PUID=9001
-      - PGID=9001
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./ext_authelia:/config
-    networks:
-      - default
-      - ctrnetwork
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    depends_on:
-      - redis
-    healthcheck:
-      test: ["CMD", "/app/healthcheck.sh"]
-      interval: 1m
-      timeout: 10s
-      retries: 3
-      start_period: 15s
-  redis:
-    image: redis:7.4.4-alpine@sha256:ee9e8748ace004102a267f7b8265dab2c618317df22507b89d16a8add7154273
-    restart: unless-stopped
-    command: redis-server --loglevel warning --requirepass authelia --databases 1 --hz 2
-    volumes: 
-      - ./redis:/data
 
 # Manually start container
 # curl http://sablier.internal.domain/api/strategies/blocking?group=stirlingpdf
