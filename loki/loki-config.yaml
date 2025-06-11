@@ -18,13 +18,6 @@ common:
 
 schema_config:
   configs:
-    - from: 2020-10-24
-      store: boltdb-shipper
-      object_store: filesystem
-      schema: v11
-      index:
-        prefix: index_
-        period: 24h
     - from: 2024-09-09
       index:
         period: 24h
@@ -34,9 +27,6 @@ schema_config:
       store: tsdb
 
 storage_config:
-  boltdb_shipper:
-   active_index_directory: /data/loki/index
-   cache_location: /data/loki/index_cache
   tsdb_shipper:
     active_index_directory: /data/loki/tsdb-index
     cache_location: /data/loki/tsdb-cache
