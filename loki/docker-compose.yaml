@@ -5,6 +5,7 @@ services:
     container_name: loki
     volumes:
       - ./loki-config.yaml:/etc/loki/config.yaml
+      - ./rules:/rules/fake
       - /mnt/ssd512/ctr_data/loki/data:/data/loki
     user: "9001:9001"
     ports:

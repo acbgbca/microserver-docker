@@ -1,0 +1,15 @@
+groups:
+  - name: should_fire
+    interval: 1m
+    rules:
+      - alert: Blocknews limit reached
+        expr: |
+          max(count by(container_name) (rate({container_name="sabnzbd"} |= `block quota exceeded` [5m]))) > 0
+        annotations:
+          summary: Block news limit reached
+          description: Block news limit reached. Purchase additional blocks
+      - alert: Upgrade failed
+        expr: |
+          sum(count by(job) (rate({job="docker-backup-upgrade"} |= `Error upgrading` [1m]))) > 0
+        annotations:
+          summary: Upgrading a container failed

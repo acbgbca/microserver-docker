@@ -1,0 +1,8 @@
+route:
+  receiver: 'default'
+
+receivers:
+- name: 'default'
+  webhook_configs:
+  - url: 'http://n8n:5678/webhook/0da99567-93f7-47c9-8797-f8a43453d00b'
+    send_resolved: true

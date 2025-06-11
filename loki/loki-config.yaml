@@ -9,7 +9,7 @@ common:
   storage:
     filesystem:
       chunks_directory: /data/loki/chunks
-      rules_directory: /data/loki/rules
+      rules_directory: /rules
   replication_factor: 1
   ring:
     instance_addr: 127.0.0.1
@@ -39,3 +39,15 @@ limits_config:
 
 query_scheduler:
   max_outstanding_requests_per_tenant: 2048
+
+ruler:
+  storage:
+    type: local
+    local:
+      directory: /rules
+  rule_path: /data/loki/scratch
+  alertmanager_url: http://alertmanager:9093
+  ring:
+    kvstore:
+      store: inmemory
+  enable_api: true

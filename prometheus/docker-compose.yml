@@ -19,6 +19,19 @@ services:
       - no-new-privileges:true
     depends_on:
       - cadvisor
+  alertmanager:
+    image: prom/alertmanager:v0.28.1
+    container_name: alertmanager
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.alertmanager.loadbalancer.server.port=9093
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager.yml
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/alertmanager.yml"
+    security_opt:
+      - no-new-privileges:true
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.52.1@sha256:f40e65878e25c2e78ea037f73a449527a0fb994e303dc3e34cb6b187b4b91435
     container_name: cadvisor
