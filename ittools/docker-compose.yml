@@ -1,7 +1,7 @@
 ---
 services:
   ittools:
-    image: ghcr.io/sharevb/it-tools:latest@sha256:2a296b9a0da9b7491d1e16195b98991ae8147c900840557dc918e9321d348e35
+    image: ghcr.io/sharevb/it-tools:latest@sha256:5ac3123d179675bc19c3582a7907510d69f90eecdad511901ab5c247cb8c146e
     container_name: ittools
     labels:
       - traefik.enable=true
