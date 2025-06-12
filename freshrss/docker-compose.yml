@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   freshrss:
-    image: freshrss/freshrss:1.26.2@sha256:ac8ba074707a020b1a865ae6671f17b6110068142484cee9f36df02ed6c41130
+    image: freshrss/freshrss:1.26.3@sha256:f9733e2cdf754d82e25826324fb4cbf3d736d82e2d36bf8e379dd4f0eeee0932
     container_name: freshrss
     labels:
       - traefik.enable=true
@@ -16,7 +16,7 @@ services:
       - './extensions:/var/www/FreshRSS/extensions'
     restart: 'unless-stopped'
   rssbridge:
-    image: rssbridge/rss-bridge@sha256:1311729e8a5cf280ed10e645378178ccf26890632f12739ab54285368d93aa92
+    image: rssbridge/rss-bridge@sha256:e3a36ea2096c03a2afeff4d5dcc278c92e4dcf952e9e223aa3fffcb4cc5842b6
     container_name: rssbridge
     labels:
       - traefik.enable=true
