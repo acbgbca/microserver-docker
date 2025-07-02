@@ -42,7 +42,7 @@ services:
     volumes:
       - './server:/config'
       - '/mnt/data8tb/onedrive/calibre/books:/books'
-      - '/mnt/data8tb/onedrive/calibre/books/import:/import'
+      - '/mnt/data8tb/onedrive/calibre/import:/import'
     restart: 'unless-stopped'
 
 networks:
