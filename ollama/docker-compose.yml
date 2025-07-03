@@ -82,7 +82,7 @@ services:
       - ./deepresearch:/root/.config/local_deep_research
   searxng:
     container_name: searxng
-    image: docker.io/searxng/searxng:latest@sha256:22c02f36d22c98a9c145bf0ecdb2c46cefcc3db0c77d0f033d9fcb09308369fa
+    image: docker.io/searxng/searxng:latest@sha256:e8110dab745e7d4639b712877ed93b28655c321d1b4446a63262b8b8e1bc6ed1
     restart: unless-stopped
     labels:
       - traefik.enable=true
