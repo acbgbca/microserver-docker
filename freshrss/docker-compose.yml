@@ -26,7 +26,7 @@ services:
       - ./bridge:/config
     restart: unless-stopped
   playwrightproxy:
-    image: ghcr.io/acbgbca/pw-scraper:0.155@sha256:a8cd09d23cf13e1074953225204f43759a0706c453457080f9412880293038e9
+    image: ghcr.io/acbgbca/pw-scraper:0.156@sha256:93908dfe4bc4f2670e9133b58f114cca800730b21bea091dcde8188dd84b4ca5
     container_name: playwrightproxy
     environment:
       - LOG_LEVEL="debug"
