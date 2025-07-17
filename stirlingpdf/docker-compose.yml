@@ -1,6 +1,6 @@
 services:
   stirlingpdf:
-    image: stirlingtools/stirling-pdf:1.0.0@sha256:7fdba5a16f3b88dc7d55a38986272369f3d2068a6cabb309282f18463418e66e
+    image: stirlingtools/stirling-pdf:1.0.2@sha256:de394ff4cb076c9fede6edff4c50284a82ff729e2d056dbea05910aba02eb21b
     container_name: stirlingpdf
     labels:
       - traefik.enable=true
