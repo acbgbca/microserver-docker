@@ -11,8 +11,9 @@
     "prHourlyLimit": 0,
     "branchConcurrentLimit": 0,
     "ignoreTests": true,
+    "timezone": "Australia/Melbourne",
     "schedule": [
-        "on Thursday"
+        "on Friday"
     ],
     "configMigration": true,
     "commitBodyTable": true,
