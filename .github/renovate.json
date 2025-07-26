@@ -20,13 +20,6 @@
     "minimumReleaseAge": "3 days",
     "packageRules": [
         {
-            "description": "Ignore problematic promtail version",
-            "matchPackageNames": [
-                "grafana/promtail"
-            ],
-            "allowedVersions": "!/3.(2|3).(0|1|2)/"
-        },
-        {
             "description": "Ignore old yyyy-MM-dd versions",
             "matchPackageNames": [
                 "ghcr.io/linuxserver/heimdall",
