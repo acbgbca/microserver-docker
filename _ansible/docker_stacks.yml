@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  
+  vars:
+    all: {}
+
+  tasks:
+  - name: Load Docker Stacks
+    include_vars:
+      file: "{{ item }}"
+      name: all
+      hash_behaviour: merge
+    when: filename is not defined
+    loop: "{{ query('fileglob', 'stacks/*.yml') }}"
+  - name: Load Single Docker Stack
+    include_vars:
+      file: "{{ filename }}"
+      name: all
+      dir: stacks
+    when: filename is defined
+  - name: Create Stacks
+    include_tasks: includes/stack.yml
+    loop: "{{ all | dict2items }}"
+    loop_control:
+      loop_var: file

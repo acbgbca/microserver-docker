@@ -1,0 +1,46 @@
+#jinja2: trim_blocks:False
+services:
+{%- for service in stack.services %}
+  {{ service.name }}:
+    image: {{ service.image }}
+    container_name: {{ service.name }}
+    restart: unless-stopped
+    {%- if 'exposed' in service or 'sablier' in stack %}
+    labels:
+      {%- if 'exposed' in service %}
+      {% if service.exposed.internal -%}
+        - traefik.enable=true
+      {% endif -%}
+      - traefik.http.services.{{ service.name }}.loadbalancer.server.port={{ service.exposed.port }}
+      {% if service.exposed.external -%}
+        - show.external=true
+      {%- endif %}
+      {%- endif %}
+      {%- if 'sablier' in stack %}
+      - sablier.enable=true
+      - sablier.group={{ stack.sablier.group }}
+      {%- endif %}
+    {%- endif %}
+    {%- if 'envFile' in service and service.envFile %}
+    env_file:
+      - {{ service.name }}.env
+    {%- endif %}
+    {%- if 'env' in service %}
+    environment:
+      {%- for key, value in service.env.items() %}
+      - {{ key }}={{ value }}
+      {%- endfor %}
+    {%- endif %}
+    {% if 'volumes' in service -%}
+    volumes:
+      {%- for volume in service.volumes %}
+      {% if 'local' in volume -%}- ./{{ volume.local }}:{{ volume.container }}{%- endif -%}
+      {%- if 'shared' in volume -%}- {{ sharedDirs[volume.shared] }}:{{ volume.container }}{%- endif %}
+      {%- endfor %}
+    {%- endif %}
+{%- endfor %}
+
+networks:
+  default:
+    external: true
+    name: ctr-network

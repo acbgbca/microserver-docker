@@ -1,0 +1,21 @@
+audiobookshelf:
+  sablier:
+    group: audiobookshelf
+  services:
+  - name: audiobookshelf
+    image: ghcr.io/advplyr/audiobookshelf:2.26.1@sha256:5901162ccdf4b44f563ff2012484d5e315d9a1ecd6af86f7fe605ec96bbc5039
+    exposed:
+      internal: true
+      external: true
+      port: 80
+    environment:
+      TZ: Australia/Melbourne
+    volumes:
+      - shared: books
+        container: /books
+      - local: podcasts
+        container: /podcasts
+      - local: config
+        container: /config
+      - local: metadata
+        container: /metadata

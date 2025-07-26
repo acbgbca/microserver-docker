@@ -1,0 +1,25 @@
+---
+- name: Create compose files for {{ file.key }}
+  ansible.builtin.template:
+    src: templates/docker_compose.yml.j2
+    dest: "../{{ file.key }}/docker_compose.yaml"
+  vars:
+    stack: "{{ file.value }}"
+- name: Create env file for {{ file.key }}
+  ansible.builtin.template:
+    src: templates/env.j2
+    dest: "../{{ file.key }}/{{ file.key }}2.env"
+  when: file.value.envFile is defined
+  vars:
+    envFile: "{{ file.value.envFile }}"
+# - name: Debug directories for {{ file.key }}
+#   ansible.builtin.debug:
+#     msg: "../{{ file.key }}/{{ item.1.local }}"
+#   when: item.1.local is defined
+#   loop: "{{ file.value.services|subelements('volumes') }}"
+- name: Setup directories for {{ file.key }}
+  file:
+    path: "../{{ file.key }}/{{ item.1.local }}"
+    state: directory
+  when: item.1.local is defined
+  loop: "{{ file.value.services|subelements('volumes') }}"
