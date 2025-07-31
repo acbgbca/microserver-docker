@@ -1,7 +1,7 @@
 services:
   olivetin:
     container_name: olivetin
-    image: ghcr.io/olivetin/olivetin:2025.7.19@sha256:a0e7b030bac90e8e0a7d84a4fed26aba071f72a0ba36ac4f2926686d38595c82
+    image: ghcr.io/olivetin/olivetin:2025.7.29@sha256:db2029a29b7cec56a32f40dec0fd5d7d3fc8802e02794bde1d6b9708d3be1deb
     labels:
       - traefik.enable=true
       - traefik.http.services.olivetin.loadbalancer.server.port=1337

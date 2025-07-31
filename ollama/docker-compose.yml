@@ -25,7 +25,7 @@ services:
               count: 1
               capabilities: [gpu]
   openwebui:
-    image: ghcr.io/open-webui/open-webui:main@sha256:1addcd1bd7f8adfa635855bc8dfb91efc11632a3ca1ed0c0cc9424b82a5975d6
+    image: ghcr.io/open-webui/open-webui:main@sha256:24669393b06bc05b5193b26ae59483b6d53e8b47a5a74217053373cef5e1ae7d
     container_name: openwebui
     labels:
       - traefik.enable=true
@@ -50,7 +50,7 @@ services:
       start_period: 30s
       start_interval: 5s
   deepresearch:
-    image: localdeepresearch/local-deep-research:0.6.4@sha256:75d12092a3570089ec5629857baab70d6c77dc440ffc14f929af41606bc142d3
+    image: localdeepresearch/local-deep-research:0.6.5@sha256:c6561f9394597743196f931e084c9ee818eb64f032708c76bd12de393992fed3
     restart: unless-stopped
     container_name: deepresearch
     labels:
@@ -82,7 +82,7 @@ services:
       - ./deepresearch:/root/.config/local_deep_research
   searxng:
     container_name: searxng
-    image: docker.io/searxng/searxng:latest@sha256:bd765c6e56256b8466c1ad53a12f3c0eff5409d96f005d92552e6510f445dd96
+    image: docker.io/searxng/searxng:latest@sha256:8ee06648ea025780c4805cf58fd66e48245bf7e81466751afae4bf84e5ef29ca
     restart: unless-stopped
     labels:
       - traefik.enable=true
