@@ -35,7 +35,7 @@ services:
       - "--certificatesresolvers.cf.acme.email=$email"
       - "--certificatesresolvers.cf.acme.storage=/letsencrypt/acme.json"
       - "--experimental.plugins.sablier.modulename=github.com/sablierapp/sablier"
-      - "--experimental.plugins.sablier.version=v1.8.5"
+      - "--experimental.plugins.sablier.version=v1.10.1"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=secure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
