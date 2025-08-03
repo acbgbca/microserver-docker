@@ -73,7 +73,7 @@
             "datasourceTemplate": "docker",
             "managerFilePatterns": ["/_ansible/stacks/*.yml"],
             "matchStrings": [
-                "image: (?<currentValue>.*?)\\n"
+                "image: (?<depName>.*?):(?<currentValue>.*?)\\n"
             ]
         }
     ]
