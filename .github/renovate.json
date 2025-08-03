@@ -66,5 +66,15 @@
                 "!docker.io/library/postgres"
             ]
         }
+    ],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "datasourceTemplate": "docker",
+            "managerFilePatterns": ["/_ansible/stacks/*.yml"],
+            "matchStrings": [
+                "image: (?<currentValue>.*?)\\n"
+            ]
+        }
     ]
 }

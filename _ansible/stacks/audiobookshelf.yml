@@ -8,7 +8,7 @@ audiobookshelf:
       internal: true
       external: true
       port: 80
-    environment:
+    env:
       TZ: Australia/Melbourne
     volumes:
       - shared: books
@@ -19,3 +19,6 @@ audiobookshelf:
         container: /config
       - local: metadata
         container: /metadata
+    healthcheck:
+      url: http://localhost/
+      tool: wget

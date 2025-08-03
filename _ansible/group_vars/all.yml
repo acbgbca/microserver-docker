@@ -1,6 +1,6 @@
 ---
 sharedDirs:
-  books: /mnt/data8tb/onedrive/calibre/books/books
+  books: /mnt/data8tb/onedrive/calibre/books
 externalDomain: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           33353432306466663735626362363433653339343764636336323665363764653564366533623562

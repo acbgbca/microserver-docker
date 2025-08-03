@@ -38,6 +38,19 @@ services:
       {%- if 'shared' in volume -%}- {{ sharedDirs[volume.shared] }}:{{ volume.container }}{%- endif %}
       {%- endfor %}
     {%- endif %}
+    {%- if 'healthcheck' in service %}
+    healthcheck:
+      {% if service.healthcheck.tool is not defined -%}
+      test: "curl -f {{ service.healthcheck.url }}"
+      {%- else -%}
+      test: "wget --no-verbose --tries=1 --spider {{ service.healthcheck.url }} || exit 1"
+      {%- endif %}
+      interval: {{ service.healthcheck.interval|default("2m") }}
+      timeout: {{ service.healthcheck.timeout|default("30s") }}
+      retries: {{ service.healthcheck.retries|default("5") }}
+      start_period: {{ service.healthcheck.startPeriod|default("30s") }}
+      start_interval: {{ service.healthcheck.startInterval|default("5s") }}
+    {%- endif -%}
 {%- endfor %}
 
 networks:
