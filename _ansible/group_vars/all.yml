@@ -1,6 +1,7 @@
 ---
 sharedDirs:
   books: /mnt/data8tb/onedrive/calibre/books
+traefikConfigDir: ../traefik/config
 externalDomain: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           33353432306466663735626362363433653339343764636336323665363764653564366533623562

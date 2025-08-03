@@ -1,0 +1,48 @@
+#jinja2: trim_blocks:False
+http:
+  routers:
+  {%- for service in stack.services %}
+    {%- if 'exposed' in service %}
+    {%- if service.exposed.internal %}
+    {{ service.name }}-internal:
+      rule: "Host(`{{ service.name }}.{{ internalDomain }}`)"
+      service: {{ service.name }}
+      {%- if 'sablier' in stack %}
+      middlewares:
+          - {{ stack.sablier.group }}-sablier@file
+      {%- endif -%}
+    {%- endif -%}
+    {%- if service.exposed.external %}
+    {{ service.name }}-external:
+      rule: "Host(`{{ service.name }}.{{ externalDomain }}`)"
+      service: {{ service.name }}
+      {%- if 'sablier' in stack %}
+      middlewares:
+          - {{ stack.sablier.group }}-sablier@file
+      {%- endif -%}
+    {%- endif -%}
+    {%- endif -%}
+  {%- endfor %}
+  services:
+    {%- for service in stack.services %}
+    {%- if 'exposed' in service %}
+    {{ service.name }}:
+      loadBalancer:
+        servers:
+          - url: http://{{ service.name }}:{{ service.exposed.port }}
+    {%- endif %}
+    {%- endfor %}
+  {% if 'sablier' in stack -%}
+  middlewares:
+    {{ stack.sablier.group }}-sablier:
+      plugin:
+        sablier:
+          group: {{ stack.sablier.group }}
+          dynamic:
+            displayName: {{ stack.sablier.displayName }}
+            refreshFrequency: 5s
+            showDetails: "true"
+            theme: hacker-terminal
+          sablierUrl: http://sablier:10000
+          sessionDuration: 15m
+  {%- endif -%}

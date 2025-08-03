@@ -23,3 +23,12 @@
     state: directory
   when: item.1.local is defined
   loop: "{{ file.value.services|subelements('volumes') }}"
+- name: Setup traefik config for {{ file.key }}
+  ansible.builtin.template:
+    src: templates/traefik.yaml.j2
+    dest: "{{ traefikConfigDir }}/{{ file.key }}.yaml"
+  vars:
+    stack: "{{ file.value }}"
+  tags:
+    - traefik
+
