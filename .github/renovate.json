@@ -71,7 +71,7 @@
         {
             "customType": "regex",
             "datasourceTemplate": "docker",
-            "managerFilePatterns": ["ansible/stacks/.*$"],
+            "managerFilePatterns": ["/(^|/)_ansible/stacks/.+\\.ya?ml$/"],
             "matchStrings": [
                 "image: (?<depName>.*?):(?<currentValue>.*?)\\n"
             ]
