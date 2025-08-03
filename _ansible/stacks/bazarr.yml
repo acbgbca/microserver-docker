@@ -1,0 +1,20 @@
+bazarr:
+  services:
+  - name: bazarr
+    image: ghcr.io/linuxserver/bazarr:1.5.2@sha256:911483a9ec04de93e60e649a101eabab5d7c143bcb14fcddb32161d34016e11b
+    exposed:
+      internal: true
+      external: true
+      port: 6767
+    env:
+      PUID: 9001
+      PGID: 9001
+    volumes:
+      - local: config
+        container: /config
+      - shared: videos
+        container: /tv
+      - shared: videos
+        container: /movies
+    healthcheck:
+      url: http://localhost:6767

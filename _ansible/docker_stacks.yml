@@ -15,9 +15,8 @@
     tags: always
   - name: Load Single Docker Stack
     include_vars:
-      file: "{{ filename }}"
+      file: "stacks/{{ filename }}.yml"
       name: all
-      dir: stacks
     when: filename is defined
     tags: always
   - name: Create Stacks
