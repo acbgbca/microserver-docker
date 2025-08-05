@@ -1,0 +1,24 @@
+template:
+  rootEnv:
+    externalDomain: {{ externalDomain }}
+    internalDomain: {{ internalDomain }}
+  envFile:
+    secret: "secret"
+  services:
+  - name: template
+    image: template:latest
+    envFile: true
+    exposed:
+      internal: true
+      external: true
+      port: 3000
+    user: '{{ userId }}:{{ groupId }}'
+    env:
+      TZ: '{{ timezone }}'
+      PUID: '{{ userId }}'
+      PGID: '{{ groupId }}'
+    volumes:
+      - local: data
+        container: /data
+      - shared: books
+        container: /bookd

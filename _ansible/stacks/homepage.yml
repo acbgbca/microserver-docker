@@ -1,0 +1,19 @@
+homepage:
+  rootEnv:
+    externalDomain: '{{ externalDomain }}'
+    internalDomain: '{{ internalDomain }}'
+  services:
+  - name: homepage
+    image: ghcr.io/gethomepage/homepage:v1.4.0@sha256:63434aafeb3d49be1f21ebd3c5d777fe5b7794c31342daad4e96f09b72a57188
+    exposed:
+      internal: true
+      external: true
+      port: 3000
+    user: '{{ userId }}:{{ groupId }}'
+    env:
+      HOMEPAGE_ALLOWED_HOSTS: homepage.${externalDomain},homepage.${internalDomain}
+    volumes:
+      - local: config
+        container: /app/config
+      - local: images
+        container: /app/public/images

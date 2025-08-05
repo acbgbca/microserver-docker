@@ -10,9 +10,7 @@ services:
       - traefik.http.services.homepage.loadbalancer.server.port=3000
       - show.external=true
     environment:
-      - PUID=9001
-      - PGID=9001
-      - HOMEPAGE_ALLOWED_HOSTS=homepage.gohbarrow.com,homepage.internal.gohbarrow.com
+      - HOMEPAGE_ALLOWED_HOSTS=homepage.${externalDomain},homepage.${internalDomain}
     volumes:
       - ./config:/app/config
       - ./images:/app/public/images

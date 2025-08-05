@@ -5,6 +5,13 @@
     dest: "../{{ file.key }}/docker_compose.yaml"
   vars:
     stack: "{{ file.value }}"
+- name: Create root env file for {{ file.key }}
+  ansible.builtin.template:
+    src: templates/env.j2
+    dest: "../{{ file.key }}/2.env"
+  when: file.value.rootEnv is defined
+  vars:
+    envFile: "{{ file.value.rootEnv }}"
 - name: Create env file for {{ file.key }}
   ansible.builtin.template:
     src: templates/env.j2
