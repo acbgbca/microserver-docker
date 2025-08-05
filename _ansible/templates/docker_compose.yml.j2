@@ -38,6 +38,12 @@ services:
       {%- if 'shared' in volume -%}- {{ sharedDirs[volume.shared] }}:{{ volume.container }}{%- endif %}
       {%- endfor %}
     {%- endif %}
+    {% if 'securityOpts' in service -%}
+    security_opt:
+      {%- for secOpt in service.securityOpts %}
+      - {{ secOpt }}
+      {%- endfor %}
+    {%- endif -%}
     {%- if 'healthcheck' in service %}
     healthcheck:
       {% if service.healthcheck.tool is not defined -%}
