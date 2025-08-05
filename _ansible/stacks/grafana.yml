@@ -1,0 +1,33 @@
+grafana:
+  services:
+  - name: grafana
+    image: grafana/grafana-oss:12.1.0@sha256:6ac590e7cabc2fbe8d7b8fc1ce9c9f0582177b334e0df9c927ebd9670469440f
+    exposed:
+      internal: true
+      external: true
+      port: 3000
+    env:
+      GF_AUTH_PROXY_ENABLED: 'true'
+      GF_AUTH_PROXY_HEADER_NAME: REMOTE-USER
+      GF_AUTH_PROXY_HEADERS: Name:REMOTE-NAME Email:REMOTE-EMAIL Groups:REMOTE-GROUPS
+      GF_LOG_LEVEL: warn # Grafana logs way too much at info level
+    user: '{{ userId }}:{{ groupId }}'
+    volumes:
+      - local: data
+        container: /var/lib/grafana
+  - name: alloy
+    image: grafana/alloy:v1.10.0@sha256:1bc130e909116a4bf950eb5187a346007d3b796f96832b529acb14a64e41230f
+    command: run --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+    volumes:
+      - file: config.alloy
+        container: /etc/alloy/config.alloy
+      - local: alloy
+        container: /var/lib/alloy/data
+      - filesystem: /var/lib/docker/containers
+        container: /var/lib/docker/containers
+        permissions: ro
+      - filesystem: /var/run/docker.sock
+        container: /var/run/docker.sock
+      - filesystem: /var/log
+        container: /logs
+        permissions: ro
