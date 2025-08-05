@@ -4,6 +4,9 @@ services:
   {{ service.name }}:
     image: {{ service.image }}
     container_name: {{ service.name }}
+    {% if 'user' in service -%}
+    user: {{ service.user }}
+    {%- endif %}
     restart: unless-stopped
     {%- if 'exposed' in service or 'sablier' in stack %}
     labels:

@@ -7,8 +7,8 @@ changedetector:
       external: true
       port: 5000
     env:
-      PUID: 9001
-      PGID: 9001
+      PUID: '{{ userId }}'
+      PGID: '{{ groupId }}'
       USE_X_SETTINGS: 1
     volumes:
       - local: data

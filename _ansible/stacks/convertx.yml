@@ -1,0 +1,15 @@
+convertx:
+  services:
+  - name: convertx
+    image: ghcr.io/c4illin/convertx:v0.14.1@sha256:346589f154332997329fdc888417d4b24c49cc9140eab80e637a68cfbdd8041b
+    exposed:
+      internal: true
+      external: true
+      port: 3000
+    user: '{{ userId }}:{{ groupId }}'
+    env:
+      HTTP_ALLOWED: 'true'
+      ALLOW_UNAUTHENTICATED: 'true'
+    volumes:
+      - local: data
+        container: /app/data

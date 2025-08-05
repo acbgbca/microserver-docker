@@ -12,8 +12,8 @@ apprise:
           39336162663566393032633430386265383466326163303132333038666565346530383631346363
           31303930393636616565
     LOG_LEVEL: info
-    PUID: 9001
-    GUID: 9001
+    PUID: '{{ userId }}'
+    GUID: '{{ groupId }}'
   services:
   - name: apprise
     image: caronc/apprise:1.2.0@sha256:82310cdb8fce879bd90f424a63b56ada5ed0705c4f921e1eac8e4dad8d86fb42
