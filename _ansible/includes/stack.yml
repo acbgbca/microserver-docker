@@ -22,7 +22,7 @@
     path: "../{{ file.key }}/{{ item.1.local }}"
     state: directory
   when: item.1.local is defined
-  loop: "{{ file.value.services|subelements('volumes') }}"
+  loop: "{{ file.value.services|subelements('volumes', skip_missing=True) }}"
 - name: Setup traefik config for {{ file.key }}
   ansible.builtin.template:
     src: templates/traefik.yaml.j2

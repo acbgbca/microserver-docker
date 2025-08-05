@@ -1,0 +1,33 @@
+freshrss:
+  services:
+  - name: freshrss
+    image: freshrss/freshrss:1.26.3@sha256:f9733e2cdf754d82e25826324fb4cbf3d736d82e2d36bf8e379dd4f0eeee0932
+    exposed:
+      internal: true
+      external: true
+      port: 80
+    env:
+      TZ: '{{ timezone }}'
+      CRON_MIN: 1,31
+    volumes:
+      - local: data
+        container: /var/www/FreshRSS/data
+      - local: extensions
+        container: /var/www/FreshRSS/extensions
+  - name: rssbridge
+    image: rssbridge/rss-bridge@sha256:217ff9ee7a3c44dea6c4b17e36f1e0f4c6028440ab63dadf7be80683cddd8b38
+    exposed:
+      internal: true
+      external: true
+      port: 80
+    volumes:
+      - local: bridge
+        container: /config
+  - name: playwrightproxy
+    image: ghcr.io/acbgbca/pw-scraper:0.159@sha256:c6b196551040d52f574390427646bc817bfc95225d4ad827971e151a04f58b68
+    exposed:
+      internal: true
+      external: true
+      port: 8080
+    environment:
+      LOG_LEVEL: "debug"

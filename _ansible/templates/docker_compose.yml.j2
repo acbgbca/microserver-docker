@@ -4,7 +4,7 @@ services:
   {{ service.name }}:
     image: {{ service.image }}
     container_name: {{ service.name }}
-    {% if 'user' in service -%}
+    {%- if 'user' in service %}
     user: {{ service.user }}
     {%- endif %}
     restart: unless-stopped
@@ -34,14 +34,14 @@ services:
       - {{ key }}={{ value }}
       {%- endfor %}
     {%- endif %}
-    {% if 'volumes' in service -%}
+    {%- if 'volumes' in service %}
     volumes:
       {%- for volume in service.volumes %}
       {% if 'local' in volume -%}- ./{{ volume.local }}:{{ volume.container }}{%- endif -%}
       {%- if 'shared' in volume -%}- {{ sharedDirs[volume.shared] }}:{{ volume.container }}{%- endif %}
       {%- endfor %}
     {%- endif %}
-    {% if 'securityOpts' in service -%}
+    {%- if 'securityOpts' in service %}
     security_opt:
       {%- for secOpt in service.securityOpts %}
       - {{ secOpt }}

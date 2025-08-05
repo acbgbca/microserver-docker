@@ -6,6 +6,7 @@ sharedDirs:
 traefikConfigDir: ../traefik/config
 userId: 9001
 groupId: 9001
+timezone: Australia/Melbourne
 externalDomain: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           33353432306466663735626362363433653339343764636336323665363764653564366533623562
