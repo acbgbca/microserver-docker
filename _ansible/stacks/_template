@@ -12,6 +12,8 @@ template:
       internal: true
       external: true
       port: 3000
+    ports:
+      - 8080:8080
     user: '{{ userId }}:{{ groupId }}'
     env:
       TZ: '{{ timezone }}'
@@ -26,3 +28,8 @@ template:
         container: /videos
       - filesystem: /var/log # Filesystem path
         container: /logs
+      - file: file.txt # File within the stack directory
+        container: /path/file
+    healthcheck:
+      url: http://localhost/
+      tool: wget # optional. Defaults to curl

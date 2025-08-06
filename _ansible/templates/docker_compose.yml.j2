@@ -11,6 +11,12 @@ services:
     command: {{ service.command }}
     {%- endif %}
     restart: unless-stopped
+    {%- if 'ports' in service %}
+    ports:
+      {%- for port in service.ports %}
+      - {{ port }}
+      {%- endfor %}
+    {%- endif %}
     {%- if 'exposed' in service or 'sablier' in stack %}
     labels:
       {%- if 'exposed' in service %}

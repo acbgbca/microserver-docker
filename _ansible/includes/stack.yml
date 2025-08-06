@@ -43,6 +43,7 @@
     dest: "{{ traefikConfigDir }}/{{ file.key }}.yaml"
   vars:
     stack: "{{ file.value }}"
+  when: file.value.services|selectattr('exposed', 'defined')|length > 0
   tags:
     - traefik
 

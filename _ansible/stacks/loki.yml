@@ -1,0 +1,18 @@
+loki:
+  services:
+  - name: loki
+    image: grafana/loki:3.5.3@sha256:3165cecce301ce5b9b6e3530284b080934a05cd5cafac3d3d82edcb887b45ecd
+    command: -config.file=/etc/loki/config.yaml
+    user: '{{ userId }}:{{ groupId }}'
+    ports:
+      - 3100:3100
+    volumes:
+      - file: loki-config.yaml
+        container: /etc/loki/config.yaml
+      - local: rules
+        container: /rules/fake
+      - data: data
+        container: /data/loki
+    healthcheck:
+      url: http://localhost:3100/ready
+      tool: wget
