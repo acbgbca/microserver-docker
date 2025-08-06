@@ -1,7 +1,7 @@
 template:
   rootEnv:
-    externalDomain: {{ externalDomain }}
-    internalDomain: {{ internalDomain }}
+    externalDomain: '{{ externalDomain }}'
+    internalDomain: '{{ internalDomain }}'
   envFile:
     secret: "secret"
   services:
@@ -18,7 +18,11 @@ template:
       PUID: '{{ userId }}'
       PGID: '{{ groupId }}'
     volumes:
-      - local: data
+      - local: config # Local directory, backed up
+        container: /config
+      - data: data # Separate data directory, not backed up
         container: /data
-      - shared: books
-        container: /bookd
+      - shared: videos # Shared directory with external files
+        container: /videos
+      - filesystem: /var/log # Filesystem path
+        container: /logs
