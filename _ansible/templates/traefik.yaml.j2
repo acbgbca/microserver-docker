@@ -12,7 +12,7 @@ http:
           - {{ stack.sablier.group }}-sablier@file
       {%- endif -%}
     {%- endif -%}
-    {%- if service.exposed.external %}
+    {%- if 'external' in service.exposed and service.exposed.external %}
     {{ service.name }}-external:
       rule: "Host(`{{ service.name }}.{{ externalDomain }}`)"
       service: {{ service.name }}
