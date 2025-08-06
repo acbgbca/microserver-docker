@@ -4,6 +4,7 @@ sharedDirs:
   importBooks: /mnt/data8tb/onedrive/calibre/import
   videos: /mnt/data8tb/videos
 traefikConfigDir: ../traefik/config
+baseDataDir: /mnt/ssd512/ctr_data
 userId: 9001
 groupId: 9001
 timezone: Australia/Melbourne

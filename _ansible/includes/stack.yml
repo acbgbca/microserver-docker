@@ -5,6 +5,7 @@
     dest: "../{{ file.key }}/docker_compose.yaml"
   vars:
     stack: "{{ file.value }}"
+    stackName: "{{ file.key }}"
 - name: Create root env file for {{ file.key }}
   ansible.builtin.template:
     src: templates/env.j2
@@ -24,11 +25,17 @@
 #     msg: "../{{ file.key }}/{{ item.1.local }}"
 #   when: item.1.local is defined
 #   loop: "{{ file.value.services|subelements('volumes') }}"
-- name: Setup directories for {{ file.key }}
+- name: Setup local directories for {{ file.key }}
   file:
     path: "../{{ file.key }}/{{ item.1.local }}"
     state: directory
   when: item.1.local is defined
+  loop: "{{ file.value.services|subelements('volumes', skip_missing=True) }}"
+- name: Setup data directories for {{ file.key }}
+  file:
+    path: "{{ baseDataDir }}/{{ file.key }}/{{ item.1.data }}"
+    state: directory
+  when: item.1.data is defined
   loop: "{{ file.value.services|subelements('volumes', skip_missing=True) }}"
 - name: Setup traefik config for {{ file.key }}
   ansible.builtin.template:

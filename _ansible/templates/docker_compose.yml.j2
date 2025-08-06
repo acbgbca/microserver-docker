@@ -42,6 +42,7 @@ services:
       {%- for volume in service.volumes %}
       {%- set permissions = ('permissions' in volume) | ternary(':' + volume.permissions | default(''), '') %}
       {% if 'local' in volume -%}- ./{{ volume.local }}:{{ volume.container }}{{ permissions }}{%- endif -%}
+      {%- if 'data' in volume -%}- {{ baseDataDir }}/{{ stackName }}/{{ volume.data }}:{{ volume.container }}{{ permissions }}{%- endif %}
       {%- if 'file' in volume -%}- ./{{ volume.file }}:{{ volume.container }}{{ permissions }}{%- endif %}
       {%- if 'shared' in volume -%}- {{ sharedDirs[volume.shared] }}:{{ volume.container }}{{ permissions }}{%- endif %}
       {%- if 'filesystem' in volume -%}- {{ volume.filesystem }}:{{ volume.container }}{{ permissions }}{%- endif %}
