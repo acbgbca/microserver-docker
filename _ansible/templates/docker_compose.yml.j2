@@ -39,9 +39,15 @@ services:
     {%- endif %}
     {%- if 'env' in service %}
     environment:
+      {%- if service.env is mapping %}
       {%- for key, value in service.env.items() %}
       - {{ key }}={{ value }}
       {%- endfor %}
+      {%- else %}
+      {%- for value in service.env %}
+      - {{ value }}
+      {%- endfor %}
+      {%- endif %}
     {%- endif %}
     {%- if 'volumes' in service %}
     volumes:
@@ -64,6 +70,21 @@ services:
     extra_hosts:
       {%- for host in service.extraHosts %}
       - {{ host }}
+      {%- endfor %}
+    {%- endif %}
+    {%- if 'addGpu' in service and service.addGpu %}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    {%- endif %}
+    {%- if 'dependsOn' in service %}
+    depends_on:
+      {%- for svc in service.dependsOn %}
+      - {{ svc }}
       {%- endfor %}
     {%- endif %}
     {%- if 'healthcheck' in service %}

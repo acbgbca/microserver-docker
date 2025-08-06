@@ -1,4 +1,7 @@
 template:
+  sablier:
+    group: sabgroup
+    displayName: Service Name
   rootEnv:
     externalDomain: '{{ externalDomain }}'
     internalDomain: '{{ internalDomain }}'
@@ -30,6 +33,9 @@ template:
         container: /logs
       - file: file.txt # File within the stack directory
         container: /path/file
+    addGpu: false
+    dependsOn:
+      - otherSvc
     healthcheck:
       url: http://localhost/
       tool: wget # optional. Defaults to curl

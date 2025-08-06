@@ -1,0 +1,88 @@
+ollama:
+  sablier:
+    group: ollama
+    displayName: Open WebUI
+  rootEnv:
+    SEARXNG_HOSTNAME: 'searxng.{{ externalDomain }}'
+  services:
+  - name: ollama
+    image: ollama/ollama:0.9.6@sha256:f478761c18fea69b1624e095bce0f8aab06825d09ccabcd0f88828db0df185ce
+    exposed:
+      internal: true
+      external: true
+      port: 11434
+    ports:
+      - 11434:11434
+    env:
+      - OLLAMA_KEEP_ALIVE=5m
+      - OLLAMA_HOST=0.0.0.0
+    volumes:
+      - local: code
+        container: /code
+      - data: ollama
+        container: /root/.ollama
+    addGpu: true
+  - name: openwebui
+    image: ghcr.io/open-webui/open-webui:main@sha256:24669393b06bc05b5193b26ae59483b6d53e8b47a5a74217053373cef5e1ae7d
+    exposed:
+      internal: true
+      external: true
+      port: 8080
+    env:
+      OLLAMA_BASE_URLS: http://ollama:11434 #comma separated ollama hosts
+      ENV: prod
+      WEBUI_AUTH_TRUSTED_EMAIL_HEADER: REMOTE-EMAIL
+      WEBUI_AUTH_TRUSTED_NAME_HEADER: REMOTE-NAME
+    volumes:
+      - local: openwebui
+        container: /app/backend/data
+    healthcheck:
+      url: http://localhost:8080/health
+    dependsOn:
+      - ollama
+  - name: deepresearch
+    image: localdeepresearch/local-deep-research:0.6.6@sha256:61fb00a54cc73649133d63c54a6613c356ee6382bb70acfd1a952808991472f0
+    exposed:
+      internal: true
+      external: true
+      port: 5000
+    env:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      # LLM Configuration
+      - LDR_LLM__PROVIDER=ollama
+      - LDR_LLM__MODEL=gemma3
+      - LDR_LLM__TEMPERATURE=0.7
+      
+      # Search Configuration
+      - LDR_SEARCH__TOOL=auto
+      - LDR_SEARCH__ITERATIONS=2
+      - LDR_SEARCH__QUESTIONS_PER_ITERATION=2
+
+      # Searxng Configuration
+      - SEARXNG_INSTANCE=http://searxng:8080
+      - SEARXNG_DELAY=2.0
+      
+      # Web Interface Settings
+      - LDR_WEB__PORT=5000
+      - LDR_WEB__HOST=0.0.0.0
+    volumes:
+      - local: deepresearch
+        container: /root/.config/local_deep_research
+    dependsOn:
+      - ollama
+      - searxng
+  - name: searxng
+    image: docker.io/searxng/searxng:latest@sha256:3c0a2ee501266c0bebc2be59b741b4a0287443ade727e27d92b6c2e519ab1d25
+    exposed:
+      internal: true
+      external: true
+      port: 8080
+    env:
+      - SEARXNG_BASE_URL=https://${SEARXNG_HOSTNAME:-localhost}/
+    volumes:
+      - local: searxng
+        container: /etc/searxng
+        permissions: rw
+    healthcheck:
+      url: http://localhost:8080/
+      tool: wget
