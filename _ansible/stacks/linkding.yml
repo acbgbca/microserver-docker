@@ -1,0 +1,18 @@
+linkding:
+  rootEnv:
+    externalDomain: '{{ externalDomain }}'
+    internalDomain: '{{ internalDomain }}'
+  services:
+  - name: linkding
+    image: sissbruecker/linkding:1.41.0@sha256:49346ebe531db7034a4347b83bef82838af76b39695f096c50a3dc3064d5ac1f
+    exposed:
+      internal: true
+      external: true
+      port: 9090
+    env:
+      LD_ENABLE_AUTH_PROXY: true
+      LD_AUTH_PROXY_USERNAME_HEADER: HTTP_REMOTE_USER
+      LD_AUTH_PROXY_LOGOUT_URL: 'https://autheliaexternal.${externalDomain}/api/logout'
+    volumes:
+      - local: data
+        container: /etc/linkding/data
