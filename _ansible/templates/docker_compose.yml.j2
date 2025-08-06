@@ -60,6 +60,12 @@ services:
       - {{ secOpt }}
       {%- endfor %}
     {%- endif -%}
+    {%- if 'extraHosts' in service %}
+    extra_hosts:
+      {%- for host in service.extraHosts %}
+      - {{ host }}
+      {%- endfor %}
+    {%- endif %}
     {%- if 'healthcheck' in service %}
     healthcheck:
       {% if service.healthcheck.tool is not defined -%}

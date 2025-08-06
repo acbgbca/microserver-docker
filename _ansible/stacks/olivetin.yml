@@ -1,0 +1,13 @@
+olivetin:
+  services:
+  - name: olivetin
+    image: ghcr.io/olivetin/olivetin:2025.7.29@sha256:db2029a29b7cec56a32f40dec0fd5d7d3fc8802e02794bde1d6b9708d3be1deb
+    exposed:
+      internal: true
+      external: true
+      port: 1337
+    volumes:
+      - local: config # Local directory, backed up
+        container: /config
+    extraHosts:
+      - "host.docker.internal:host-gateway"
