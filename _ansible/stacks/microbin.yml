@@ -1,0 +1,24 @@
+microbin:
+  rootEnv:
+    MICROBIN_PUBLIC_PATH: 'https://microbin.{{ externalDomain }}'
+    MICROBIN_ADMIN_USERNAME: '{{ defaultUsername }}'
+    MICROBIN_ADMIN_PASSWORD:
+  services:
+  - name: microbin
+    image: danielszabo99/microbin:2.0.4@sha256:c5bd4643135540a68a2846950fe4f65f3bcc94b62ed7c7644e563dfde6f1732c
+    exposed:
+      internal: true
+      external: true
+      port: 8080
+    user: '{{ userId }}:{{ groupId }}'
+    env:
+      MICROBIN_ADMIN_USERNAME: ${MICROBIN_ADMIN_USERNAME}
+      MICROBIN_ADMIN_PASSWORD: ${MICROBIN_ADMIN_PASSWORD}
+      MICROBIN_PUBLIC_PATH: ${MICROBIN_PUBLIC_PATH}
+      MICROBIN_GC_DAYS: 7
+      MICROBIN_WIDE: 'true'
+      MICROBIN_QR: 'true'
+      MICROBIN_DEFAULT_EXPIRY: 1week
+    volumes:
+      - local: data
+        container: /app/microbin_data
