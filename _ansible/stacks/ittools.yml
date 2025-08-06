@@ -1,0 +1,8 @@
+ittools:
+  services:
+  - name: ittools
+    image: ghcr.io/sharevb/it-tools:latest@sha256:15ceba669c11cc3d22a16396b52a9b1294e475f6679777240cdd29da7305a02a
+    exposed:
+      internal: true
+      external: true
+      port: 8080
