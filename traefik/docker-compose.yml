@@ -53,8 +53,9 @@ services:
     labels:
       - traefik.enable=true
       - show.external=true
+      - traefik.http.routers.authelia.rule=Host(`authelia.$externaldomain`)
       - traefik.http.services.authelia.loadbalancer.server.port=9091
-      - traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://authelia.$domain/
+      - traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://authelia.$externaldomain/
       - traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true
       - traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email
       - traefik.http.middlewares.autheliaexternal.forwardauth.address=http://authelia:9091/api/verify?rd=https://authelia.$externaldomain/
