@@ -21,7 +21,7 @@
             "versioningTemplate": "docker",
             "managerFilePatterns": ["/(^|/)_ansible/stacks/.+\\.ya?ml$/"],
             "matchStrings": [
-                "image: (?<currentValue>.*?)$"
+                "image: (?<depName>[^:]+):(?<currentValue>[^@\\s]+)(?:@(?<currentDigest>sha256:[a-f0-9]{64}))?$"
             ]
         }
     ],
