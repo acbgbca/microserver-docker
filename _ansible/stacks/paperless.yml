@@ -1,0 +1,63 @@
+paperless:
+  sablier:
+    group: paperless
+    displayName: Paperless
+  envFileTemplate:
+    template: paperless.env.j2
+    secret: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          33366135323632373230663136626238613431333931396536613437373232343732666437323565
+          6561326633323864326666333733336565383061623031620a393663363639636432613364353365
+          62346133303666336562326333323566343765353134373536303463393661373463303739643930
+          3963336563303236330a653861353234633264636533393662333465656264613032333037393135
+          61643031613363623033326564363832333337363133343231396463336263623131616561643063
+          3832336530343464336637643539396263306232343263396664
+  services:
+  - name: db16
+    image: postgres:16.9@sha256:fec2740c517838d4f582e48a8a9a1cb51082af3dcae59e9b12a66ec262302b97
+    env:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+    volumes:
+      - local: pgdata16
+        container: /var/lib/postgresql/data
+  - name: broker
+    image: redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
+    volumes:
+      - local: redisdata
+        container: /data
+  - name: paperless
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.17.1@sha256:ab72a0ab42a792228cdbe83342b99a48acd49f7890ae54b1ae8e04401fba24ee
+    envFile: true
+    exposed:
+      internal: true
+      external: true
+      port: 8000
+    env:
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_DBHOST: db16
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+    volumes:
+      - local: data
+        container: /usr/src/paperless/data
+      - shared: paperlessMedia
+        container: /usr/src/paperless/media
+      - shared: paperlessExport
+        container: /usr/src/paperless/export
+      - shared: paperlessConsume
+        container: /usr/src/paperless/consume
+    dependsOn:
+      - db16
+      - broker
+      - gotenberg
+      - tika
+    healthcheck:
+      url: http://localhost:8000
+  - name: gotenberg
+    image: docker.io/gotenberg/gotenberg:8.21@sha256:91486863744f7420ca985ee6cef7c216910e40faffd378f3da7c0fad724d01ba
+    command: "gotenberg --chromium-disable-javascript=true --chromium-allow-list=file:///tmp/.*"
+  - name: tika
+    image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f

@@ -20,6 +20,13 @@
   when: file.value.envFile is defined
   vars:
     envFile: "{{ file.value.envFile }}"
+- name: Create env file from template for {{ file.key }}
+  ansible.builtin.template:
+    src: "./stacks/{{ file.key }}/{{ file.value.envFileTemplate.template }}"
+    dest: "../{{ file.key }}/{{ file.key }}2.env"
+  when: file.value.envFileTemplate is defined
+  vars:
+    envVars: "{{ file.value.envFileTemplate }}"
 # - name: Debug directories for {{ file.key }}
 #   ansible.builtin.debug:
 #     msg: "../{{ file.key }}/{{ item.1.local }}"

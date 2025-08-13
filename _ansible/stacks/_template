@@ -7,6 +7,9 @@ template:
     internalDomain: '{{ internalDomain }}'
   envFile:
     secret: "secret"
+  envFileTemplate:
+    template: template.env.j2
+    secret: "value"
   services:
   - name: template
     image: template:latest
@@ -17,6 +20,7 @@ template:
       port: 3000
     ports:
       - 8080:8080
+    command: "command"
     user: '{{ userId }}:{{ groupId }}'
     env:
       TZ: '{{ timezone }}'
