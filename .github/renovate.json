@@ -14,17 +14,12 @@
     "configMigration": true,
     "commitBodyTable": true,
     "minimumReleaseAge": "3 days",
-    "customManagers": [
-        {
-            "customType": "regex",
-            "datasourceTemplate": "docker",
-            "versioningTemplate": "docker",
-            "managerFilePatterns": ["/(^|/)_ansible/stacks/.+\\.ya?ml$/"],
-            "matchStrings": [
-                "image: (?<depName>[^:]+):(?<currentValue>[^@\\s]+)(?:@(?<currentDigest>sha256:[a-f0-9]{64}))?$"
-            ]
-        }
-    ],
+    "docker-compose": {
+        "managerFilePatterns": [
+          "/(^|/)(?:docker-)?compose[^/]*\\.ya?ml$/",
+          "/(^|/)_ansible/stacks/.+\\.ya?ml$/"
+        ]
+      },
     "packageRules": [
         {
             "description": "Ignore old yyyy-MM-dd versions",
