@@ -18,6 +18,17 @@
     "configMigration": true,
     "commitBodyTable": true,
     "minimumReleaseAge": "3 days",
+    "customManagers": [
+        {
+            "customType": "regex",
+            "datasourceTemplate": "docker",
+            "depNameTemplate": "docker",
+            "managerFilePatterns": ["/(^|/)_ansible/stacks/.+\\.ya?ml$/"],
+            "matchStrings": [
+                "image: (?<currentValue>.*?)\\n"
+            ]
+        }
+    ],
     "packageRules": [
         {
             "description": "Ignore old yyyy-MM-dd versions",
@@ -64,17 +75,6 @@
             "matchPackageNames": [
                 "!postgres",
                 "!docker.io/library/postgres"
-            ]
-        }
-    ],
-    "customManagers": [
-        {
-            "customType": "regex",
-            "datasourceTemplate": "docker",
-            "depNameTemplate": "docker",
-            "managerFilePatterns": ["/(^|/)_ansible/stacks/.+\\.ya?ml$/"],
-            "matchStrings": [
-                "image: (?<currentValue>.*?)\\n"
             ]
         }
     ]
