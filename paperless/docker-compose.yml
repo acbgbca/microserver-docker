@@ -2,7 +2,7 @@
 # To upgrade the database, see https://acbgbca.github.io/documentation/postgres/
 services:
   db16:
-    image: postgres:16.9@sha256:ddfe3e8713e3ee5b8f286082cb12512488dfbf3f5a1ecb0b74a42e6055af0a5f
+    image: postgres:17.4@sha256:304ab813518754228f9f792f79d6da36359b82d8ecf418096c636725f8c930ad
     restart: unless-stopped
     volumes:
       - ./pgdata16:/var/lib/postgresql/data
