@@ -15,7 +15,7 @@ freshrss:
       - local: extensions
         container: /var/www/FreshRSS/extensions
   - name: rssbridge
-    image: rssbridge/rss-bridge:stable@sha256:217ff9ee7a3c44dea6c4b17e36f1e0f4c6028440ab63dadf7be80683cddd8b38
+    image: rssbridge/rss-bridge:stable@sha256:569f01f3faecd0d34d702e01b34eb0a769f7bedb84caf6dff29821d18b46f971
     exposed:
       internal: true
       external: true
