@@ -1,0 +1,46 @@
+plex:
+  envFile:
+    TZ: "{{ timezone }}"
+    PLEX_CLAIM: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65626537366333616633373465386138313162393962653131306564613733386239346136346563
+          6237323765633632313663643164313438313864396535360a633533353366313034353336323839
+          37313663333131376333663436636238393832316231663836613632303438363266633430303536
+          3161616136363333340a636130363138396666316162363962336236613864623538333965323963
+          61613233323637356537366137626230386232633737663264363533376335353664
+    HOSTNAME: "microserver"
+    ADVERTISE_IP: "http://192.168.94.20:32400"
+    PLEX_UID: "{{ userId }}"
+    PLEX_GID: "{{ groupId}}"
+    CHANGE_CONFIG_DIR_OWNERSHIP: "FALSE"
+    ALLOWED_NETWORKS: "192.168.94.0/24,172.16.0.0/16"
+  services:
+  - name: plex
+    image: plexinc/pms-docker:latest@sha256:4e704a2172129d8a6bc5b05ea201945b329bb6512f48a4e92ed4a4a787c35462
+    envFile: true
+    exposed:
+      internal: true
+      external: false
+      port: 32400
+    ports:
+      - 32400:32400/tcp
+      - 1900:1900/udp
+      - 3005:3005/tcp
+      - 8324:8324/tcp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+      - 32469:32469/tcp
+    volumes:
+      - local: config
+        container: /config
+      - filesystem: /tmp/transcode
+        container: /transcode
+      - shared: videos
+        container: /data
+      - shared: music
+        container: /music
+    addGpu: true
+    healthcheck:
+      url: http://localhost:32400/web/index.html

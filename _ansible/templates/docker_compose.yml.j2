@@ -24,7 +24,7 @@ services:
         - traefik.enable=true
       {% endif -%}
       - traefik.http.services.{{ service.name }}.loadbalancer.server.port={{ service.exposed.port }}
-      {% if 'external' in service.exposed and service.exposed.external -%}
+      {%- if 'external' in service.exposed and service.exposed.external %}
         - show.external=true
       {%- endif %}
       {%- endif %}
