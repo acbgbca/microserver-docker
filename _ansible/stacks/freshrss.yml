@@ -24,7 +24,7 @@ freshrss:
       - local: bridge
         container: /config
   - name: playwrightproxy
-    image: ghcr.io/acbgbca/pw-scraper:0.161@sha256:469fba93201da63a3d74c8a658da64b6954625069075b2023fa696e70872c8c0
+    image: ghcr.io/acbgbca/pw-scraper:0.162@sha256:849dcda23c1ca9bf0ddd2091c098fa2f795d9e8e967351ba44902cb4b0ca07f9
     exposed:
       internal: true
       external: true
