@@ -27,7 +27,7 @@ ldap:
           62613264633161393066353439646634323439303263303732333239633961386163
   services:
   - name: ldap
-    image: lldap/lldap:v0.6.1@sha256:4931eeeb841b1bbf5774161b5fd9dab88f41ffeb4b08ca656f0b7595cd7cb52a
+    image: lldap/lldap:v0.6.2@sha256:9e605a66c02514bfcffd1b67cafb1e98d50992216bb2871d7ae44622047dd09d
     exposed:
       internal: true
       port: 17170
