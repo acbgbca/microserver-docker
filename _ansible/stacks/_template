@@ -46,6 +46,9 @@ template:
     dependsOn:
       - otherSvc
     networks: internal # or all for all networks. Remove for default only
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     healthcheck:
       url: http://localhost/
       tool: wget # optional. Defaults to curl

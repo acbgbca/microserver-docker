@@ -1,0 +1,20 @@
+uptimekuma:
+  services:
+  - name: uptimekuma
+    image: louislam/uptime-kuma:1.23.16-debian@sha256:431fee3be822b04861cf0e35daf4beef6b7cb37391c5f26c3ad6e12ce280fe18
+    exposed:
+      internal: true
+      external: true
+      port: 3001
+    env:
+      - PUID=1000
+      - PGID=998
+    volumes:
+      - local: config
+        container: /app/data
+      - filesystem: /var/run/docker.sock
+        container: /var/run/docker.sock
+        permissions: ro
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1

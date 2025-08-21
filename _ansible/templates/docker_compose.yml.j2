@@ -115,6 +115,12 @@ services:
       {%- endif %}
     {%- endif %}
     {%- endif %}
+    {%- if 'dns' in service %}
+    dns:
+      {%- for ip in service.dns %}
+      - {{ ip }}
+      {%- endfor %}
+    {%- endif %}
     {%- if 'healthcheck' in service %}
     healthcheck:
       {%- if 'custom' in service.healthcheck %}
