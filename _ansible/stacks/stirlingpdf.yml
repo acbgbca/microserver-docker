@@ -1,0 +1,26 @@
+stirlingpdf:
+  sablier:
+    group: stirlingpdf
+    displayName: Stirling PDF
+  services:
+  - name: stirlingpdf
+    image: stirlingtools/stirling-pdf:1.2.0@sha256:4b549915161efdf8a7c43bf0ad3b5d5d39f0cb0be58b7dcce1d1b62fbe8ed818
+    exposed:
+      internal: true
+      external: true
+      port: 8080
+    env:
+      - DOCKER_ENABLE_SECURITY=false
+      - LANGS=en_GB
+    volumes:
+      - local: config
+        container: /configs
+      - local: customFiles
+        container: /customFiles
+      - local: logs
+        container: /logs
+      - local: pipeline
+        container: /pipeline
+    healthcheck:
+      custom: ["CMD-SHELL", "curl -f http://localhost:8080/api/v1/info/status | grep -q 'UP' && curl -fL http://localhost:8080/ | grep -qv 'Please sign in'"]
+      timeout: 10s

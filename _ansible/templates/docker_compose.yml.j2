@@ -108,7 +108,9 @@ services:
     {%- endif %}
     {%- if 'healthcheck' in service %}
     healthcheck:
-      {% if service.healthcheck.tool is not defined -%}
+      {%- if 'custom' in service.healthcheck %}
+      test: {{ service.healthcheck.custom }}
+      {%- elif service.healthcheck.tool is not defined %}
       test: "curl -f {{ service.healthcheck.url }}"
       {%- else -%}
       test: "wget --no-verbose --tries=1 --spider {{ service.healthcheck.url }} || exit 1"
