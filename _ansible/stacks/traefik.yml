@@ -1,0 +1,96 @@
+traefik:
+  internalNetwork: true
+  rootEnv:
+    domain: '{{ internalDomain }}'
+    externaldomain: '{{ externalDomain }}'
+    email: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          36643539353536343763336434333039643637393866346333323065373763636331303839376362
+          6466636665646538613930376439313261326630616432350a373837663963313639613063363233
+          65623836383337366365333236373734316136333863623365626330326239613932623263386234
+          6536353239363437320a623837613263393536323039623639333166623137643734666635386436
+          39323565653630353539383632616437363464343933333536343239396662663433
+    API_TOKEN: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35323635653961356139323032313764393763346361366135306138316133613163643036363463
+          3738653637396538393863646434633236613462643163620a353730653062616136326636336639
+          33653637333136633630323964643931663565656466303764653165643664666638346162386237
+          6266626463643039300a363964316561636333633063383665333237653830326662343937396331
+          32303762373161366237616235343964646338323539336364633235336437383231393732613138
+          3138303930333662323738313537633838373930363839363062
+  services:
+  - name: traefik
+    image: traefik:v3.5.0@sha256:4e7175cfe19be83c6b928cae49dde2f2788fb307189a4dc9550b67acf30c11a5
+    exposed:
+      internal: true
+      port: 8080
+    ports:
+      - 80:80
+      - 443:443
+    command:
+      - "--api.insecure=true"
+      - "--providers.file.directory=/config"
+      - "--certificatesresolvers.cf.acme.dnschallenge=true"
+      - "--certificatesresolvers.cf.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.cf.acme.email=$email"
+      - "--certificatesresolvers.cf.acme.storage=/letsencrypt/acme.json"
+      - "--experimental.plugins.sablier.modulename=github.com/sablierapp/sablier"
+      - "--experimental.plugins.sablier.version=v1.10.1"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=secure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.secure.address=:443"
+      - "--entrypoints.secure.http.tls=true"
+      - "--entrypoints.secure.http.tls.certResolver=cf"
+      - "--entrypoints.secure.http.middlewares=authelia@docker"
+      - "--serversTransport.insecureSkipVerify=true"
+      - "--accesslog=true"
+      - "--accesslog.filters.statuscodes=300-399,400-499,500-599"
+    env:
+      - "CF_ZONE_API_TOKEN=$API_TOKEN"
+      - "CF_DNS_API_TOKEN=$API_TOKEN"
+    volumes:
+      - filesystem: /etc/localtime
+        container: /etc/localtime
+        permissions: ro
+      - filesystem: /var/run/docker.sock
+        container: /var/run/docker.sock
+        permissions: ro
+      - local: config
+        container: /config
+      - local: letsencrypt
+        container: /letsencrypt
+    securityOpts:
+      - no-new-privileges:true
+    dependsOn:
+      - authelia
+  - name: authelia
+    image: authelia/authelia:4.39.6@sha256:08776367d54d4482c54ac8ca75b18f7db3287b751106e19736780c5f6811374d
+    exposed:
+      external: true
+      internal: true
+      port: 9091
+    env:
+      - "PUID={{ userId }}"
+      - "PGID={{ groupId}}"
+    volumes:
+      - filesystem: /etc/localtime
+        container: /etc/localtime
+        permissions: ro
+      - local: authelia
+        container: /config
+    securityOpts:
+      - no-new-privileges:true
+    dependsOn:
+      - redis
+    healthcheck:
+      custom: ["CMD", "/app/healthcheck.sh"]
+    networks: all
+  - name: redis
+    image: redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
+    command: redis-server --loglevel warning --requirepass authelia --databases 1 --hz 2
+    volumes:
+      - local: redis
+        container: /data
+    networks: internal

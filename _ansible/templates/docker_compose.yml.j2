@@ -106,6 +106,15 @@ services:
       - {{ svc }}
       {%- endfor %}
     {%- endif %}
+    {%- if 'networks' in service %}
+    networks:
+    {%- if 'internalNetwork' in stack and stack.internalNetwork %}
+      - internal
+      {%- if service.networks == 'all' %}
+      - default
+      {%- endif %}
+    {%- endif %}
+    {%- endif %}
     {%- if 'healthcheck' in service %}
     healthcheck:
       {%- if 'custom' in service.healthcheck %}
@@ -127,3 +136,8 @@ networks:
   default:
     external: true
     name: ctr-network
+{%- if 'internalNetwork' in stack and stack.internalNetwork %}
+  internal:
+    internal: true
+    name: internal
+{%- endif %}

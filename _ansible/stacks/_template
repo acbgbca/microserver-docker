@@ -1,4 +1,5 @@
 template:
+  internalNetwork: true
   sablier:
     group: sabgroup
     displayName: Service Name
@@ -44,6 +45,7 @@ template:
     addGpu: false
     dependsOn:
       - otherSvc
+    networks: internal # or all for all networks. Remove for default only
     healthcheck:
       url: http://localhost/
       tool: wget # optional. Defaults to curl
