@@ -1,0 +1,22 @@
+vscode:
+  services:
+  - name: vscode
+    image: codercom/code-server:4.103.1@sha256:fc1d8a57dc5ca5fab67999416165d994ab78a7338b046c4b29f168033a6b7b38
+    exposed:
+      internal: true
+      external: true
+      port: 8080
+    user: '{{ userId }}:{{ groupId }}'
+    env:
+      - DOCKER_USER=ctrdata
+    volumes:
+      - local: local
+        container: /home/coder/.local
+      - local: config
+        container: /home/coder/.config
+      - local: code
+        container: /home/coder/project
+      - file: .gitconfig
+        container: /home/coder/.gitconfig
+    healthcheck:
+      url: http://localhost:8080/healthz
