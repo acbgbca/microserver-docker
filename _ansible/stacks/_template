@@ -26,6 +26,10 @@ template:
       TZ: '{{ timezone }}'
       PUID: '{{ userId }}'
       PGID: '{{ groupId }}'
+    # or
+      - TZ="{{ timezone }}"
+      - PUID={{ userId }}
+      - PGID={{ groupId }}
     volumes:
       - local: config # Local directory, backed up
         container: /config
