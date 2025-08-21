@@ -1,0 +1,24 @@
+sdwebui:
+  sablier:
+    group: sdwebui
+    displayName: Stable Diffusion Web UI
+  services:
+  - name: sdwebui
+    image: ghcr.io/neggles/sd-webui-docker:latest@sha256:1795fe796e1dad0d8d3baa9ef7c38a255b69c0878b76869feecc617bfd015e53
+    exposed:
+      internal: true
+      external: true
+      port: 7860
+    env:
+      CLI_ARGS: "--skip-version-check --allow-code --api --xformers --medvram --no-half"
+      # make TQDM behave a little better
+      PYTHONUNBUFFERED: "1"
+      SD_WEBUI_VARIANT: auto
+    volumes:
+      - local: output
+        container: /output
+      - data: data
+        container: /data
+    addGpu: true
+    healthcheck:
+      url: http://localhost:7860/internal/ping

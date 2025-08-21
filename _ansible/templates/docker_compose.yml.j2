@@ -32,7 +32,7 @@ services:
       {% endif -%}
       - traefik.http.services.{{ service.name }}.loadbalancer.server.port={{ service.exposed.port }}
       {%- if 'external' in service.exposed and service.exposed.external %}
-        - show.external=true
+      - show.external=true
       {%- endif %}
       {%- endif %}
       {%- if 'sablier' in stack %}
@@ -48,7 +48,7 @@ services:
     environment:
       {%- if service.env is mapping %}
       {%- for key, value in service.env.items() %}
-      - {{ key }}={{ value }}
+      {{ key }}: "{{ value }}"
       {%- endfor %}
       {%- else %}
       {%- for value in service.env %}
