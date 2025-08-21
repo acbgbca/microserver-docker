@@ -8,7 +8,14 @@ services:
     user: {{ service.user }}
     {%- endif %}
     {%- if 'command' in service %}
+    {%- if service.command is string %}
     command: {{ service.command }}
+    {% else %}
+    command:
+      {%- for cmd in service.command %}
+      - "{{ cmd }}"
+      {%- endfor %}
+    {%- endif %}
     {%- endif %}
     restart: unless-stopped
     {%- if 'ports' in service %}
@@ -65,6 +72,15 @@ services:
       {%- for secOpt in service.securityOpts %}
       - {{ secOpt }}
       {%- endfor %}
+    {%- endif -%}
+    {%- if 'devices' in service %}
+    devices:
+      {%- for device in service.devices %}
+      - {{ device }}
+      {%- endfor %}
+    {%- endif -%}
+    {%- if 'pid' in service %}
+    pid: {{ service.pid }}
     {%- endif -%}
     {%- if 'extraHosts' in service %}
     extra_hosts:

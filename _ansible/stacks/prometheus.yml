@@ -1,0 +1,72 @@
+prometheus:
+  services:
+  - name: prometheus
+    image: prom/prometheus:v3.5.0@sha256:63805ebb8d2b3920190daf1cb14a60871b16fd38bed42b857a3182bc621f4996
+    exposed:
+      internal: true
+      external: false
+      port: 9090
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=45d"
+    user: '{{ userId }}:{{ groupId }}'
+    volumes:
+      - local: etc
+        container: /etc/prometheus
+      - data: data
+        container: /prometheus
+    dependsOn:
+      - cadvisor
+    securityOpts:
+      - no-new-privileges:true
+  - name: alertmanager
+    image: prom/alertmanager:v0.28.1@sha256:27c475db5fb156cab31d5c18a4251ac7ed567746a2483ff264516437a39b15ba
+    exposed:
+      internal: true
+      external: false
+      port: 9093
+    command:
+      - "--config.file=/etc/alertmanager.yml"
+    volumes:
+      - file: alertmanager.yml
+        container: /etc/alertmanager.yml
+    securityOpts:
+      - no-new-privileges:true
+  - name: cadvisor
+    image: gcr.io/cadvisor/cadvisor:v0.52.1@sha256:f40e65878e25c2e78ea037f73a449527a0fb994e303dc3e34cb6b187b4b91435
+    command:
+      - '--housekeeping_interval=30s'
+      - '--docker_only=true'
+      - '--disable_metrics=percpu,sched,tcp,udp,disk,referenced_memory'
+      - '--store_container_labels=false'
+    volumes:
+      - filesystem: /
+        container: /rootfs
+        permissions: ro
+      - filesystem: /var/run
+        container: /var/run
+        permissions: rw
+      - filesystem: /sys
+        container: /sys
+        permissions: ro
+      - filesystem: /var/lib/docker/
+        container: /var/lib/docker
+        permissions: ro
+      - filesystem: /dev/disk/
+        container: /dev/disk
+        permissions: ro
+    securityOpts:
+      - no-new-privileges:true
+    devices:
+      - /dev/kmsg
+  - name: node_exporter
+    image: quay.io/prometheus/node-exporter:v1.9.1@sha256:d00a542e409ee618a4edc67da14dd48c5da66726bbd5537ab2af9c1dfc442c8a
+    command:
+      - '--path.rootfs=/host'
+    volumes:
+      - filesystem: /
+        container: /host
+        permissions: ro,rslave'
+    securityOpts:
+      - no-new-privileges:true
+    pid: host
