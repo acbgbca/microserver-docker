@@ -1,0 +1,21 @@
+radarr:
+  services:
+  - name: radarr
+    image: ghcr.io/linuxserver/radarr:5.26.2@sha256:c2adf66bafefa781401d07d358e399c476bdffb9a179a2780bb465bda8a55a51
+    exposed:
+      internal: true
+      external: true
+      port: 7878
+    env:
+      TZ: '{{ timezone }}'
+      PUID: '{{ userId }}'
+      PGID: '{{ groupId }}'
+    volumes:
+      - local: config
+        container: /config
+      - shared: videos
+        container: /movies
+      - shared: downloads
+        container: /media
+    healthcheck:
+      url: http://localhost:7878/radarr
