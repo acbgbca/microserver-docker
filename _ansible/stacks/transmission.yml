@@ -1,0 +1,22 @@
+transmission:
+  services:
+  - name: transmission
+    image: ghcr.io/linuxserver/transmission:4.0.6@sha256:50f9c0c60d932e56214b1d0538d757265c2b03dc7b0c683f7564e366f70a339a
+    exposed:
+      internal: true
+      external: true
+      port: 9091
+    ports:
+      - 51413:51413
+      - 51413:51413/udp
+    env:
+      - TZ="{{ timezone }}"
+      - PUID={{ userId }}
+      - PGID={{ groupId }}
+    volumes:
+      - local: config
+        container: /config
+      - shared: downloads
+        container: /media
+    healthcheck:
+      url: http://localhost:9091/transmission/web/
