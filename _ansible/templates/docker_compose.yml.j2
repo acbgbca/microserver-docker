@@ -4,13 +4,16 @@ services:
   {{ service.name }}:
     image: {{ service.image }}
     container_name: {{ service.name }}
+    {%- if 'hostname' in service %}
+    hostname: {{ service.hostname }}
+    {%- endif %}
     {%- if 'user' in service %}
     user: {{ service.user }}
     {%- endif %}
     {%- if 'command' in service %}
     {%- if service.command is string %}
     command: {{ service.command }}
-    {% else %}
+    {%- else %}
     command:
       {%- for cmd in service.command %}
       - "{{ cmd }}"
