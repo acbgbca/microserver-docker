@@ -1,7 +1,7 @@
 ittools:
   services:
   - name: ittools
-    image: ghcr.io/sharevb/it-tools:latest@sha256:e315e1c45a641c2d6fe9fe8c14a55b662595e1c4b7466197d986a69887a40fc2
+    image: ghcr.io/sharevb/it-tools:latest@sha256:300f89201fe816f7c090be913ad84dddfab8a8ce4db0d1354e34c14bc5009fc4
     exposed:
       internal: true
       external: true
