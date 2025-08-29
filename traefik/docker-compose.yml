@@ -30,7 +30,7 @@ services:
       - "--entrypoints.secure.http.tls.domains[0].main=$externaldomain"
       - "--entrypoints.secure.http.tls.domains[0].sans=*.$externaldomain"
       - "--entrypoints.secure.http.tls.domains[1].main=$domain"
-      - "--entrypoints.secure.http.tls.domains[2].sans=*.$domain"
+      - "--entrypoints.secure.http.tls.domains[1].sans=*.$domain"
       - "--entrypoints.secure.http.middlewares=authelia@docker"
       - "--serversTransport.insecureSkipVerify=true"
       - "--accesslog=true"

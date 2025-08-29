@@ -46,8 +46,6 @@ services:
       - "--entrypoints.secure.http.tls.certResolver=cf"
       - "--entrypoints.secure.http.tls.domains[0].main=$externaldomain"
       - "--entrypoints.secure.http.tls.domains[0].sans=*.$externaldomain"
-      - "--entrypoints.secure.http.tls.domains[1].main=$domain"
-      - "--entrypoints.secure.http.tls.domains[2].sans=*.$domain"
       - "--entrypoints.secure.http.middlewares=autheliaexternal@docker"
       - "--accesslog=true"
       - "--accesslog.filters.statuscodes=300-399,400-499,500-599"
