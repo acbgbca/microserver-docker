@@ -1,4 +1,8 @@
 ---
+- name: Setup compose directory for {{ file.key }}
+  file:
+    path: "../{{ file.key }}"
+    state: directory
 - name: Create compose files for {{ file.key }}
   ansible.builtin.template:
     src: templates/docker_compose.yml.j2
@@ -36,6 +40,12 @@
   file:
     path: "../{{ file.key }}/{{ item.1.local }}"
     state: directory
+  when: item.1.local is defined
+  loop: "{{ file.value.services|subelements('volumes', skip_missing=True) }}"
+- name: Add gitignore to local directory for {{ file.key }}
+  ansible.builtin.template:
+    src: templates/gitignore.j2
+    dest: "../{{ file.key }}/{{ item.1.local }}/.gitignore"
   when: item.1.local is defined
   loop: "{{ file.value.services|subelements('volumes', skip_missing=True) }}"
 - name: Setup data directories for {{ file.key }}

@@ -27,6 +27,10 @@ services:
       - "--entrypoints.secure.address=:443"
       - "--entrypoints.secure.http.tls=true"
       - "--entrypoints.secure.http.tls.certResolver=cf"
+      - "--entrypoints.secure.http.tls.domains[0].main=$externaldomain"
+      - "--entrypoints.secure.http.tls.domains[0].sans=*.$externaldomain"
+      - "--entrypoints.secure.http.tls.domains[1].main=$domain"
+      - "--entrypoints.secure.http.tls.domains[2].sans=*.$domain"
       - "--entrypoints.secure.http.middlewares=authelia@docker"
       - "--serversTransport.insecureSkipVerify=true"
       - "--accesslog=true"
@@ -47,6 +51,9 @@ services:
       - 443:443
     depends_on:
       - authelia
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
   authelia:
     image: authelia/authelia:4.39.6@sha256:08776367d54d4482c54ac8ca75b18f7db3287b751106e19736780c5f6811374d
     container_name: authelia
