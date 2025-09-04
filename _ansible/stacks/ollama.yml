@@ -41,7 +41,7 @@ ollama:
     dependsOn:
       - ollama
   - name: deepresearch
-    image: localdeepresearch/local-deep-research:1.1.1@sha256:dde629bc8a0262f869b6a48f547513f0b4cd812661524257aa6c6765ceeb078f
+    image: localdeepresearch/local-deep-research:1.1.2@sha256:d73783249e6d1dd98214b450de6b59a547bae06e5105cd123ae5f29d88f6fdb6
     exposed:
       internal: true
       external: true
