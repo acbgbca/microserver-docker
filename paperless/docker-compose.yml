@@ -24,7 +24,7 @@ services:
       - sablier.group=paperless
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.18.2@sha256:fbe142ff2e02713740329ebb5981c6bb6fe54f8b4de18e98637c2ff586ea1935
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.18.3@sha256:6dbe57d8198fa117158ba9e867e2d45280b65e9c37ea54c1df7b34c4085a564c
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
@@ -58,7 +58,7 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
 
   gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.22@sha256:91035c5041e7f986ae89d0e9f1783233dbae4254b19a33f954288466de5d150f
+    image: docker.io/gotenberg/gotenberg:8.23@sha256:3e9d970c395dfd7f0f98fd8da5adc01dab6bf95881d8d232f77a9feafe6d4977
     restart: unless-stopped
     labels:
       - sablier.enable=true

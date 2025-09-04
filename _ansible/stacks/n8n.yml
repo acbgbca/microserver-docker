@@ -11,7 +11,7 @@ n8n:
     N8N_SMTP_SENDER: 'n8n@{{ externalDomain }}'
   services:
   - name: n8n
-    image: ghcr.io/n8n-io/n8n:1.109.1@sha256:0257f3f0a5aef5edbe137972afc1915152d7e25fd5f596a28fd32d2622381156
+    image: ghcr.io/n8n-io/n8n:1.110.1@sha256:6c0c7650150a3fb0fd30d13160a87b5227963c36c9297b5bda618bcadfcee932
     envFile: true
     exposed:
       internal: true
