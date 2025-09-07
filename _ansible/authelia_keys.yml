@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  
+  tasks:
+    - name: Generate Authelia Private Key
+      community.crypto.openssl_privatekey:
+        path: ./ansible_rsa_key.pem
+        type: RSA
+        size: 4096
+        mode: '0600'

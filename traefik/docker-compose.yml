@@ -78,7 +78,7 @@ services:
     security_opt:
       - no-new-privileges:true
     depends_on:
-      - redis
+      - authelia_redis
     networks:
       - internal
       - default
@@ -88,8 +88,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 15s
-  redis:
+  authelia_redis:
     image: redis:7.4.5-alpine@sha256:bb186d083732f669da90be8b0f975a37812b15e913465bb14d845db72a4e3e08
+    container_name: authelia_redis
     restart: unless-stopped
     command: redis-server --loglevel warning --requirepass authelia --databases 1 --hz 2
     volumes: 
