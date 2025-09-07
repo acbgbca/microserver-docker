@@ -54,6 +54,10 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
+    networks:
+      default:
+        aliases:
+          - authelia.$externaldomain # For OIDC containers, so they don't try to resolve the host IP
   authelia:
     image: authelia/authelia:4.39.7@sha256:00fdbe0f4fe6120b1ba00bd3d618a8cbfc1a59aba68fb6b411ee3efb796cc054
     container_name: authelia

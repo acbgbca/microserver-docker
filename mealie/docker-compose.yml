@@ -1,0 +1,18 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v3.1.2
+    container_name: mealie
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.mealie.loadbalancer.server.port=9000
+      - show.external=true
+    env_file:
+      - mealie.env
+    volumes:
+      - ./data:/app/data/
+
+networks:
+  default:
+    external: true
+    name: ctr-network
