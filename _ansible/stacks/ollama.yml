@@ -23,7 +23,7 @@ ollama:
         container: /root/.ollama
     addGpu: true
   - name: openwebui
-    image: ghcr.io/open-webui/open-webui:main@sha256:2e78a2f9f6f62173ae28d2203f3c9bcdadc614023380ebbe903ea9fab772535e
+    image: ghcr.io/open-webui/open-webui:main@sha256:6411dd62178b3d5fbd26bd953b12c03e74ede96875aa96c394513628ba842cc1
     exposed:
       internal: true
       external: true
@@ -41,7 +41,7 @@ ollama:
     dependsOn:
       - ollama
   - name: deepresearch
-    image: localdeepresearch/local-deep-research:1.1.11@sha256:4ab175c690d61feb49cf75a4024e6ca65d50fc578b11a943a4422440e1da8cc8
+    image: localdeepresearch/local-deep-research:1.2.0@sha256:40f6bd47585e9160b3392229a05b2837462f36f8ebd7c17a9c4f74050ba73e91
     exposed:
       internal: true
       external: true
@@ -72,7 +72,7 @@ ollama:
       - ollama
       - searxng
   - name: searxng
-    image: docker.io/searxng/searxng:latest@sha256:3bf5b1c3d76abd3c825d4b4fd2048caa0bf01d73fdefa22af902304d1982e940
+    image: docker.io/searxng/searxng:latest@sha256:9c071b8685d6586692072df2eaa48a0adb8e53d13e18cb53e21924837c5803d7
     exposed:
       internal: true
       external: true
