@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   wireguard:
-    image: 'ghcr.io/linuxserver/wireguard:1.0.20250521@sha256:58ba7f17ca63195eecca5192cf069fc0c00e6b0603e91d55f5ab6d00efced5f7'
+    image: 'ghcr.io/linuxserver/wireguard:1.0.20250521@sha256:c9863e07db79437228fa6b174523491abf9c560fb4c273a635214440e7b46c41'
     container_name: wireguard
     env_file: vpn.env
     volumes:
