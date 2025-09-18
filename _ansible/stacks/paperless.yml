@@ -14,7 +14,7 @@ paperless:
           3832336530343464336637643539396263306232343263396664
   services:
   - name: db16
-    image: postgres:16.10@sha256:b477759d38be47671d54a054d832791f8ddb9f0eaf6faf51ed17516087793a66
+    image: postgres:17.6@sha256:feff5b24fedd610975a1f5e743c51a4b360437f4dc3a11acf740dcd708f413f6
     env:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
