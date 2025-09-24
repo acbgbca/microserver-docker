@@ -1,16 +1,22 @@
 jellyfin:
-  rootEnv:
-    internalDomain: '{{ internalDomain }}'
+  envFile:
+    JELLYFIN_PublishedServerUrl: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          30306333343162656237363434313037383736373663616538323364313536316434666262633536
+          3233663734353564643534623037366561366433333131300a366264303232346432376435633163
+          32323262653863663936383638663638666465663063633166383461343537306562386566633231
+          3437626266326134300a616131386662393138666137393632396436396133343166316463313034
+          34306235306263313765303931393732663566393532653561333635613865616130636638383939
+          6633353339376339616238326331366436343634643732346137
   services:
   - name: jellyfin
     image: jellyfin/jellyfin:10.10.7@sha256:7ae36aab93ef9b6aaff02b37f8bb23df84bb2d7a3f6054ec8fc466072a648ce2
     exposed:
       internal: true
-      external: true
+      external: false
       port: 8096
     user: '{{ userId }}:{{ groupId }}'
-    env:
-      JELLYFIN_PublishedServerUrl: https://jellyfin.${internalDomain}
+    envFile: true
     volumes:
       - local: config
         container: /config
@@ -20,3 +26,4 @@ jellyfin:
         container: /data
       - filesystem: /tmp/jellyfin
         container: /transcode
+    addGpu: true

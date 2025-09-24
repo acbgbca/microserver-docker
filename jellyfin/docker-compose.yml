@@ -6,15 +6,22 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.jellyfin.loadbalancer.server.port=8096
-      - show.external=true
+      - show.external=false
     env_file: jellyfin.env
     user: 9001:9001
     volumes:
       - ./config:/config
       - /mnt/ssd512/ctr_data/jellyfin/cache:/cache
       - '/mnt/data8tb/videos:/data'
-      - /tmp/jellyfin:/transcode
+      - /tmp/jellyfin:/transcode:rw
     restart: 'unless-stopped'
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 networks:
   default:
     external: true
