@@ -4,7 +4,7 @@ calibre:
     displayName: Calibre
   services:
   - name: calibre
-    image: ghcr.io/linuxserver/calibre-web:0.6.25@sha256:f4159edfe9bbf1b07389d249b241004f6e15360f5d3cc01029f5865632b613cd
+    image: ghcr.io/linuxserver/calibre-web:0.6.25@sha256:98a20064168ab284bbb8e048af48c89a5e25650f35a4b217705241af94c1debe
     exposed:
       internal: true
       external: true
@@ -20,7 +20,7 @@ calibre:
     healthcheck:
       url: http://localhost:8083/login
   - name: calibreserver
-    image: ghcr.io/linuxserver/calibre:8.10.0@sha256:94af2505dbfbcde314138880bb547e2e984e5298d836dc525b4be4f984d80d9a
+    image: ghcr.io/linuxserver/calibre:8.10.0@sha256:7be820c0aa94f9deaaedce3eb8c13185e59cb4e64a868562abcfe3c3981a4afd
     exposed:
       internal: true
       external: true
