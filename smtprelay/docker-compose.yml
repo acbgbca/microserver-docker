@@ -5,7 +5,7 @@ services:
     container_name: smtprelay
     hostname: smtprelay
     ports:
-      - 25:25
+      - 2025:25
     command: -config=/smtprelay.ini
     volumes:
       - ./smtprelay.ini:/smtprelay.ini:ro
