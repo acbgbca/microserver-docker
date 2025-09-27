@@ -55,12 +55,13 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     networks:
-      default:
+      ctrnetwork:
         aliases:
           - authelia.$externaldomain # For OIDC containers, so they don't try to resolve the host IP
   authelia:
     image: authelia/authelia:4.39.10@sha256:ed52a81c71dfb3b84327a1397081423773804281519b4f6c337cb12a4c58bef9
     container_name: authelia
+    hostname: authelia
     labels:
       - traefik.enable=true
       - show.external=true
@@ -84,7 +85,7 @@ services:
     depends_on:
       - authelia_redis
     networks:
-      - internal
+      - ctrnetwork
       - default
     healthcheck:
       test: ["CMD", "/app/healthcheck.sh"]
@@ -99,13 +100,8 @@ services:
     command: redis-server --loglevel warning --requirepass authelia --databases 1 --hz 2
     volumes: 
       - ./redis:/data
-    networks:
-      - internal
 networks:
-  default:
+  ctrnetwork:
     external: true
     name: ctr-network
-  internal:
-    driver: bridge
-    internal: true
-    name: internal
+  default:
