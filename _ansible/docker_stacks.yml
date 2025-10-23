@@ -14,9 +14,20 @@
     loop: "{{ query('fileglob', 'stacks/*.yml') }}"
     tags: always
   - name: Load Single Docker Stack
-    include_vars:
-      file: "stacks/{{ filename }}.yml"
-      name: all
+    block:
+      - name: Check file exists
+        ansible.builtin.stat:
+          path: "stacks/{{ filename }}.yml"
+        register: file_data
+      - name: Fail if file missing
+        ansible.builtin.fail:
+          msg: "File stacks/{{ filename }}.yml does not exist"
+        when: not file_data.stat.exists
+      - name: "Load {{ filename }}"
+        include_vars:
+          file: "stacks/{{ filename }}.yml"
+          name: all
+        when: file_data.stat.exists
     when: filename is defined
     tags: always
   - name: Create Stacks

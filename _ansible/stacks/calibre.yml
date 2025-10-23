@@ -10,8 +10,8 @@ calibre:
       external: true
       port: 8083
     env:
-      PUID: '{{ userId }}'
-      PGID: '{{ groupId }}'
+      - "PUID={{ userId }}"
+      - "GUID={{ groupId }}"
     volumes:
       - local: config
         container: /config
@@ -26,8 +26,8 @@ calibre:
       external: true
       port: 8080
     env:
-      PUID: '{{ userid }}'
-      GUID: '{{ groupId }}'
+      - "PUID={{ userId }}"
+      - "GUID={{ groupId }}"
     volumes:
       - local: server
         container: /config
