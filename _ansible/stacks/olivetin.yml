@@ -1,7 +1,7 @@
 olivetin:
   services:
   - name: olivetin
-    image: ghcr.io/olivetin/olivetin:2025.7.29@sha256:db2029a29b7cec56a32f40dec0fd5d7d3fc8802e02794bde1d6b9708d3be1deb
+    image: ghcr.io/olivetin/olivetin:2025.10.27@sha256:27c6cef221c1e472ad222b273f7f60fd9ba3068acb60547644eae8eb23ddc6fd
     exposed:
       internal: true
       external: true

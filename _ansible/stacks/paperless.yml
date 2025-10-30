@@ -14,7 +14,7 @@ paperless:
           3832336530343464336637643539396263306232343263396664
   services:
   - name: db16
-    image: postgres:16.10@sha256:f554b7e953b6fc0f72fe2b34e34f935f7ecc4f5bab9d1006467b30bfc6fc7ea1
+    image: postgres:16.10@sha256:4eb532412200f7fbbf15d62ee0d96e020a9eae9eaed76066692474a7371c4d83
     env:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
@@ -28,7 +28,7 @@ paperless:
       - local: redisdata
         container: /data
   - name: paperless
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.19.2@sha256:e1e0026cdacda4bb157c024a8a1a343bd16b34d8900e7f3958598b9afebd0d38
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.19.3@sha256:321ca858e4b6ce9dc416dbcb7c0691d545e3e9b0f44cf420f75c22098854ca25
     envFile: true
     exposed:
       internal: true

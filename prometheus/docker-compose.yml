@@ -2,7 +2,7 @@
 version: "3.7"
 services:
   prometheus:
-    image: prom/prometheus:v3.7.1@sha256:ff7e389acbe064a4823212a500393d40a28a8f362e4b05cbf6742a9a3ef736b2
+    image: prom/prometheus:v3.7.2@sha256:23031bfe0e74a13004252caaa74eccd0d62b6c6e7a04711d5b8bf5b7e113adc7
     container_name: prometheus
     user: "9001:9001"
     labels:
@@ -52,7 +52,7 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
   node_exporter:
-    image: quay.io/prometheus/node-exporter:v1.9.1@sha256:d00a542e409ee618a4edc67da14dd48c5da66726bbd5537ab2af9c1dfc442c8a
+    image: quay.io/prometheus/node-exporter:v1.10.2@sha256:337ff1d356b68d39cef853e8c6345de11ce7556bb34cda8bd205bcf2ed30b565
     container_name: node_exporter
     command:
       - '--path.rootfs=/host'

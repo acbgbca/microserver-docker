@@ -50,7 +50,7 @@ services:
       start_period: 30s
       start_interval: 5s
   deepresearch:
-    image: localdeepresearch/local-deep-research:1.2.9@sha256:ef0e466d64184818ef93788b98b6fa480267a3375f88d6d54a40d5760f4ec69e
+    image: localdeepresearch/local-deep-research:1.2.14@sha256:e34bed441bbc4f0d95dedddf82993d8cd8fb3fa577873054c21c6de4e08bd255
     restart: unless-stopped
     container_name: deepresearch
     labels:
@@ -82,7 +82,7 @@ services:
       - ./deepresearch:/root/.config/local_deep_research
   searxng:
     container_name: searxng
-    image: docker.io/searxng/searxng:latest@sha256:ffc01f261943ae18e203c01fafd8c7eba75f9dd30f9a1c352f39511d668d6df6
+    image: docker.io/searxng/searxng:latest@sha256:a943cb1111c2a61ef74162359de687cca94f5472d336e0a2dfef7be2259a4e8f
     restart: unless-stopped
     labels:
       - traefik.enable=true

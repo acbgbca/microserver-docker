@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr:latest@sha256:608935c38763920b25622a3d404bb14ea08fcaa7c2a9b1c93ce9bac61ad4b11d
+    image: ghcr.io/linuxserver/prowlarr:latest@sha256:643220338204525524db787ff38a607261597f49d1f550694acdb3e908e2b43e
     container_name: prowlarr
     labels:
       - traefik.enable=true
