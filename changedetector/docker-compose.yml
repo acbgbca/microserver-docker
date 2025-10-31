@@ -1,4 +1,3 @@
-version: "2.4"
 services:
   changedetector:
     image: ghcr.io/dgtlmoon/changedetection.io:latest@sha256:5896f6273a3ec1470aac264e19d4318ceb449685f29606df0711e7aed58bbca0

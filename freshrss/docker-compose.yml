@@ -1,5 +1,4 @@
 ---
-version: '3.7'
 services:
   freshrss:
     image: freshrss/freshrss:1.27.1@sha256:9a56be99f3927cc8fab4c6bbd5723ae098824792d4d98a84007a95eb64e8f905

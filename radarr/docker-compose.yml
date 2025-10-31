@@ -1,5 +1,4 @@
 ---
-version: "3.7"
 services:
   radarr:
     image: 'ghcr.io/linuxserver/radarr:5.28.0@sha256:c984533510abe0219a70e80d15bd0d212b7df21baa0913759c4ce6cc9092240b'

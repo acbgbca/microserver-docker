@@ -1,5 +1,4 @@
 ---
-version: "3.7"
 services:
   ipsecvpn:
     image: 'hwdsl2/ipsec-vpn-server:debian@sha256:fe5647f22e7dbe2271a42a8e8cbb8333188ac34baf0d33691fd621f6e45a4fbd'

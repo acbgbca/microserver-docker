@@ -1,5 +1,4 @@
 ---
-version: "3.7"
 services:
   minecraft:
     image: ghcr.io/acbgbca/minecraft-bedrock:1.21.84.1@sha256:af24357eb3d12e8063471092f8cede9b5dd0c5c71f50b77623db71904f46476e
