@@ -40,7 +40,7 @@ services:
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.secure.address=:443"
-      - "--entryPoints.secure.forwardedHeaders.trustedIPs=172.16.0.1/12"
+      - "--entryPoints.secure.forwardedHeaders.trustedIPs=172.18.0.1/16"
       - "--entrypoints.secure.http.tls=true"
       - "--entrypoints.secure.http.tls.certResolver=cf"
       - "--entrypoints.secure.http.tls.domains[0].main=$externaldomain"
@@ -52,8 +52,9 @@ services:
       - "CF_ZONE_API_TOKEN=$API_TOKEN"
       - "CF_DNS_API_TOKEN=$API_TOKEN"
     networks:
-      - default
-      - ctrnetwork
+      default:
+      ctrnetwork:
+        ipv4_address: 172.18.128.11
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true

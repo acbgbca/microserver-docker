@@ -54,6 +54,7 @@ services:
       - 1.0.0.1
     networks:
       ctrnetwork:
+        ipv4_address: 172.18.128.10
         aliases:
           - authelia.$externaldomain # For OIDC containers, so they don't try to resolve the host IP
   authelia:
