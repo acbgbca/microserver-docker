@@ -45,7 +45,7 @@ services:
     command:
       - '--housekeeping_interval=30s'
       - '--docker_only=true'
-      - '--disable_metrics=percpu,sched,tcp,udp,disk,referenced_memory'
+      - '--disable_metrics=percpu,hugetlb,sched,tcp,udp,disk,referenced_memory,advtcp'
       - '--store_container_labels=false'
     security_opt:
       - no-new-privileges:true
