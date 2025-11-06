@@ -2,7 +2,7 @@
 # To upgrade the database, see https://acbgbca.github.io/documentation/postgres/
 services:
   db16:
-    image: postgres:16.10@sha256:4eb532412200f7fbbf15d62ee0d96e020a9eae9eaed76066692474a7371c4d83
+    image: postgres:16.10@sha256:21f6013073bc6b92830a2129570e2f5ec42a6c734b5a985a41e83aa58f54c3c1
     restart: unless-stopped
     volumes:
       - ./pgdata16:/var/lib/postgresql/data
@@ -24,7 +24,7 @@ services:
       - sablier.group=paperless
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.19.3@sha256:321ca858e4b6ce9dc416dbcb7c0691d545e3e9b0f44cf420f75c22098854ca25
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.19.4@sha256:7ec0797af256194f6e117d1b7ed3ef91ad31b4a14bf3092abdee6bb74f6b3656
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001

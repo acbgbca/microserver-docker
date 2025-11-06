@@ -1,7 +1,7 @@
 ---
 services:
   cloudflared:
-    image: 'cloudflare/cloudflared:2025.10.0@sha256:396cd2e6f021275ad09969a1b4f1a7e62ca5349fde62781ce082bb2c18105c70'
+    image: 'cloudflare/cloudflared:2025.10.1@sha256:21f3607baf2384c54d592b0efe76dd5f548c0dbc083e62fa22c7fac3923d077f'
     container_name: cloudflared
     user: 9001:9001
     volumes:
@@ -17,7 +17,7 @@ services:
     restart: 'unless-stopped'
 
   traefikexternal:
-    image: traefik:v3.5.3@sha256:d6be8725d21b45bdd84b93ea01438256e0e3c94aa8fa51834fe87f37cd5d4af8
+    image: traefik:v3.5.4@sha256:4df0a50fcf71b454c0d7ad17675776dc8d37359deae3291895bdaa008c1b9972
     container_name: traefikexternal
     labels:
       - traefik.enable=true
