@@ -1,0 +1,17 @@
+services:
+  nginx:
+    image: nginx:1.29.1-alpine-slim
+    container_name: nginx
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - ./jellyfin.conf:/etc/nginx/conf.d/jellyfin.conf:ro
+      - ./etc_letsencrypt:/etc/letsencrypt:ro
+    restart: 'unless-stopped'
+    networks:
+      default:
+        ipv4_address: 172.18.128.12
+networks:
+  default:
+    external: true
+    name: ctr-network
