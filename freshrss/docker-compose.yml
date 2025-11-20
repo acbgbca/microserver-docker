@@ -16,7 +16,7 @@ services:
       - './extensions:/var/www/FreshRSS/extensions'
     restart: 'unless-stopped'
   rssbridge:
-    image: rssbridge/rss-bridge@sha256:b9bf7fff73176af8eac47af65ac39fb9233654702c915e8154537d89dc5e13b8
+    image: rssbridge/rss-bridge@sha256:0f919cc552b9a894851a944509d9da238f1c1ae5030f293b61c9fcf86a6191b3
     container_name: rssbridge
     labels:
       - traefik.enable=true
