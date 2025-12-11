@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:0.13.1@sha256:8850b8b33936b9fb246e7b3e02849941f1151ea847e5fb15511f17de9589aea1
+    image: ollama/ollama:0.13.2@sha256:ceaad0844eda02ddc59d9b40551de7264a564ba7a16a90e241d1c582f0df992d
     ports:
       - 11434:11434
     labels:
@@ -50,7 +50,7 @@ services:
       start_period: 30s
       start_interval: 5s
   deepresearch:
-    image: localdeepresearch/local-deep-research:1.3.4@sha256:92df15e7814e28e29a4c60e1fe40f664d549697e1335e44d679653a7d3e0e046
+    image: localdeepresearch/local-deep-research:1.3.6@sha256:0e0aa01396a50873f8b465dcc4dbda091781f14932236c891877d8d851ed99f8
     restart: unless-stopped
     container_name: deepresearch
     labels:
