@@ -4,7 +4,7 @@ stirlingpdf:
     displayName: Stirling PDF
   services:
   - name: stirlingpdf
-    image: stirlingtools/stirling-pdf:1.6.0@sha256:1f73a8f898fe269cbbccea3be577064dd87fc4334de349fcc5b1afa1bcebf240
+    image: stirlingtools/stirling-pdf:2.1.1@sha256:c351ebf9d7602f1e63c49b20043739fc5ee13defa43e40646bf09aabc10f6e21
     exposed:
       internal: true
       external: true
