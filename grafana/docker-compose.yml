@@ -1,7 +1,7 @@
 ---
 services:
   grafana:
-    image: grafana/grafana-oss:12.1.1@sha256:a1701c2180249361737a99a01bc770db39381640e4d631825d38ff4535efa47d
+    image: grafana/grafana-oss:12.3.1@sha256:adaf2d6b44c7e2b711b931b98be153778d313806582a24eab21178804fac2976
     container_name: grafana
     user: "9001:9001"
     labels:
@@ -17,7 +17,7 @@ services:
       - ./data:/var/lib/grafana
     restart: unless-stopped
   alloy:
-    image: grafana/alloy:v1.12.0@sha256:85e4a706181741dd735d9a69bea81f9e03e16d5349bff46dd9640379f143c007
+    image: grafana/alloy:v1.12.1@sha256:c311595156fca7b1131683d383dae1acfd29e8879d347161d2a6f714ebac0c0b
     container_name: alloy
     command: run --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
     volumes:
