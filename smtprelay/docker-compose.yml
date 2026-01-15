@@ -1,7 +1,7 @@
 ---
 services:
   smtprelay:
-    image: grafana/smtprelay:2.3.0@sha256:08e6b8417323c386d8b3cbd82f65fe3a7ca5aff0bf7f1be74a2c7882cfc60584
+    image: grafana/smtprelay:2.3.1@sha256:fcfca604a66eb9f59e926aed2f04e91b384459839ab97ac3702896bc15638071
     container_name: smtprelay
     hostname: smtprelay
     ports:
