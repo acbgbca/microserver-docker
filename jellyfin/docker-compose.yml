@@ -12,7 +12,7 @@ services:
       - ./config:/config
       - /mnt/ssd512/ctr_data/jellyfin/cache:/cache
       - '/mnt/data8tb/videos:/data'
-      - /tmp/jellyfin:/transcode:rw
+      - /mnt/ssd512/ctr_data/jellyfin/transcode:/transcode:rw
     restart: 'unless-stopped'
     deploy:
       resources:

@@ -24,6 +24,11 @@ su -c "git tag -a $date -m 'Version $date' && git push origin $date" devops
 # This removes all cache files older than 5 days
 find "./plex/config/Library/Application Support/Plex Media Server/Cache/PhotoTranscoder" -type f -mtime +5 -delete
 
+# Next, clean up the transcode directories
+# This removes all cache files older than 1 days
+find "/mnt/ssd512/ctr_data/jellyfin/transcode" -mtime +1 -delete
+find "/mnt/ssd512/ctr_data/plex/transcode" -mtime +1 -delete
+
 set +e
 for d in */ ; do
 	# Remove trailing slash from directory

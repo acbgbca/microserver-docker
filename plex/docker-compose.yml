@@ -9,7 +9,7 @@ services:
     env_file: plex.env
     volumes:
       - './config:/config'
-      - '/tmp/transcode:/transcode'
+      - '/mnt/ssd512/ctr_data/plex/transcode:/transcode'
       - '/mnt/data8tb/videos:/data'
       - '/mnt/data8tb/music:/music'
     ports:
