@@ -4,6 +4,7 @@ services:
   steamheadless:
     image: josh5/steam-headless:latest
     restart: unless-stopped
+    privileged: true
     shm_size: ${SHM_SIZE}
     ulimits:
       nofile:
