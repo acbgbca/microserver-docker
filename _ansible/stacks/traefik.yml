@@ -20,7 +20,7 @@ traefik:
           3138303930333662323738313537633838373930363839363062
   services:
   - name: traefik
-    image: traefik:v3.6.7@sha256:ebe7d3fc715e28f033cea8265e9105b9d64705867f5b916e2d9ed0b62c530192
+    image: traefik:v3.6.7@sha256:140d1fe3ba042682b8c93e8d0fdff043f9d6b27654bd9e84599d7ed220cf2ec7
     exposed:
       internal: true
       port: 8080
@@ -88,7 +88,7 @@ traefik:
       custom: ["CMD", "/app/healthcheck.sh"]
     networks: all
   - name: redis
-    image: redis:7.4.7-alpine@sha256:ee64a64eaab618d88051c3ade8f6352d11531fcf79d9a4818b9b183d8c1d18ba
+    image: redis:7.4.7-alpine@sha256:66f2428ae138e8af9dce81c4531db952a250b6b28e4d73bd7b4397a7d7481b79
     command: redis-server --loglevel warning --requirepass authelia --databases 1 --hz 2
     volumes:
       - local: redis
