@@ -16,7 +16,7 @@ services:
       - './extensions:/var/www/FreshRSS/extensions'
     restart: 'unless-stopped'
   rssbridge:
-    image: rssbridge/rss-bridge@sha256:04dff3a487d297d149affd5535b92ac923f5c2dfaf7bc9403473a7c8427552ce
+    image: rssbridge/rss-bridge@sha256:cebd08cca02f87b653c402541cdebeecbf99874a8375ef19817db749c0a18b3d
     container_name: rssbridge
     environment:
       - CURL_IMPERSONATE=firefox144
