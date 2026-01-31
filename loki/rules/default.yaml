@@ -10,6 +10,6 @@ groups:
           description: Block news limit reached. Purchase additional blocks
       - alert: Upgrade failed
         expr: |
-          sum(count by(job) (rate({job="docker-backup-upgrade"} |= `Error upgrading` [1m]))) > 0
+          sum(rate({job="docker-backup-upgrade"} |= `Error upgrading` | pattern `<message>` [1m])) by (message) > 0
         annotations:
-          summary: Upgrading a container failed
+          summary: "Upgrading container failed - {{ $labels.message }}"
