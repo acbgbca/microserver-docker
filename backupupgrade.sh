@@ -18,7 +18,12 @@ cd $wd
 
 su -c "git pull --ff-only origin main" devops
 # tag with todays date to make rollback easier
-su -c "git tag -a $date -m 'Version $date' && git push origin $date" devops
+# Check if tag exists first, incase this is a re-run
+if [ -z "$(git tag -l "$date")" ]; then
+	su -c "git tag -a $date -m 'Version $date' && git push origin $date" devops
+else
+  echo "Tag $date already exists, skipping."
+fi
 
 # Before we start, clean up the plex cache
 # This removes all cache files older than 5 days
@@ -26,8 +31,8 @@ find "./plex/config/Library/Application Support/Plex Media Server/Cache/PhotoTra
 
 # Next, clean up the transcode directories
 # This removes all cache files older than 1 days
-find "/mnt/ssd512/ctr_data/jellyfin/transcode" -mtime +1 -delete
-find "/mnt/ssd512/ctr_data/plex/transcode" -mtime +1 -delete
+find "/mnt/ssd512/ctr_data/jellyfin/transcode" -type f -mtime +1 -delete
+find "/mnt/ssd512/ctr_data/plex/transcode" -type f -mtime +1 -delete
 
 set +e
 for d in */ ; do
