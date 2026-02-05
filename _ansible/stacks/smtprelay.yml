@@ -1,7 +1,7 @@
 smtprelay:
   services:
   - name: smtprelay
-    image: grafana/smtprelay:2.3.1@sha256:fcfca604a66eb9f59e926aed2f04e91b384459839ab97ac3702896bc15638071
+    image: grafana/smtprelay:2.4.0@sha256:86e46986de4d627486758cce481c1af5d586097a0eadf48e495889d5292c9eba
     hostname: smtprelay
     command: "-config=/smtprelay.ini"
     volumes:
