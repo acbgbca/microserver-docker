@@ -27,6 +27,10 @@ services:
     volumes:
       - ./bridge:/config
     restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - rssbridge.$DOMAIN # So I can copy and paste the URLs without needing to change the host
   playwrightproxy:
     image: ghcr.io/acbgbca/pw-scraper:0.175@sha256:427c6da70e6dcf9a7afc47ba4ff18a2a68ed7a7531ddf9b3107bb666908c498b
     container_name: playwrightproxy
