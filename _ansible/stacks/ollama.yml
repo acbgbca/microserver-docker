@@ -6,7 +6,7 @@ ollama:
     SEARXNG_HOSTNAME: 'searxng.{{ externalDomain }}'
   services:
   - name: ollama
-    image: ollama/ollama:0.15.4@sha256:37ef34d78a6f4563a11cbbb336bbaa75f01eb19671d639973f98baa58f11a5ed
+    image: ollama/ollama:0.15.6@sha256:5f7a20da9b4d42d1909b4693f90942135bcabc335ee42d529c0d143c44a92311
     exposed:
       internal: true
       external: true
@@ -41,7 +41,7 @@ ollama:
     dependsOn:
       - ollama
   - name: deepresearch
-    image: localdeepresearch/local-deep-research:1.3.48@sha256:115f3937a449e276b779a17062ea346f1792349efead8d4552d298ad8f2a0599
+    image: localdeepresearch/local-deep-research:1.3.49@sha256:2249edb7319257880273157b0207fabd9b0fccba234ebdaa5d40091bee7ea3fe
     exposed:
       internal: true
       external: true
@@ -72,7 +72,7 @@ ollama:
       - ollama
       - searxng
   - name: searxng
-    image: docker.io/searxng/searxng:latest@sha256:8d77102a0d2c615e88c5184868dc2c32cd361413dbc104abc301f54079fd40a2
+    image: docker.io/searxng/searxng:latest@sha256:1502823ea918998e325d95f8c0cbd3db1dbd024da412dcce9f504e6244632b26
     exposed:
       internal: true
       external: true
