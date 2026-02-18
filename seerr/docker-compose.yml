@@ -1,0 +1,21 @@
+services:
+  seerr:
+    image: ghcr.io/seerr-team/seerr:v3.0.1
+    container_name: seerr
+    user: 9001:9001
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.seerr.loadbalancer.server.port=5055
+      - show.external=true
+    environment:
+      TZ: "Australia/Melbourne"
+      LOG_LEVEL: "info"
+    volumes:
+      - ./config:/app/config
+      - /tmp/jellyseerr_cache:/app/.next/cache
+
+networks:
+  default:
+    external: true
+    name: ctr-network
