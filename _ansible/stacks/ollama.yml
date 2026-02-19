@@ -6,7 +6,7 @@ ollama:
     SEARXNG_HOSTNAME: 'searxng.{{ externalDomain }}'
   services:
   - name: ollama
-    image: ollama/ollama:0.15.6@sha256:5f7a20da9b4d42d1909b4693f90942135bcabc335ee42d529c0d143c44a92311
+    image: ollama/ollama:0.16.1@sha256:dca1224ecd799f764b21b8d74a17afdc00505ecce93e7b55530d124115b42260
     exposed:
       internal: true
       external: true
@@ -23,7 +23,7 @@ ollama:
         container: /root/.ollama
     addGpu: true
   - name: openwebui
-    image: ghcr.io/open-webui/open-webui:main@sha256:000b87a6ae726aa7f6611a0064ba528ba1a6aff6ead5fb3b6c89fd4a5717eb8a
+    image: ghcr.io/open-webui/open-webui:main@sha256:2b9d2bec40ff30eb71216065f5244c2861d30b75b4e49c40e39973ee64218cde
     exposed:
       internal: true
       external: true
@@ -72,7 +72,7 @@ ollama:
       - ollama
       - searxng
   - name: searxng
-    image: docker.io/searxng/searxng:latest@sha256:1502823ea918998e325d95f8c0cbd3db1dbd024da412dcce9f504e6244632b26
+    image: docker.io/searxng/searxng:latest@sha256:60055af6f2f1ca14b488d9c0f47a019d1dbaf15b4f6547a7194253bf2ab94744
     exposed:
       internal: true
       external: true
