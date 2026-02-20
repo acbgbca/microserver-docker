@@ -1,5 +1,5 @@
 # Use the latest Debian minimal image
-FROM docker:dind
+FROM debian:bookworm-slim
 
 ARG USER=ctrdata
 ARG UID=9001
@@ -14,8 +14,13 @@ ENV CLI_DATA_DIR=/vscode/cli
 ENV USER=${USER}
 ENV UID=${UID}
 
+ENV DOCKER_TLS_CERTDIR=/certs
+RUN mkdir /certs /certs/client && chmod 1777 /certs /certs/client
+
 # Set working directory
 WORKDIR /app
+
+COPY --from=docker:dind /usr/local/bin/ /usr/local/bin/
 
 # Copy setup.sh into the container
 COPY setup.sh start.sh ./

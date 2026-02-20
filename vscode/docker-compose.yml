@@ -22,22 +22,22 @@ services:
       timeout: 10s
       retries: 3
       start_period: 1m
-  # vscode_remote:
-  #   container_name: vscode_remote
-  #   build:
-  #     context: ./devcontainer
-  #   volumes:
-  #     - ./home:/home/ctrdata
-  #     - ./cache:/vscode
-  #     - ./sshd_config:/etc/ssh/sshd_config
-  #     - /home/ctrdata/.ssh:/home/ctrdata/.ssh
-  #     - '.gitconfig:/home/ctrdata/.gitconfig'
-  #   environment:
-  #     - COMMAND=TUNNEL
-  #   privileged: true
-  #   networks:
-  #     lan:
-  #       ipv4_address: 192.168.94.72
+  vscode_remote:
+    container_name: vscode_remote
+    build:
+      context: ./devcontainer
+    volumes:
+      - ./home:/home/ctrdata
+      - ./cache:/vscode
+      - ./sshd_config:/etc/ssh/sshd_config
+      - /home/ctrdata/.ssh:/home/ctrdata/.ssh
+      - '.gitconfig:/home/ctrdata/.gitconfig'
+    environment:
+      - COMMAND=TUNNEL
+    privileged: true
+    networks:
+      lan:
+        ipv4_address: 192.168.94.72
     
 networks:
   default:
