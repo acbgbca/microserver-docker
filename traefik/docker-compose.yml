@@ -94,7 +94,7 @@ services:
       retries: 3
       start_period: 15s
   authelia_redis:
-    image: redis:7.4.7-alpine@sha256:02f2cc4882f8bf87c79a220ac958f58c700bdec0dfb9b9ea61b62fb0e8f1bfcf
+    image: redis:8.6.0
     container_name: authelia_redis
     restart: unless-stopped
     command: redis-server --loglevel warning --requirepass authelia --databases 1 --hz 2

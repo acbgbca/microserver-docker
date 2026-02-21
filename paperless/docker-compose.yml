@@ -15,7 +15,7 @@ services:
       - sablier.group=paperless
 
   broker:
-    image: redis:7.4.7-alpine@sha256:02f2cc4882f8bf87c79a220ac958f58c700bdec0dfb9b9ea61b62fb0e8f1bfcf
+    image: redis:8.6.0
     restart: unless-stopped
     volumes:
       - ./redisdata:/data
