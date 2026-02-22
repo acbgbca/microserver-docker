@@ -1,11 +1,11 @@
 
 # To upgrade the database, see https://acbgbca.github.io/documentation/postgres/
 services:
-  db16:
-    image: postgres:16.12@sha256:e4842c8a99ca99339e1693e6fe5fe62c7becb31991f066f989047dfb2fbf47af
+  db18:
+    image: postgres:18.1
     restart: unless-stopped
     volumes:
-      - ./pgdata16:/var/lib/postgresql/data
+      - ./pgdata18:/var/lib/postgresql
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
@@ -35,7 +35,7 @@ services:
       - sablier.enable=true
       - sablier.group=paperless
     depends_on:
-      - db16
+      - db18
       - broker
       - gotenberg
       - tika
@@ -52,7 +52,7 @@ services:
     env_file: docker-compose.env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
-      PAPERLESS_DBHOST: db16
+      PAPERLESS_DBHOST: db18
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
