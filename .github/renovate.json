@@ -66,11 +66,7 @@
             "matchUpdateTypes": [
                 "major"
             ],
-            "automerge": false,
-            "matchPackageNames": [
-                "!postgres",
-                "!docker.io/library/postgres"
-            ]
+            "automerge": false
         }
     ]
 }
