@@ -60,4 +60,4 @@ paperless:
     image: docker.io/gotenberg/gotenberg:8.26@sha256:328551506b3dec3ff6381dd47e5cd72a44def97506908269e201a8fbfa1c12c0
     command: "gotenberg --chromium-disable-javascript=true --chromium-allow-list=file:///tmp/.*"
   - name: tika
-    image: ghcr.io/paperless-ngx/tika:2.9.1-minimal@sha256:20db3df89eaeb1b271dd840888fe909b88b12f4b86ef641ec07a1d45d4c5168f
+    image: docker.io/apache/tika:3.2.3.0
