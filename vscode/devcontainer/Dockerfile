@@ -1,5 +1,5 @@
 # Use the latest Debian minimal image
-FROM debian:bookworm-slim
+FROM ubuntu:24.04
 
 ARG USER=ctrdata
 ARG UID=9001
@@ -20,7 +20,7 @@ RUN mkdir /certs /certs/client && chmod 1777 /certs /certs/client
 # Set working directory
 WORKDIR /app
 
-COPY --from=docker:dind /usr/local/bin/ /usr/local/bin/
+# COPY --from=docker:dind /usr/local/bin/ /usr/local/bin/
 
 # Copy setup.sh into the container
 COPY setup.sh start.sh ./
@@ -29,6 +29,9 @@ COPY setup.sh start.sh ./
 RUN ./setup.sh
 
 VOLUME [ "/vscode", "/home/${USER}" ]
+
+# To avoid problems with overlayfs on overlayfs
+VOLUME /var/lib/docker
 
 EXPOSE 8000
 

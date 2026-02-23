@@ -2,8 +2,13 @@
 
 set -xe
 
-rc-service sshd start
-rc-service dockerd start
+# rc-service sshd start
+# rc-service dockerd start
+
+# dockerd&
+
+service docker start
+service ssh start
 
 ./code serve-web --help
 
