@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:0.16.3@sha256:63f052826604a28a83795df1a66d9e364410c0b8d1357a62a885c62cef05cdbb
+    image: ollama/ollama:0.17.0@sha256:006ad593108a705eafc8ea8496a30765222bdab17b1a1b0bbe3d50ff2e70fbf4
     ports:
       - 11434:11434
     labels:
@@ -82,7 +82,7 @@ services:
       - ./deepresearch:/root/.config/local_deep_research
   searxng:
     container_name: searxng
-    image: docker.io/searxng/searxng:latest@sha256:edf110a2816d8963949d03879c72a7e19c221b5f7bfb7952a33ae073f96ccb18
+    image: docker.io/searxng/searxng:latest@sha256:2c86f95c22dde03f5354a81b027ec882830748c5fe6454f03c7ec8fc384e54ea
     restart: unless-stopped
     labels:
       - traefik.enable=true
