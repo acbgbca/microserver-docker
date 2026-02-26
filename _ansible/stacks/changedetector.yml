@@ -1,7 +1,7 @@
 changedetector:
   services:
   - name: changedetector
-    image: ghcr.io/dgtlmoon/changedetection.io:latest@sha256:92eb008681b978859af72f8c181b59a1a9526f23d423b9541812fb0744cc7920
+    image: ghcr.io/dgtlmoon/changedetection.io:latest@sha256:bda857dd1c0680eb2665366ef8fe7472593c5add6558c25825a28e241888c6ea
     exposed:
       internal: true
       external: true
