@@ -14,7 +14,7 @@ paperless:
           3832336530343464336637643539396263306232343263396664
   services:
   - name: db18
-    image: postgres:18.1
+    image: postgres:18.3
     env:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
@@ -23,7 +23,7 @@ paperless:
       - local: pgdata18
         container: /var/lib/postgresql
   - name: broker
-    image: redis:8.6.0-alpine@sha256:fd83658b0e40e2164617d262f13c02ca9ee9e1e6b276fd2fa06617e09bd5c780
+    image: redis:8.6.1-alpine@sha256:2afba59292f25f5d1af200496db41bea2c6c816b059f57ae74703a50a03a27d0
     volumes:
       - local: redisdata
         container: /data
