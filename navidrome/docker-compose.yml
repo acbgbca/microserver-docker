@@ -1,0 +1,20 @@
+services:
+  navidrome:
+    image: deluan/navidrome:0.60.3
+    container_name: navidrome
+    user: 9001:9001
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.navidrome.loadbalancer.server.port=4533
+      - show.external=true
+    env_file:
+      - navidrome.env
+    volumes:
+      - ./data:/data
+      - /mnt/data8tb/music:/music
+
+networks:
+  default:
+    external: true
+    name: ctr-network

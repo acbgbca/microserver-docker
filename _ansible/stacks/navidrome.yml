@@ -1,0 +1,17 @@
+navidrome:
+  envFile:
+    ND_BASEURL: 'https://navidrome.{{ externalDomain }}'
+  services:
+  - name: navidrome
+    image: deluan/navidrome:latest
+    envFile: true
+    exposed:
+      internal: true
+      external: true
+      port: 4533
+    user: '{{ userId }}:{{ groupId }}'
+    volumes:
+      - local: data
+        container: /data
+      - shared: music
+        container: /music
