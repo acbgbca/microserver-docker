@@ -1,0 +1,26 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - "8888:8888"   # HTTP proxy port (Tinyproxy, exposed via Gluetun's network)
+    env_file: gluetun.env
+    volumes:
+      - ./data:/gluetun
+    restart: unless-stopped
+
+  proxy:
+    image: ubuntu/squid:latest
+    container_name: squid
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    volumes:
+      - ./squid.conf:/etc/squid/squid.conf:ro
+    restart: unless-stopped
+
