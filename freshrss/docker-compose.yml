@@ -19,7 +19,7 @@ services:
     image: rssbridge/rss-bridge@sha256:2b4b9e0a47e0d69c2cc8ad14e64e49432529894ad7b65cb23c4c3205cbf52eb7
     container_name: rssbridge
     environment:
-      - CURL_IMPERSONATE=firefox146
+      - CURL_IMPERSONATE=tor145
     labels:
       - traefik.enable=true
       - traefik.http.services.rssbridge.loadbalancer.server.port=80
