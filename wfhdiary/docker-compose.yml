@@ -1,0 +1,19 @@
+services:
+  wfhdiary:
+    image: ghcr.io/acbgbca/ato-wfh-diary:latest
+    container_name: wfhdiary
+    user: 9001:9001
+    restart: unless-stopped
+    environment:
+      - FORWARD_AUTH_HEADER=Remote-User
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.wfhdiary.loadbalancer.server.port=8080
+      - show.external=true
+    volumes:
+      - ./data:/data
+
+networks:
+  default:
+    external: true
+    name: ctr-network

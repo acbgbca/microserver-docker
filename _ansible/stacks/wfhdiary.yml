@@ -1,0 +1,12 @@
+wfhdiary:
+  services:
+  - name: wfhdiary
+    image: ghcr.io/acbgbca/ato-wfh-diary:latest
+    exposed:
+      internal: true
+      external: true
+      port: 8080
+    user: '{{ userId }}:{{ groupId }}'
+    volumes:
+      - local: data # Local directory, backed up
+        container: /data
