@@ -1,19 +1,13 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "config:recommended",
+        "github>acbgbca/renovate",
         "docker:enableMajor",
         "docker:pinDigests"
-    ],
-    "assignees": [
-        "acbgbca"
     ],
     "prHourlyLimit": 0,
     "branchConcurrentLimit": 0,
     "ignoreTests": true,
-    "configMigration": true,
-    "commitBodyTable": true,
-    "minimumReleaseAge": "3 days",
     "customManagers": [
         {
             "customType": "regex",
