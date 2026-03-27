@@ -1,6 +1,6 @@
 services:
   gluetun:
-    image: qmcgaw/gluetun:latest
+    image: qmcgaw/gluetun:v3.41.1
     container_name: gluetun
     cap_add:
       - NET_ADMIN
@@ -19,7 +19,7 @@ services:
     network_mode: "service:gluetun"
     depends_on:
       gluetun:
-        condition: service_healthy
+        condition: service_started # sometimes gluetun takes a while to become healthy. Start proxy anyway
     volumes:
       - ./squid.conf:/etc/squid/squid.conf:ro
     restart: unless-stopped
