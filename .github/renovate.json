@@ -8,6 +8,9 @@
     "prHourlyLimit": 0,
     "branchConcurrentLimit": 0,
     "ignoreTests": true,
+    "schedule":[
+        "* * * * 5"
+    ],
     "customManagers": [
         {
             "customType": "regex",
