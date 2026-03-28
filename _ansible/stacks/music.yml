@@ -1,0 +1,38 @@
+music:
+  rootEnv:
+    externalDomain: '{{ externalDomain }}'
+    internalDomain: '{{ internalDomain }}'
+  services:
+  - name: beets
+    image: lscr.io/linuxserver/beets:2.7.1
+    exposed:
+      internal: true
+      external: true
+      port: 8337
+    user: '{{ userId }}:{{ groupId }}'
+    env:
+      TZ: '{{ timezone }}'
+    volumes:
+      - local: config
+        container: /config
+      - shared: music # Shared directory with external files
+        container: /music
+      - shared: downloads
+        container: /downloads
+  - name: slskd
+    image: slskd/slskd:0.24.5
+    exposed:
+      internal: true
+      external: true
+      port: 5030
+    ports:
+      - "50300:50300"
+    user: '{{ userId }}:{{ groupId }}'
+    env:
+      - SLSKD_REMOTE_CONFIGURATION=true
+    volumes:
+      - local: slskd
+        container: /app
+      - filesystem: /mnt/data8tb/music_untagged
+        container: /music
+    restart: always

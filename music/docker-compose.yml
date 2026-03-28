@@ -1,0 +1,38 @@
+services:
+  beets:
+    image: lscr.io/linuxserver/beets:2.7.1
+    container_name: beets
+    user: 9001:9001
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.beets.loadbalancer.server.port=8337
+      - show.external=true
+    environment:
+      TZ: "Australia/Melbourne"
+    volumes:
+      - ./config:/config
+      - /mnt/data8tb/music_tagged:/music
+      - /mnt/data8tb/downloads:/downloads
+      - /mnt/data8tb/music_untagged:/untagged
+  slskd:
+    image: slskd/slskd:0.24.5
+    container_name: slskd
+    user: 9001:9001
+    restart: unless-stopped
+    ports:
+      - 50300:50300
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.slskd.loadbalancer.server.port=5030
+      - show.external=true
+    environment:
+      - SLSKD_REMOTE_CONFIGURATION=true
+    volumes:
+      - ./slskd:/app
+      - /mnt/data8tb/music_untagged:/downloads
+
+networks:
+  default:
+    external: true
+    name: ctr-network
