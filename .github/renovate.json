@@ -38,15 +38,6 @@
             "allowedVersions": "< 5.0"
         },
         {
-            "matchManagers": ["github-actions"],
-            "groupName": "all-github-actions",
-            "automerge": true,
-            "automergeType": "branch",
-            "schedule":[
-                "* * * * *"
-            ]
-        },
-        {
             "description": "Automatically merge minor updates",
             "matchUpdateTypes": [
                 "digest",
@@ -73,6 +64,28 @@
                 "major"
             ],
             "automerge": false
+        },
+        {
+            "description": "Update Github action version separately at any time",
+            "matchManagers": ["github-actions"],
+            "groupName": "all-github-actions",
+            "automerge": true,
+            "automergeType": "branch",
+            "schedule":[
+                "* * * * *"
+            ]
+        },
+        {
+            "description": "Pin digests immediately, one PR per package",
+            "matchUpdateTypes": [
+                "pinDigest"
+            ],
+            "groupName": null,
+            "automerge": true,
+            "automergeType": "branch",
+            "schedule": [
+                "* * * * *"
+            ]
         }
     ]
 }
