@@ -38,6 +38,15 @@
             "allowedVersions": "< 5.0"
         },
         {
+            "matchManagers": ["github-actions"],
+            "groupName": "all-github-actions",
+            "automerge": true,
+            "automergeType": "branch",
+            "schedule":[
+                "* * * * *"
+            ]
+        },
+        {
             "description": "Automatically merge minor updates",
             "matchUpdateTypes": [
                 "digest",
