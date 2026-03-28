@@ -1,9 +1,9 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "github>acbgbca/renovate",
         "docker:enableMajor",
-        "docker:pinDigests"
+        "docker:pinDigests",
+        "github>acbgbca/renovate"
     ],
     "prHourlyLimit": 0,
     "branchConcurrentLimit": 0,
