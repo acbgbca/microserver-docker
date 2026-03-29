@@ -16,7 +16,7 @@ services:
       - /mnt/data8tb/downloads:/downloads
       - /mnt/data8tb/music_untagged:/untagged
   slskd:
-    image: slskd/slskd:0.24.5
+    image: slskd/slskd:0.24.5@sha256:17ef977563be206f3b5932080b1e23883b2cb39dc9010640f6f39b4eaec887e3
     container_name: slskd
     user: 9001:9001
     restart: unless-stopped
