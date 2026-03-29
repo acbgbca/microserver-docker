@@ -11,16 +11,6 @@
     "schedule":[
         "* * * * 5"
     ],
-    "customManagers": [
-        {
-            "customType": "regex",
-            "datasourceTemplate": "docker",
-            "managerFilePatterns": ["/(^|/)_ansible/stacks/.+\\.ya?ml$/"],
-            "matchStrings": [
-                "image: (?<depName>[^:]+):(?<currentValue>[^@\\n]+)(?:@(?<currentDigest>sha256:[a-f0-9]{64}))?\\n"
-            ]
-        }
-    ],
     "packageRules": [
         {
             "description": "Ignore old yyyy-MM-dd versions",
