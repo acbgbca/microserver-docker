@@ -72,7 +72,7 @@ services:
 # Manually start container
 # curl http://sablier.internal.domain/api/strategies/blocking?group=stirlingpdf
   sablier:
-    image: ghcr.io/sablierapp/sablier:1.10.1@sha256:4d4096b59a6e1496bd3106c1a90a7fdd161aafb73d58539b8c749c69380dedae
+    image: ghcr.io/sablierapp/sablier:1.11.1@sha256:000fab8e34adec9587b2424cc91e8526403ebea4b0636e9667f4123d450fe165
     container_name: sablier
     command:
       - start
