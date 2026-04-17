@@ -4,6 +4,7 @@ sharedDirs:
   importBooks: /mnt/data8tb/onedrive/calibre/import
   videos: /mnt/data8tb/videos
   music: /mnt/data8tb/music
+  photos: /mnt/data8tb/pictures/family
   downloads: /mnt/data8tb/downloads
   paperlessMedia: /mnt/data8tb/onedrive/paperless/media
   paperlessExport: /mnt/data8tb/onedrive/paperless/export

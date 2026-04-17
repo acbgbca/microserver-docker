@@ -18,9 +18,10 @@ for d in */ ; do
 		echo "Skipping $d"
 		
 	else
+		docker-compose down
 
 		# Download updated containers
-		docker-compose pull --ignore-pull-failures
+		# docker-compose pull --ignore-pull-failures
 
 		# Rebuild any docker container defined in the docker-compose file
 		# docker-compose build --no-cache
