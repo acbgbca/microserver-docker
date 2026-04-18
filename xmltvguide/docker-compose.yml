@@ -8,7 +8,7 @@ services:
       XMLTV_URL: "http://xmltv.net/xml_files/Melbourne.xml"
       TZ: "Australia/Melbourne"
       HIDDEN_CHANNELS: "16,17,34,36,44,77,78,200,201,301,302"
-      CHANNEL_NAME_STRIP: "Melbourne,Victoria"
+      CHANNEL_NAME_STRIP: "Melbourne,Victoria,VIC"
     labels:
       - traefik.enable=true
       - traefik.http.services.xmltvguide.loadbalancer.server.port=8080
