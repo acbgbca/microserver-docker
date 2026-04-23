@@ -1,6 +1,6 @@
 services:
   beets:
-    image: lscr.io/linuxserver/beets:2.9.0@sha256:98ae4d846d2e5e00f9d8f771288e4be9b963c0f1fb69003d599c470c435ccc76
+    image: lscr.io/linuxserver/beets:2.10.0@sha256:49ba964b32ee7c44256619d5fda3db677072f21a92196846e81960b86604e1ad
     container_name: beets
     user: 9001:9001
     restart: unless-stopped
@@ -16,7 +16,7 @@ services:
       - /mnt/data8tb/downloads:/downloads
       - /mnt/data8tb/music_untagged:/untagged
   slskd:
-    image: slskd/slskd:0.24.5@sha256:17ef977563be206f3b5932080b1e23883b2cb39dc9010640f6f39b4eaec887e3
+    image: slskd/slskd:0.25.1@sha256:ab9ed50e028b524cefdb7c1dd8ebca368a076e18441ee8ac2326473eb850b4c3
     container_name: slskd
     user: 9001:9001
     restart: unless-stopped

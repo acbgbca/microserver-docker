@@ -32,7 +32,7 @@ services:
         aliases:
           - rssbridge.$DOMAIN # So I can copy and paste the URLs without needing to change the host
   playwrightproxy:
-    image: ghcr.io/acbgbca/pw-scraper:0.208@sha256:cf5c6ae9d97e5970043ed84ff9a1c87f10fc80e8e7e73058a335dbeb91df737c
+    image: ghcr.io/acbgbca/pw-scraper:0.209@sha256:804a6ef51234991842be1d184bcb1044c8eefc27083d04ee8d33ee3820519aac
     container_name: playwrightproxy
     environment:
       - LOG_LEVEL="debug"
