@@ -25,7 +25,7 @@ services:
       start_interval: 5s
     restart: 'unless-stopped'
   calibreserver:
-    image: 'ghcr.io/linuxserver/calibre:8.16.2@sha256:296486899c825c5106b0de5672c0b14188ae7e45003b2c33b767c6bc32090ee2'
+    image: 'ghcr.io/linuxserver/calibre:9.8.0@sha256:db4df4f7b40c39521c5607cff53184101dc25c17b570da2a41d69e104a2f1777'
     container_name: calibreserver
     labels:
       - traefik.enable=true
