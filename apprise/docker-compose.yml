@@ -1,6 +1,6 @@
 services:
   apprise:
-    image: caronc/apprise:v1.4.0@sha256:647fd1901f383461b37a53a288c832f75e57a69f4d6191edde837444fb2b86a7
+    image: caronc/apprise:v1.4.1@sha256:25e0577915c2f06233ae1dce077f05c0fc9ba4f0ea89de5aee18a32b2ee9a75c
     container_name: apprise
     restart: unless-stopped
     labels:
@@ -13,7 +13,7 @@ services:
       - ./config:/config
       - ./attach:/attach
   signal:
-    image: bbernhard/signal-cli-rest-api:0.98@sha256:c51c117d030d051f0cf2ef17f2cb135f1301810f9526a224be67daded8f272d6
+    image: bbernhard/signal-cli-rest-api:0.99@sha256:96578363477d97cb1d8da303791b2ad686b374a255fce4d78c7c6f00ef56cba8
     container_name: signal
     restart: unless-stopped
     environment:

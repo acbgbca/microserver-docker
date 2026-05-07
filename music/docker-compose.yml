@@ -1,6 +1,6 @@
 services:
   beets:
-    image: lscr.io/linuxserver/beets:2.10.0@sha256:2958a54c962c41c1d1def64525fee246147b8d1feb2fa583526b04abd425be09
+    image: lscr.io/linuxserver/beets:2.11.0@sha256:58390a3cf44248ac0695dbe7f373ab2c37e12499ac707fc6005dfd6c6fa454ab
     container_name: beets
     user: 9001:9001
     restart: unless-stopped
