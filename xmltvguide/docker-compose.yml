@@ -1,6 +1,6 @@
 services:
   xmltvguide:
-    image: ghcr.io/acbgbca/xmltvguide:latest@sha256:adac70e26c05e177007cf34609590b7259cea15fcd90fc42d3c477835a43d24f
+    image: ghcr.io/acbgbca/xmltvguide:latest@sha256:d21ed0632de18fa19ef33f611587198a426d18815d0ecbdd9a7628f8bca4f550
     container_name: xmltvguide
     user: 9001:9001
     restart: unless-stopped
