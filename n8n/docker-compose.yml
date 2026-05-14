@@ -1,6 +1,6 @@
 services:
   n8n:
-    image: ghcr.io/n8n-io/n8n:2.20.5@sha256:92e5cd1bfe6453a382ddf822db1f95ad63764a8f87ae33464a5d6721e3faa738
+    image: ghcr.io/n8n-io/n8n:2.21.2@sha256:32d7475fd061772a88e485f804f7079dd5641f35502116d1389dcff269c2d72e
     container_name: n8n
     labels:
       - traefik.enable=true

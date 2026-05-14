@@ -17,7 +17,7 @@ services:
     restart: 'unless-stopped'
 
   traefikexternal:
-    image: traefik:v3.6.15@sha256:8cb20d16e01a53d8d7f7696ac2f1af7d200d5c9984d226ce2299731d9eab6d6c
+    image: traefik:v3.7.0@sha256:eb328e2c806c53aafbbace6c451fa54d268961261a85452fcf0fb752a30c17be
     container_name: traefikexternal
     labels:
       - traefik.enable=true
@@ -72,7 +72,7 @@ services:
 # Manually start container
 # curl http://sablier.internal.domain/api/strategies/blocking?group=stirlingpdf
   sablier:
-    image: ghcr.io/sablierapp/sablier:1.11.2@sha256:ce28de9ff608b4f9107466db6812d0c655587246de44e1e4a1cbae3c3b9814fa
+    image: ghcr.io/sablierapp/sablier:1.12.0@sha256:31c6877d69e7d8e627b51343f78234498e8746eb90051deafcfb765caabb584b
     container_name: sablier
     command:
       - start
