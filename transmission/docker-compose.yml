@@ -1,7 +1,7 @@
 ---
 services:
   transmission:
-    image: "ghcr.io/linuxserver/transmission:4.1.1@sha256:64ac33a613ebf6d611d738f645bc2f2dd471f95b2601bb2ab662fa4c01f3640f"
+    image: "ghcr.io/linuxserver/transmission:4.1.2@sha256:aa4926b22bc25e89820acf427f8a5d1426c34a7ae9bd834e06eda43b12d839c3"
     container_name: transmission
     labels:
       - traefik.enable=true
