@@ -1,7 +1,7 @@
 ---
 services:
   minecraft-alpha:
-    image: ghcr.io/acbgbca/minecraft-bedrock:alpha@sha256:a811649b2024c39057ff5d4f2679a0e0d6ec88ea83c8fd62e2601a0db532abb0
+    image: ghcr.io/acbgbca/minecraft-bedrock:alpha@sha256:e59bb9bb3d7729c24ec81e9e5d654c600570ac970f81e0dbb65ebf4214fde839
     container_name: minecraft-alpha
     user: 9001:9001
     environment:
