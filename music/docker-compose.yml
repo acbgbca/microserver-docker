@@ -46,7 +46,7 @@ services:
       - /mnt/data8tb/downloads:/app/downloads
       - ./aurral:/app/backend/data
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
+    image: lscr.io/linuxserver/lidarr:latest@sha256:20025a94077f6f9ad523fbc83a201e35e766f4b2135e92237a41aa5fd51015ce
     container_name: lidarr
     labels:
       - traefik.enable=true
