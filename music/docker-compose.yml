@@ -31,6 +31,36 @@ services:
     volumes:
       - ./slskd:/app
       - /mnt/data8tb/music_untagged:/downloads
+  aurral:
+    image: ghcr.io/lklynet/aurral:1.76.49
+    container_name: aurral
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.aurral.loadbalancer.server.port=3001
+      - show.external=true
+    environment:
+      - PUID=9001
+      - PGID=9001
+    volumes:
+      - /mnt/data8tb/downloads:/app/downloads
+      - ./aurral:/app/backend/data
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.lidarr.loadbalancer.server.port=8686
+      - show.external=true
+    environment:
+      - PUID=9001
+      - PGID=9001
+      - TZ=Australia/Melbourne
+    volumes:
+      - ./lidarr:/config
+      - /mnt/data8tb/music:/music
+      - '/mnt/data8tb/downloads:/media'
+    restart: unless-stopped
 
 networks:
   default:
