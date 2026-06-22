@@ -1,0 +1,50 @@
+tdarr:
+  services:
+  - name: tdarr
+    image: ghcr.io/haveagitgat/tdarr:latest
+    exposed:
+      internal: true
+      external: true
+      port: 8265
+    env:
+      - TZ={{ timezone }}
+      - PUID={{ userId }}
+      - PGID={{ groupId }}
+      - internalNode=true
+      - inContainer=true
+      - ffmpegVersion=7
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - local: config
+        container: /app/server
+      - local: server
+        container: /app/configs
+      - local: logs
+        container: /app/logs
+      - shared: videos
+        container: /media
+      - filesystem: /tmp/tdarr
+        container: /temp
+    addGpu: true
+  - name: handbrake
+    image: jlesage/handbrake:latest
+    exposed:
+      internal: true
+      external: true
+      port: 5800
+    env:
+      - TZ={{ timezone }}
+      - USER_ID={{ userId }}
+      - GROUP_ID={{ groupId }}
+      - UMASK=002
+      - DARK_MODE=1
+      - WEB_FILE_MANAGER=1
+    volumes:
+      - local: handbrake
+        container: /config
+      - shared: videos
+        container: /storage:ro
+      - filesystem: /mnt/data8tb/videos/test
+        container: /output
+    addGpu: true

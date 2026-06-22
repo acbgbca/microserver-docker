@@ -1,0 +1,36 @@
+services:
+  tdarr:
+    image: ghcr.io/haveagitgat/tdarr:latest
+    container_name: tdarr
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.tdarr.loadbalancer.server.port=8265
+      - show.external=true
+    environment:
+      - TZ=Australia/Melbourne
+      - PUID=9001
+      - PGID=9001
+      - internalNode=true
+      - inContainer=true
+      - ffmpegVersion=7
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./config:/app/server
+      - ./server:/app/configs
+      - ./logs:/app/logs
+      - /mnt/data8tb/videos:/media
+      - /tmp/tdarr:/temp
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+networks:
+  default:
+    external: true
+    name: ctr-network
