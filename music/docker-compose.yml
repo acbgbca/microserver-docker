@@ -1,6 +1,6 @@
 services:
   beets:
-    image: lscr.io/linuxserver/beets:2.11.0@sha256:bb73b8be1142a7b22e13d6f76f986bec99e60761a967714b098f8d766f88ca37
+    image: lscr.io/linuxserver/beets:2.12.0@sha256:4fcf2a7ce3f3fe2d3f29abe088cf510813d31302f18c987c76f6cb02c0cecc11
     container_name: beets
     user: 9001:9001
     restart: unless-stopped
@@ -32,7 +32,7 @@ services:
       - ./slskd:/app
       - /mnt/data8tb/music_untagged:/downloads
   aurral:
-    image: ghcr.io/lklynet/aurral:1.76.49@sha256:b30405522fc107e6872d8947c11d75af75930b3c7b1577bb193b3d9fb4fe99b2
+    image: ghcr.io/lklynet/aurral:1.76.50@sha256:cfd995e4cdec6a280bbaba212c1809b3c561f2d9899b510bd08b268f1c85b28e
     container_name: aurral
     restart: unless-stopped
     labels:
@@ -46,7 +46,7 @@ services:
       - /mnt/data8tb/downloads:/app/downloads
       - ./aurral:/app/backend/data
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest@sha256:20025a94077f6f9ad523fbc83a201e35e766f4b2135e92237a41aa5fd51015ce
+    image: lscr.io/linuxserver/lidarr:latest@sha256:4ac390131993f3104a43c4abed79b8abd3227e2536f7b468877e5f41d9f54da4
     container_name: lidarr
     labels:
       - traefik.enable=true
