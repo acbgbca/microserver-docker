@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:0.30.10@sha256:bfc9c6d53cc6989aa5131a6fde6b162b2802d4d337657f3253b5f69579bddeee
+    image: ollama/ollama:0.31.1@sha256:f1a705f2bd113fb8d15f85f7c217f0dc5f6bebda6b0cc42b82c3ad165ffcb9dc
     ports:
       - 11434:11434
     labels:
@@ -25,7 +25,7 @@ services:
               count: 1
               capabilities: [gpu]
   openwebui:
-    image: ghcr.io/open-webui/open-webui:main@sha256:7f1b0a1a50cfbac23da3b16f96bc968fd757b26dc9e54e93813d61768ea9184e
+    image: ghcr.io/open-webui/open-webui:main@sha256:a26effeb220e132482bf7e0560b3404843e7bc40d23051144e062960df8df6b0
     container_name: openwebui
     labels:
       - traefik.enable=true
@@ -50,7 +50,7 @@ services:
       start_period: 30s
       start_interval: 5s
   deepresearch:
-    image: localdeepresearch/local-deep-research:1.7.0@sha256:c42c9321e286be35f65717e8744268314ee21b44552fd7cfa2372dac444ed1de
+    image: localdeepresearch/local-deep-research:1.8.1@sha256:47d0fd292c00916ecefa254a513444dac31ab7253c30ab52ae076cde20d0e9a8
     restart: unless-stopped
     container_name: deepresearch
     labels:
@@ -82,7 +82,7 @@ services:
       - ./deepresearch:/root/.config/local_deep_research
   searxng:
     container_name: searxng
-    image: docker.io/searxng/searxng:latest@sha256:15275f138662b0eefd62c492a919b29c4662c42004efe4b1a245c92cc6d2fef1
+    image: docker.io/searxng/searxng:latest@sha256:a1a04679fe6a4fa6bfe9efb82adfbe7bee4eaef8d77b2392562ca5bfe032c4be
     restart: unless-stopped
     labels:
       - traefik.enable=true

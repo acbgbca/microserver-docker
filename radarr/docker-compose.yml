@@ -1,7 +1,7 @@
 ---
 services:
   radarr:
-    image: 'ghcr.io/linuxserver/radarr:6.2.1@sha256:1e95b5c13fe015361a9ae1c4d99fc2336816790aaea60fa74b2ffebe076a69e0'
+    image: 'ghcr.io/linuxserver/radarr:6.2.1@sha256:28852d0eacababc206762af48fe86d78594a4f434cc46b358f9764a857098662'
     container_name: radarr
     labels:
       - traefik.enable=true
