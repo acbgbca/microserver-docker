@@ -60,6 +60,8 @@ services:
       - sablier.enable=true
       - sablier.group=ollama
     environment:
+      - LDR_ALLOW_UNENCRYPTED=true
+      - LDR_BOOTSTRAP_ALLOW_UNENCRYPTED=true
       - OLLAMA_BASE_URL=http://ollama:11434
       # LLM Configuration
       - LDR_LLM__PROVIDER=ollama
