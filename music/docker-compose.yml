@@ -1,6 +1,6 @@
 services:
   beets:
-    image: lscr.io/linuxserver/beets:2.12.0@sha256:b4751c91795cdb36e7fca83c8deeb5dd8659eb3f595789437f1e2e5651a4acaa
+    image: lscr.io/linuxserver/beets:2.12.0@sha256:b8765bc96d916e455be26130e90391777098c6549a26c8723b3d40f59c224fcf
     container_name: beets
     user: 9001:9001
     restart: unless-stopped
@@ -16,7 +16,7 @@ services:
       - /mnt/data8tb/downloads:/downloads
       - /mnt/data8tb/music_untagged:/untagged
   slskd:
-    image: slskd/slskd:0.25.1@sha256:ab9ed50e028b524cefdb7c1dd8ebca368a076e18441ee8ac2326473eb850b4c3
+    image: slskd/slskd:0.26.0@sha256:ecd4026d4f8fb504e2cc55323efa2c1f5b56d20d3686b018249cc36b48ea17a6
     container_name: slskd
     user: 9001:9001
     restart: unless-stopped
@@ -46,7 +46,7 @@ services:
       - /mnt/data8tb/downloads:/app/downloads
       - ./aurral:/app/backend/data
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest@sha256:1caffbd1e5ad5fe3cf6f63de4aa6941e9d31625b0d7e08b60c6eeb6cf09e3a91
+    image: lscr.io/linuxserver/lidarr:latest@sha256:f60ee67694bc4a218efe0fb2dc0b0021d193ac5f15be2638d17ab4eeb6966946
     container_name: lidarr
     labels:
       - traefik.enable=true
