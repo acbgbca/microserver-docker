@@ -4,7 +4,7 @@ name: immich
 services:
   immich:
     container_name: immich
-    image: ghcr.io/immich-app/immich-server:v2.7.5@sha256:c15bff75068effb03f4355997d03dc7e0fc58720c2b54ad6f7f10d1bc57efaa5
+    image: ghcr.io/immich-app/immich-server:v3.1.0@sha256:b434cb9287eea1471c9974845914d4dd328c9c2d652e446ed4930f99944f0ceb
     deploy:
       resources:
         reservations:
@@ -34,7 +34,7 @@ services:
 
   immich-machine-learning:
     container_name: immich_machine_learning
-    image: ghcr.io/immich-app/immich-machine-learning:v2.7.5-cuda@sha256:304142175e345f0155d7642f637cfdceae60e89075ff03938cb2886d52c65a62
+    image: ghcr.io/immich-app/immich-machine-learning:v3.1.0-cuda@sha256:82d3f6a093455964508052e0b3bc55a91075b48b65be35e78b40774a72c1ebb3
     deploy:
       resources:
         reservations:
