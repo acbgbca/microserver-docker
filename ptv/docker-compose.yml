@@ -4,6 +4,8 @@ services:
     container_name: ptv
     user: 9001:9001
     restart: unless-stopped
+    env_file:
+      - ptv.env
     labels:
       - traefik.enable=true
       - traefik.http.services.ptv.loadbalancer.server.port=8080
