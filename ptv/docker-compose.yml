@@ -1,6 +1,6 @@
 services:
   ptv:
-    image: ghcr.io/acbgbca/ptv-monitor:latest
+    image: ghcr.io/acbgbca/ptv-monitor:latest@sha256:f82482334e04a287f82f4cb47f4f06b1aaf80ea77a3f8f9db2dbb5ef4eb770e0
     container_name: ptv
     user: 9001:9001
     restart: unless-stopped
