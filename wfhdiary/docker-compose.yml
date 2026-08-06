@@ -1,6 +1,6 @@
 services:
   wfhdiary:
-    image: ghcr.io/acbgbca/ato-wfh-diary:latest@sha256:298c599d7cf92239bdf10f22bebf89e16c9b8f163875ef19c4f6eaff0510b97f
+    image: ghcr.io/acbgbca/ato-wfh-diary:latest@sha256:1bbcbdedce1f4b9a41643df2f29014a58c098160bf7ab96b8e4f60333da48428
     container_name: wfhdiary
     user: 9001:9001
     restart: unless-stopped
