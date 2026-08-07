@@ -14,7 +14,7 @@
 # snippets to override directives set in this file.
 Include /etc/ssh/sshd_config.d/*.conf
 
-#Port 22
+Port 2022
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
@@ -27,8 +27,8 @@ Include /etc/ssh/sshd_config.d/*.conf
 #RekeyLimit default none
 
 # Logging
-#SyslogFacility AUTH
-#LogLevel INFO
+SyslogFacility AUTH
+LogLevel VERBOSE
 
 # Authentication:
 
@@ -38,7 +38,7 @@ Include /etc/ssh/sshd_config.d/*.conf
 #MaxAuthTries 6
 #MaxSessions 10
 
-#PubkeyAuthentication yes
+PubkeyAuthentication yes
 
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
 # but this is overridden so installations will only check .ssh/authorized_keys
@@ -87,7 +87,7 @@ PasswordAuthentication no
 # and KbdInteractiveAuthentication to 'no'.
 #UsePAM no
 
-#AllowAgentForwarding yes
+AllowAgentForwarding yes
 # Feel free to re-enable these if your use case requires them.
 AllowTcpForwarding yes
 GatewayPorts no

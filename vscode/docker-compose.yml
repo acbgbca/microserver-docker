@@ -33,7 +33,7 @@ services:
       - /home/ctrdata/.ssh:/home/ctrdata/.ssh
       - '.gitconfig:/home/ctrdata/.gitconfig'
     environment:
-      - COMMAND=TUNNEL
+      - COMMAND=WEB
     privileged: true
     networks:
       lan:

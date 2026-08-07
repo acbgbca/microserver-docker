@@ -16,6 +16,9 @@ service ssh start
 
 if [ "${COMMAND,,}" = "web" ]; then
     su $USER -c "./code serve-web --port $WEB_PORT --host $WEB_HOST --server-data-dir $SERVER_DATA_DIR --cli-data-dir $CLI_DATA_DIR --accept-server-license-terms --without-connection-token"
+
+    # Force vscode to download
+    wget http://localhost:$WEB_PORT
 elif [ "${COMMAND,,}" = "tunnel" ]; then
     su $USER -c "./code tunnel --accept-server-license-terms --server-data-dir $SERVER_DATA_DIR --cli-data-dir $CLI_DATA_DIR --name acbgbca"
 else

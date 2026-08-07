@@ -17,16 +17,39 @@ apt-get install -y --no-install-recommends \
     gzip \
     sudo \
     ssh \
+    openssh-server \
+    systemd \
+    rsyslog \
+    libpam-modules \
     git \
     gpg \
+    bash \
+    less \
+    vim \
     coreutils \
     sed \
     zfsutils-linux \
     lsb-release \
+    software-properties-common \
     nodejs npm
 
-# Install Docker
 install -m 0755 -d /etc/apt/keyrings
+
+# Install mise
+add-apt-repository -y ppa:jdxcode/mise
+apt update
+apt install -y mise
+
+# Install GitHub CLI
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | gpg --dearmor -o /etc/apt/keyrings/githubcli-archive-keyring.gpg
+chmod a+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"\
+  | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+
+apt-get update
+apt-get install gh -y --no-install-recommends
+
+# Install Docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 chmod a+r /etc/apt/keyrings/docker.gpg
 
@@ -85,9 +108,20 @@ useradd \
 
 usermod -aG docker "$USER"
 
+# To be able to ssh into an account the user needs a password
+PASS=$(openssl rand -base64 12)
+echo "ctrdata:${PASS}" | sudo chpasswd
+
+# Install Claude Code. Needs to be installed under the users account
+su $USER -c curl -fsSL https://claude.ai/install.sh | bash
+
 mkdir -p $HOME_DIR/workspace
 mkdir -p $HOME_DIR/.ssh
 mkdir -p $HOME_DIR/.vscode
 
 chown -R $USER:$USER .
 chown -R $USER:$USER $HOME_DIR
+
+# Passwordless sudo
+echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER
+chmod 0440 /etc/sudoers.d/$USER
