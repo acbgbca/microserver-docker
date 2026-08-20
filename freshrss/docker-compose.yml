@@ -16,7 +16,7 @@ services:
       - './extensions:/var/www/FreshRSS/extensions'
     restart: 'unless-stopped'
   rssbridge:
-    image: rssbridge/rss-bridge@sha256:1a1b0f1bb81eb753525bd4adc696c8356199f5377f2d7749c3b23afffbe39aa8
+    image: rssbridge/rss-bridge@sha256:3d151be86e9b8935ee184670b3a1e0809316a3be0b9656d0c749b3dae458d09a
     container_name: rssbridge
     labels:
       - traefik.enable=true
@@ -30,7 +30,7 @@ services:
         aliases:
           - rssbridge.$DOMAIN # So I can copy and paste the URLs without needing to change the host
   playwrightproxy:
-    image: ghcr.io/acbgbca/pw-scraper:0.221@sha256:07c86b2f209d054cb9f1d90d29bfcae5643d5242af5782fcce215914b473dd11
+    image: ghcr.io/acbgbca/pw-scraper:0.222@sha256:32d69d5e2ea648bf00aa661f619c45b6636a03b9658d08a2cf7f9084bd9c80cc
     container_name: playwrightproxy
     environment:
       - LOG_LEVEL="debug"
