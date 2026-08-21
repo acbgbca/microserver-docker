@@ -32,7 +32,7 @@ services:
       - ./slskd:/app
       - /mnt/data8tb/music_untagged:/downloads
   aurral:
-    image: ghcr.io/lklynet/aurral:1.76.51@sha256:cf04da830f6965d9bd27d533eddddb0b3430390efe7b4f6f4338e486d4e3ec94
+    image: ghcr.io/lklynet/aurral:2.5.1@sha256:4eaf8ade415bdace8501b97dd7be6287d2b8f519a818db6dfccbe2f40c7ac746
     container_name: aurral
     restart: unless-stopped
     labels:
