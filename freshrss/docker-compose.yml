@@ -39,6 +39,25 @@ services:
       - traefik.http.services.playwrightproxy.loadbalancer.server.port=8080
       - show.external=true
     restart: unless-stopped
+  redlib:
+    image: ghcr.io/itsjfx/redlib:latest
+    container_name: redlib
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.redlib.loadbalancer.server.port=8080
+      - show.external=true
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    env_file: redlib.env
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - redlib.$DOMAIN # So I can copy and paste the URLs without needing to change the host
+
 networks:
   default:
     external: true
