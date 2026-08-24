@@ -40,7 +40,7 @@ services:
       - show.external=true
     restart: unless-stopped
   redlib:
-    image: ghcr.io/itsjfx/redlib:latest
+    image: ghcr.io/itsjfx/redlib:latest@sha256:3f4d65903bf52b56f2f932e0140c822f58ec7511a54058ce1ad5b217ba1ed3bd
     container_name: redlib
     labels:
       - traefik.enable=true
