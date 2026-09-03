@@ -1,7 +1,7 @@
 ---
 services:
   traefik:
-    image: traefik:v3.7.11@sha256:5203c3f39ca70de6790d964624e042463ffbd57715bc82be155cf224c0dd5144
+    image: traefik:v3.7.12@sha256:9c2a54d87f76f5c2f5f2682c68394af92fb12c0a2686798d6462a3f84bd78eaf
     container_name: traefik
     labels:
       - traefik.enable=true
@@ -94,7 +94,7 @@ services:
       retries: 3
       start_period: 15s
   authelia_redis:
-    image: redis:8.10.0@sha256:344e3945a0b431c8ff1eecd58c5573538126bd756f02fc7e218ddf1fc2546366
+    image: redis:8.10.1@sha256:298e5b3bc566bade82f46ad5511777a4a07a294097ce16ada2f6a42be5239df5
     container_name: authelia_redis
     restart: unless-stopped
     command: redis-server --loglevel warning --requirepass authelia --databases 1 --hz 2
