@@ -1,7 +1,7 @@
 ---
 services:
   plex:
-    image: 'plexinc/pms-docker:latest@sha256:83a425ae9e133b1cb2cc3b809556e01c61cd8ff65c582e41b4374bc2210bac9e'
+    image: 'plexinc/pms-docker:latest@sha256:e0ab27395614a8e1a4fdf84c6bc60ac664915cfdde70c52d030c7728a1c48e14'
     container_name: plex
     labels:
       - traefik.enable=true

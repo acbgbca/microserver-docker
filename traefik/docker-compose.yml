@@ -1,7 +1,7 @@
 ---
 services:
   traefik:
-    image: traefik:v3.7.12@sha256:9c2a54d87f76f5c2f5f2682c68394af92fb12c0a2686798d6462a3f84bd78eaf
+    image: traefik:v3.7.13@sha256:f86a2cab1b5c649070c49f883c743dd32d8485a56e3368c5f93b9e91f1e91259
     container_name: traefik
     labels:
       - traefik.enable=true
@@ -59,7 +59,7 @@ services:
         aliases:
           - authelia.$externaldomain # For OIDC containers, so they don't try to resolve the host IP
   authelia:
-    image: authelia/authelia:4.39.20@sha256:1b363e9279e742397966333f364e0876ae02bf5c876de73e83af6d48c57ff51b
+    image: authelia/authelia:4.39.22@sha256:936134132eaf01bfa2faf85055afbc1e0cc1cc5ca4547e9c06408fd0dd784646
     container_name: authelia
     hostname: authelia
     labels:
