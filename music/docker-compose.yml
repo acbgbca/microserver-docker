@@ -42,9 +42,12 @@ services:
     environment:
       - PUID=9001
       - PGID=9001
+      - AUTH_PROXY_ENABLE=true
+      - AUTH_PROXY_HEADER=REMOTE-USER
+      - AUTH_PROXY_ADMIN_GROUPS=REMOTE-GROUPS
     volumes:
       - /mnt/data8tb/downloads:/app/downloads
-      - ./aurral:/app/backend/data
+      - ./aurral:/config
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest@sha256:8ab0fd370b604ae034d9a9c261a9d8d873bece33d9736852e7ce4f3566e4a35d
     container_name: lidarr
