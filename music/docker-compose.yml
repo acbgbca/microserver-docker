@@ -1,6 +1,6 @@
 services:
   beets:
-    image: lscr.io/linuxserver/beets:2.14.0@sha256:bbd09e2b19a0903f3f916c26e9ae5c30004913b293228b422154c0f9fecb2cd9
+    image: lscr.io/linuxserver/beets:2.14.1@sha256:3e21faa842c31d11ca99c17a2c299f54871af5434554ae265b103e8f8322fa48
     container_name: beets
     user: 9001:9001
     restart: unless-stopped
@@ -32,7 +32,7 @@ services:
       - ./slskd:/app
       - /mnt/data8tb/music_untagged:/downloads
   aurral:
-    image: ghcr.io/lklynet/aurral:2.8.0@sha256:cf3cbd059d7c50fb12a9fcf35ff5d5124852b6219c61bf78aa5614eaf65d6cd2
+    image: ghcr.io/lklynet/aurral:2.9.1@sha256:5690b43d50c76f81af3d0163ae05061f3227e8631da5bffbdd67c0d6407a334e
     container_name: aurral
     restart: unless-stopped
     labels:

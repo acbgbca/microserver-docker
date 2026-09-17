@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:1.31.5-alpine-slim@sha256:3b171d7224b669faa3cc2137fea0a65301791df1ec1f271ebd2a2b7461f7fade
+    image: nginx:1.31.6-alpine-slim@sha256:865bd567ede55893f380ae4548ef74363611136fadbdd7b7f46ac0e8a976582a
     container_name: nginx
     ports:
       - "${PORT}:${PORT}"
