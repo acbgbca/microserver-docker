@@ -1,7 +1,7 @@
 ---
 services:
   minecraft:
-    image: ghcr.io/acbgbca/minecraft-bedrock:1.26.45.1@sha256:04299d1fc3be208d486a903e9661b954070b65e8b87ab99f660f38459cc5a3ba
+    image: ghcr.io/acbgbca/minecraft-bedrock:1.26.51.1@sha256:47cde64582be51a540b8f9c9428b06716f588aa99d722bff3712f709e49e2b5c
     container_name: minecraft
     environment:
       - UID=9001

@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:0.34.0@sha256:684d8674b4315fa18f4f0e973a118ec2652ed96f67563277839985175858e0ba
+    image: ollama/ollama:0.34.2@sha256:da6e0dc5651df159e45686fd663c4dbe1624a52c44d7280eeac1551d8f865532
     ports:
       - 11434:11434
     labels:
@@ -25,7 +25,7 @@ services:
               count: 1
               capabilities: [gpu]
   openwebui:
-    image: ghcr.io/open-webui/open-webui:main@sha256:1a6399d237dc392a2313e0ca826020b3fd5d22536357840eb63393d18dc8b924
+    image: ghcr.io/open-webui/open-webui:main@sha256:8b432fe0a65b91116afc7961365c6cca5379cc923171386a96691f3471f3cae9
     container_name: openwebui
     labels:
       - traefik.enable=true
