@@ -1,6 +1,6 @@
 services:
   tdarr:
-    image: ghcr.io/haveagitgat/tdarr:latest@sha256:7a992a0f1e0e6b16a7514b498ee4072d238ede079f4f472d6c0130b438ed63ac
+    image: ghcr.io/haveagitgat/tdarr:latest@sha256:aaf8ef97c035c0456ef38f869ecad2cd26c685adacf24c58a0a5100644e13f69
     container_name: tdarr
     restart: unless-stopped
     labels:

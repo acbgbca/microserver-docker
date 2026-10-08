@@ -2,7 +2,7 @@
 
 services:
   steamheadless:
-    image: josh5/steam-headless:latest@sha256:b682c3fbd296af7e51a313f0ee6b62fedcb02a67bb37a565e65ef37d0d936b7f
+    image: josh5/steam-headless:latest@sha256:28acbee506844b60fe0a49f1f2a85f4a0a8dbccf8a83db7af73aacbb08d20f74
     restart: unless-stopped
     privileged: true
     shm_size: ${SHM_SIZE}

@@ -1,6 +1,6 @@
 services:
   beets:
-    image: lscr.io/linuxserver/beets:2.14.1@sha256:99582f104d04241b46a4a7071d424d0529800f9e3d04baa36db47b5e8cda6e96
+    image: lscr.io/linuxserver/beets:2.14.1@sha256:e5a4b1292c58bf67fc941002dff363254426e846af7fa9d875789310c0a2c5ce
     container_name: beets
     user: 9001:9001
     restart: unless-stopped
@@ -49,7 +49,7 @@ services:
       - /mnt/data8tb/downloads:/app/downloads
       - ./aurral:/config
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest@sha256:044d616beb43c5e7810991242c6a9c42b93ff238c8c0850684939634ea751208
+    image: lscr.io/linuxserver/lidarr:latest@sha256:67887807b13ae025c0fe979da298347c8609969087ab064c81d8e9acc1e06bbf
     container_name: lidarr
     labels:
       - traefik.enable=true
