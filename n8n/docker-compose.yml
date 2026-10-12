@@ -10,6 +10,7 @@ services:
       - n8n.env
     volumes:
       - ./data:/home/node/.n8n
+      - /mnt/data8tb/videos:/videos:rw
     restart: 'unless-stopped'
 networks:
   default:
