@@ -2,7 +2,7 @@
 # To upgrade the database, see https://acbgbca.github.io/documentation/postgres/
 services:
   db18:
-    image: postgres:18.6@sha256:5a5a84b19854a9ffaa54082c166ff4ec27473a361e496e5ea167f298f2da9722
+    image: postgres:18.6@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
     restart: unless-stopped
     volumes:
       - ./pgdata18:/var/lib/postgresql
@@ -15,7 +15,7 @@ services:
       - sablier.group=paperless
 
   broker:
-    image: redis:8.10.2@sha256:d5ac52db24d4e70566fe9944f22cf5bdc2bc739b05c0f426335161ea6c23f3b3
+    image: redis:8.10.2@sha256:2c2dff791878316e3b083188be0d578423b24813cdda5de0e80ea4f7b3e6bfd6
     restart: unless-stopped
     volumes:
       - ./redisdata:/data
@@ -24,7 +24,7 @@ services:
       - sablier.group=paperless
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:3.3.0@sha256:6b94799bc769a063b3340cc5847402e626d4d91d29a295a8e747f8e9bead4207
+    image: ghcr.io/paperless-ngx/paperless-ngx:3.3.1@sha256:cb91bfb468e63025a9d10c01b54c33665113668eee61b490db96de19b860b9c4
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
