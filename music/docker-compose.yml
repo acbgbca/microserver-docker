@@ -64,8 +64,30 @@ services:
       - /mnt/data8tb/music:/music
       - '/mnt/data8tb/downloads:/media'
     restart: unless-stopped
+  musicassistant:
+    image: ghcr.io/music-assistant/server:2.10.6
+    container_name: musicassistant
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.musicassistant.loadbalancer.server.port=8095
+    restart: unless-stopped
+    volumes:
+      - ./musicassistant:/data/
+      - /mnt/data8tb/music:/media:ro
+    environment:
+      - LOG_LEVEL=info
+    networks:
+      lan:
+        ipv4_address: 192.168.94.73
+      default:
+        aliases:
+          - musicassistant.$internalDomain
+    hostname: musicassistant.${internalDomain}
 
 networks:
   default:
     external: true
     name: ctr-network
+  lan:
+    name: lan-network
+    external: true
