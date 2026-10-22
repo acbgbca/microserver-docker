@@ -32,7 +32,7 @@ services:
       - ./slskd:/app
       - /mnt/data8tb/music_untagged:/downloads
   aurral:
-    image: ghcr.io/lklynet/aurral:2.10.0@sha256:e15f05e525a7c9d4a97e36ff18b6a37904dda6c803e46f0fd87900a7021febae
+    image: ghcr.io/lklynet/aurral:2.11.0@sha256:a772c2d6c35dd9dd90128cf350bfc35b37bdd3c59ab5810374b7aa1a4063855c
     container_name: aurral
     restart: unless-stopped
     labels:
@@ -49,7 +49,7 @@ services:
       - /mnt/data8tb/downloads:/app/downloads
       - ./aurral:/config
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest@sha256:67887807b13ae025c0fe979da298347c8609969087ab064c81d8e9acc1e06bbf
+    image: lscr.io/linuxserver/lidarr:latest@sha256:d8549ff9ea29b4015c32257360652c1000c31ea471a2b3f0835ae77292faf35b
     container_name: lidarr
     labels:
       - traefik.enable=true
