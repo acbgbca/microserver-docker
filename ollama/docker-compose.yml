@@ -54,7 +54,7 @@ services:
       start_period: 30s
       start_interval: 5s
   deepresearch:
-    image: localdeepresearch/local-deep-research:1.10.7@sha256:ce95481a35d3eebc2c1ae7bd34fad426108c3fb8d1a22f66c9e772276869c2f0
+    image: localdeepresearch/local-deep-research:2.0.0@sha256:29d337397d62d5b759c0cae274cb3f036e700df009364661b48444500f49d598
     restart: unless-stopped
     container_name: deepresearch
     labels:
