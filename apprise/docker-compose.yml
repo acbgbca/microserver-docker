@@ -1,6 +1,6 @@
 services:
   apprise:
-    image: caronc/apprise:2.1.0
+    image: caronc/apprise:2.1.0@sha256:bd7dc73b75882326b97d2963b7c3dd2a5e033df27d84c51f0090465d583fb316
     container_name: apprise
     restart: unless-stopped
     labels:
