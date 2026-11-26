@@ -1,7 +1,7 @@
 ---
 services:
   cloudflared:
-    image: 'cloudflare/cloudflared:2026.10.7@sha256:4955524aeaa379e154023d5a027c250f7b35041a2e7e950cf13f144bc9b9c5ba'
+    image: 'cloudflare/cloudflared:2026.11.2@sha256:55c7e3e8d89d5e8d20b75a82f3602cbf98e06db406e73e282073cfdc5a9a3af6'
     container_name: cloudflared
     user: 9001:9001
     volumes:
@@ -17,7 +17,7 @@ services:
     restart: 'unless-stopped'
 
   traefikexternal:
-    image: traefik:v3.7.17@sha256:f4bb143d1135a579b630ed491e17ec50f6f7c9c6a30585ff3d385471d2a86f5a
+    image: traefik:v3.7.19@sha256:a6c0194dda77bcb804824580f36fa7edc56e315b1acfe933366c8b52844a78a4
     container_name: traefikexternal
     labels:
       - traefik.enable=true
@@ -72,7 +72,7 @@ services:
 # Manually start container
 # curl http://sablier.internal.domain/api/strategies/blocking?group=stirlingpdf
   sablier:
-    image: ghcr.io/sablierapp/sablier:1.21.0@sha256:10736085e548adbed386c47c7a39f6f904715166a3bba5368f03f2eb8c432f7a
+    image: ghcr.io/sablierapp/sablier:1.21.1@sha256:ceb0b06eca3783991199ce392fa0af74ac28953918f7e558f574a8ca4f4458f8
     container_name: sablier
     command:
       - start

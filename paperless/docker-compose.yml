@@ -24,7 +24,7 @@ services:
       - sablier.group=paperless
 
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:3.4.2@sha256:d704e84f88300eb6ab001ab15720a2330ff99169cf9f94d6b8fcc44b63a84c84
+    image: ghcr.io/paperless-ngx/paperless-ngx:3.5.1@sha256:8508853b8a0f8394074260957d0be186c8c64f346973b24a7583de4580f306b9
     container_name: paperless
     restart: unless-stopped
     # user: 9001:9001
@@ -72,7 +72,7 @@ services:
       - "--chromium-allow-list=file:///tmp/.*"
 
   tika:
-    image: docker.io/apache/tika:3.3.3.0@sha256:326b238b37904c94ff61fed87afe0af72e6a29fa715933b10af97b7d56f1d4cb
+    image: docker.io/apache/tika:3.3.3.1@sha256:3049611264bb18cf66e6629f59818cad75ea5d46f770c504ae46537949838c67
     restart: unless-stopped
     labels:
       - sablier.enable=true
